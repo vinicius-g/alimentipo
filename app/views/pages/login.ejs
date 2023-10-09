@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include("../templates/head.ejs") %>
+    <link rel="stylesheet" href="/css/estilo_cadastro_login.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="/js/perfil.js" defer></script>
+    <title><%- data.page_name %></title>
+</head>
+
+<body>
+    <%- include("../templates/header.ejs") %>
+
+    <main>
+        <form action="/login" method="post">
+            <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
+
+            <div>
+                <label for="email">E-mail</label>
+                <input type="text" name="email" id="email"
+                <%- data.input_values ? `value="${data.input_values.email}"` : "" %>
+                <%- data.errors && data.errors.email_error ? `class="error"` : "" %>>
+            </div>
+
+            <%- data.errors && data.errors.email_error ? `<span class='error-message'>${data.errors.email_error.msg}</span>` : "" %>
+
+            <div>
+                <label for="senha">Senha</label>
+                <input type="text" name="senha" id="senha"
+                <%- data.input_values ? `value="${data.input_values.senha}"` : "" %>
+                <%- data.errors && data.errors.senha_error ? `class="error"` : "" %>>
+            </div>
+
+            <%- data.errors && data.errors.senha_error ? `<span class='error-message'>${data.errors.senha_error.msg}</span>` : "" %>
+
+            <input type="submit" value="Entrar">
+        </form>
+    </main>
+
+    <%- include("../templates/footer.ejs") %>
+</body>

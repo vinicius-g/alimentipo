@@ -1,0 +1,186 @@
+.slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slick-next {
+    right: -15px;
+}
+
+.slick-prev {
+    left: -15px;
+}
+
+.slick-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.slick-dots li {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #797979;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slick-dots li.slick-active {
+    background-color: #b6b6b6;
+}
+
+.slick-dots li button {
+    display: none;
+}
+
+#slider {
+    margin-bottom: 40px;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    border: 2px solid #729f46;
+    border-radius: 5px;
+    width: 90%;
+    margin-inline: auto;
+    margin-bottom: 20px;
+}
+
+.searchbar img {
+    margin-inline: 5px;
+}
+
+.searchbar input {
+    border: none;
+    width: 100%;
+    outline: none;
+}
+
+#produtos-destacados,
+#promocoes {
+    padding: 0 15px;
+}
+
+#produtos-destacados a {
+    display: block;
+    color: #729f46;
+    text-align: end;
+    margin-bottom: 10px;
+    font-size: .9rem;
+}
+
+#promocoes > h2,
+#produtos-destacados > h2 {
+    margin-left: 15px;
+    font-weight: normal;
+    color: #f59a23;
+    font-size: 1.3rem;
+}
+
+.produto-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.produto {
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+    width: 100%;
+    max-width: 175px;
+}
+
+.produto .promocao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #729f46;
+    color: white;
+    border-top-left-radius: 10px;
+    padding: 5px 10px;
+}
+
+.produto .favoritar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.produto img {
+    margin-bottom: 10px;
+}
+
+.produto h2 {
+    font-weight: 400;
+    color: #797979;
+    align-self: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.produto h3 {
+    font-size: .9rem;
+    font-weight: 300;
+    color: #797979;
+    margin-bottom: 5px;
+}
+
+.produto > p {
+    font-size: 1.1rem;
+    color: #f59a23;
+    font-weight: bold;
+}
+
+#sobre {
+    padding: 0 15px;
+}
+
+#sobre h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #729f46;
+    margin-bottom: 20px;
+}
+
+#sobre h2 span {
+    font-size: inherit;
+    color: #f59a23;
+}
+
+#sobre h3 {
+    color: #729f46;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+#sobre h3 span {
+    font-size: inherit;
+    color: #f59a23;
+}
+
+#sobre > div {
+    background-color: #729f46;
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
+    margin-bottom: 40px;
+}
+
+#sobre > div h4 {
+    font-weight: normal;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}

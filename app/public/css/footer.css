@@ -1,0 +1,52 @@
+footer {
+    position: relative;
+    border-top: 10px solid #72a046;
+    border-bottom: 10px solid #72a046;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.linha-laranja-topo {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f59a23;
+    height: 5px;
+}
+
+.linha-laranja-baixo {
+    position: absolute;
+    width: 100%;
+    bottom: -15px;
+    left: 0;
+    background-color: #f59a23;
+    height: 5px;
+}
+
+footer h2 {
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: #72a046;
+    margin-bottom: 18px;
+}
+
+footer h2.margem-maior {
+    margin-top: 30px;
+}
+
+footer a {
+    color: #797979;
+    margin-bottom: 8px;
+}
+
+footer a.endereco-digital {
+    display: flex;
+    align-items: center;
+}
+
+footer address {
+    font-style: normal;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include("../templates/head.ejs") %>
+    <link rel="stylesheet" href="/css/resultado-busca.css">
+    <title><%- data.page_name %></title>
+</head>
+
+<body>
+    <%- include("../templates/header.ejs") %>
+
+    <main>
+        <div class="pesquisa">
+            <img src="/imagem/lupa.svg" alt="lupa de pesquisa" class="lupa">
+            <input type="text" class="pesquisar">
+        </div>
+
+        <h1>Veganos</h1>
+
+        <div class="itens">
+            <img src="/imagem/Home_Meatballs.png" alt="Meat balls">
+            <h2>Meat balls</h2>
+            <h3>vegano</h3>
+            <h4> R$ 21,60</h4>
+        </div>
+        <br>
+        <div class="itens">
+            <img src="/imagem/Cookies r.png" alt="Cookies">
+            <h2>Cookies</h2>
+            <h3>Veganos</h3>
+            <h4> R$ 16,50</h4>
+        </div>
+        <br>
+        <div class="itens">
+            <img src="/imagem/Chips r.png" alt="Chips de Salsa">
+            <h2>Chips de Salsa</h2>
+            <h3>Veganos</h3>
+            <h4> R$ 11,29</h4>
+        </div>
+        <br>
+        <div class="itens">
+            <img src="/imagem/pipoca r.png" alt="Pipoca">
+            <h2>Pipoca</h2>
+            <h3>Veganos</h3>
+            <h4> R$ 9,45</h4>
+        </div>
+    </main>
+
+    <%- include("../templates/footer.ejs") %>
+
+</body>
+
+</html>
