@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const session = require('express-session');
 const path = require('path');
+const rotas = require("./app/routes/router");
 
 const app = express();
 const port = process.env.PORRT || 3000;
@@ -18,7 +19,7 @@ app.use(session({
     }
 }));
 
-app.use(express.static("app/public"));
+app.use(express.static(path.join(__dirname, 'app', 'public')));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, 'app', 'views'));
@@ -26,7 +27,6 @@ app.set("views", path.join(__dirname, 'app', 'views'));
 app.use(express.json()); 
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-var rotas = require("./app/routes/router");
 app.use("/", rotas);
 
 app.listen(port, () => {
