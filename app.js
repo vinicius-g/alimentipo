@@ -6,7 +6,7 @@ const path = require('path');
 const rotas = require("./app/routes/router");
 
 const app = express();
-const port = process.env.PORRT || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(session({
     secret: process.env.SECRET,
