@@ -3,107 +3,44 @@
 
 <head>
     <%- include("../templates/head.ejs") %>
-    <link rel="stylesheet" href="/css/sobre_restricoes.css">
+    <link rel="stylesheet" href="/css/sobre-restricoes.css">
     <title><%- data.page_name %></title>
 </head>
 
 <body>
     <%- include("../templates/header.ejs") %>
+
     <main>
-        <h1>Restrições Alimentares</h1>
         <section>
-            <p> As restrições variam em tipo e
-                intensidade de acordo com cada indivíduo,
-                seu organismo e condição de saúde.
-                Existem diferentes restrições alimentares:
-                uma <span>intolerância alimentar</span> sintomática ocorre
-                quando o organismo de uma pessoa não é capaz
-                de digerir determinado nutriente; já uma <span>alergia alimentar</span> é uma
-                reação de saúde adversa que ocorre
-                quando o sistema imunológico reconhece, de
-                forma incorreta, um nutriente como sendo
-                um fator agressivo ao organismo. </p>
-        </section>
-        <section>
+            <h1>Restrições Alimentares</h1>
+
+            <p class="inicio-paragrafo">As restrições variam em tipo e intensidade de acordo com cada indivíduo, seu organismo e condição de saúde. Existem diferentes restrições alimentares: uma <b class="laranja">intolerância alimentar</b> sintomática ocorre quando o organismo de uma pessoa não é capaz de digerir determinado nutriente; já uma <b class="laranja">alergia alimentar</b> é uma reação de saúde adversa que ocorre quando o sistema imunológico reconhece, de forma incorreta, um nutriente como sendo um fator agressivo ao organismo.</p>
+
             <h2>Principais Restrições Alimentares</h2>
-            <section>
-                <p><span>Glúten</span> : O glúten se trata de um
-                    composto de proteínas (gliadina e glutenina)
-                    encontrado em diversos alimentos, como o trigo,
-                    malte, cevada, centeio e outros cereais. Quando
-                    a pessoa tem o glúten como uma restrição alimentar,
-                    é possível que ela seja portadora de doença celíaca,
-                    caracterizada por uma reação contra o próprio intestino
-                    delgado perante a ingestão de glúten, a qual faz
-                    diminuir a capacidade de absorção de nutrientes
-                    pelo organismo, resultando em má nutrição, anemia,
-                    perda de peso e fadiga. Os doentes celíacos são
-                    extremamente sensíveis ao glúten, mesmo quando
-                    este é ingerido em pequenas quantidades. </p>
-            </section>
-            <section>
-                <p><span>Lactose</span> : A lactose é um açúcar
-                    encontrado no leite e seus derivados,
-                    e a sua intolerância surge da incapacidade
-                    do organismo digerí-la, devido à falta da
-                    enzima lactase (responsável pela digestão
-                    da lactose); existem pessoas tolerantes à
-                    lactose (digerem facilmente a lactose),
-                    semi-tolerantes (digerem diariamente
-                    quantidades pequenas de lactose) e as
-                    intolerantes à lactose (não conseguem digerir
-                    a lactose mesmo em pequena quantidade). </p>
-            </section>
-            <setion>
-                <p><span>Açúcar</span> : O açúcar é uma das restrições
-                    alimentares mais comuns da atualidade; isso ocorre
-                    em partes pelo grande número de diabéticos.
-                    A diabetes pode ser dividida em dois tipos:</p>
-                <section>
-                    <p><span>Diabetes tipo 1</span> – onde o sistema
-                        imunológico ataca equivocadamente as células
-                        beta (produtoras de insulina), com pouca ou
-                        nenhuma insulina sendo liberada para o corpo.
-                        Como resultado, a glicose fica no sangue, em
-                        vez de ser usada como energia. </p>
-                </section>
-                <section>
-                    <p><span>Diabetes tipo 2</span> – ocorre quando
-                        o organismo não consegue usar adequadamente
-                        a insulina que produz; ou não produz insulina
-                        suficiente para controlar a taxa de glicemia.</p>
-                </section>
-            </setion>
-            <setion>
-                <h2>Veganos</h2>
-                <p>Além das restrições, temos em nosso site uma área vegana
-                    para aqueles que buscam alimentos dentro dessa categoria</p>
-                <section>
-                    <p><span>O que é veganismo</span> : "O veganismo é uma
-                        filosofia e um modo de vida que procura excluir,
-                        dentro do possível e praticável, todas as formas
-                        de exploração e crueldade para com os animais para
-                        alimentação, vestuário ou qualquer outro propósito.“
-                        - The Vegan Society</p>
-                </section>
-                <section>
-                    <p><span>Alimentação vegana</span> : uma pessoa vegana
-                        procura evitar contribuir para a exploração dos animais,
-                        dentro do possível e praticável. Por isso não consomem
-                        produtos que implicam exploração dos animais ,entre esses
-                        produtos encontram-se carne, peixe, marisco, laticínios,
-                        ovos e mel.</p>
-                </section>
-            </setion>
-            <div>
-                <p>
-                <h3>Disponível</h3> em :</p>
-                <a href="https://nutrijr.ufsc.br/restricoes-alimentares">https://nutrijr.ufsc.br/restricoes-alimentares</a>
-                <br><br>
-                <a href="https://veganismosemduvida.com">https://veganismosemduvida.com</a>
-                <br><br>
+
+            <p><b class="laranja">Glúten</b>: O glúten se trata de um composto de proteínas (gliadina e glutenina) encontrado em diversos alimentos, como o trigo, malte, cevada, centeio e outros cereais. Quando a pessoa tem o glúten como uma restrição alimentar, é possível que ela seja portadora de doença celíaca, caracterizada por uma reação contra o próprio intestino delgado perante a ingestão de glúten, a qual faz diminuir a capacidade de absorção de nutrientes pelo organismo, resultando em má nutrição, anemia, perda de peso e fadiga. Os doentes celíacos são extremamente sensíveis ao glúten, mesmo quando este é ingerido em pequenas quantidades.</p>
+
+            <p><b class="laranja">Lactose</b>: A lactose é um açúcar encontrado no leite e seus derivados, e a sua intolerância surge da incapacidade do organismo digerí-la, devido à falta da enzima lactase (responsável pela digestão da lactose); existem pessoas tolerantes à lactose (digerem facilmente a lactose), semi-tolerantes (digerem diariamente quantidades pequenas de lactose) e as intolerantes à lactose (não conseguem digerir a lactose mesmo em pequena quantidade).</p>
+
+            <p><b class="laranja">Açúcar</b>: O açúcar é uma das restrições alimentares mais comuns da atualidade; isso ocorre em partes pelo grande número de diabéticos. A diabetes pode ser dividida em dois tipos: <br>
+                <b class="verde">Diabetes tipo 1 -</b> onde o sistema imunológico ataca equivocadamente as células beta (produtoras de insulina), com pouca ou nenhuma insulina sendo liberada para o corpo. Como resultado, a glicose fica no sangue, em vez de ser usada como energia.
+                <br>
+                <b class="verde">Diabetes tipo 2 -</b> ocorre quando o organismo não consegue usar adequadamente a insulina que produz; ou não produz insulina suficiente para controlar a taxa de glicemia.
+            </p>
+
+            <h2>Veganos</h2>
+
+            <p class="inicio-paragrafo">Além das restrições, temos em nosso site uma área vegana para aqueles que buscam alimentos dentro dessa categoria.</p>
+
+            <p><b class="laranja">O que é veganismo</b>: "O veganismo é uma filosofia e um modo de vida que procura excluir, dentro do possível e praticável, todas as formas de exploração e crueldade para com os animais para alimentação, vestuário ou qualquer outro propósito.“ - The Vegan Society</p>
+
+            <p><b class="laranja">Alimentação vegana</b>: uma pessoa vegana procura evitar contribuir para a exploração dos animais, dentro do possível e praticável. Por isso não consomem produtos que implicam exploração dos animais ,entre esses produtos encontram-se carne, peixe, marisco, laticínios, ovos e mel.</p>
+
+            <p><b class="verde">Disponível</b> em: <br><br>
+                <a href="https://nutrijr.ufsc.br/restricoes-alimentares">https://nutrijr.ufsc.br/restricoes-alimentares</a> <br><br>
+                <a href="https://veganismosemduvida.com">https://veganismosemduvida.com</a> <br><br>
                 <a href="https://www.vegansociety.com">https://www.vegansociety.com</a>
-            </div>
+            </p>
         </section>
     </main>
 

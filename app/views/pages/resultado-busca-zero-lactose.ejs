@@ -2,57 +2,142 @@
 <html lang="pt-br">
 
 <head>
-    <%- include("../templates/head.ejs") %>
+    <%- include("../templates/head.ejs") %>>
     <link rel="stylesheet" href="/css/resultado-busca.css">
+
     <title><%- data.page_name %></title>
 </head>
 
 <body>
     <%- include("../templates/header.ejs") %>
-    <main>
-        <br>
-        <br>
-        <br>
-        <div class="pesquisa">
-            <img src="/imagem/lupa.svg" alt="lupa de pesquisa" class="lupa">
-            <input type="text" class="pesquisar">
-        </div>
-        <h1>Zero Lactose</h1>
 
-        <div class="itens">
-            <img src="/imagem/Home_queijo.png" alt="Queijo">
-            <h2>Queijo</h2>
-            <h3>Zero Lactose</h3>
-            <h4> R$ 13,99</h4>
-        </div>
-        <br>
-        <div class="itens">
-            <img src="/imagem/chocolate r.png" alt="Chocolate">
-            <h2>Chocolate</h2>
-            <h3>Zero Lactose</h3>
-            <h4> R$ 5,49</h4>
-        </div>
-        <br>
-        <div class="itens">
-            <img src="/imagem/leite r.png" alt="Leite">
-            <h2>Leite</h2>
-            <h3>Zero Lactose</h3>
-            <h4> R$ 7,79</h4>
-        </div>
-        <br>
-        <div class="itens">
-            <img src="/imagem/Butter r.png" alt="Manteiga">
-            <h2>Manteiga</h2>
-            <h3>Zero Lactose</h3>
-            <h4> R$ 12,89</h4>
-        </div>
-        <br>
-        <div class="itens">
-            <img src="/imagem/yogurte r.png" alt="yogurt">
-            <h2>yogurt</h2>
-            <h3>Zero Lactose</h3>
-            <h4> R$ 3,49</h4>
-        </div>
+    <main>
+        <section>
+            <div class="searchbar">
+                <img src="/imagem/pesquisa.png" alt="Pesquisa">
+                <input type="search" id="searchbar">
+            </div>
+
+            <h1>Zero Lactose</h1>
+
+            <div id="produtos">
+                <div class="produto">
+                    <div class="produto-imagem">
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
+
+                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                    </div>
+
+                    <div class="produto-texto">
+                        <h2>Molho de tomate</h2>
+
+                        <h3>Zero Lactose</h3>
+
+                        <p>R$ 21,60</p>
+                    </div>
+                </div>
+
+                <div class="produto">
+                    <div class="produto-imagem">
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
+
+                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                    </div>
+
+                    <div class="produto-texto">
+                        <h2>Molho de tomate</h2>
+
+                        <h3>Zero Lactose</h3>
+
+                        <p>R$ 21,60</p>
+                    </div>
+                </div>
+
+                <div class="produto">
+                    <div class="produto-imagem">
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
+
+                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                    </div>
+
+                    <div class="produto-texto">
+                        <h2>Molho de tomate</h2>
+
+                        <h3>Zero Lactose</h3>
+
+                        <p>R$ 21,60</p>
+                    </div>
+                </div>
+
+                <div class="produto">
+                    <div class="produto-imagem">
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
+
+                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                    </div>
+
+                    <div class="produto-texto">
+                        <h2>Molho de tomate</h2>
+
+                        <h3>Zero Lactose</h3>
+
+                        <p>R$ 21,60</p>
+                    </div>
+                </div>
+
+                <div class="produto">
+                    <div class="produto-imagem">
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
+
+                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                    </div>
+
+                    <div class="produto-texto">
+                        <h2>Molho de tomate</h2>
+
+                        <h3>Zero Lactose</h3>
+
+                        <p>R$ 21,60</p>
+                    </div>
+                </div>
+
+                <div class="produto">
+                    <div class="produto-imagem">
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
+
+                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                    </div>
+
+                    <div class="produto-texto">
+                        <h2>Molho de tomate</h2>
+
+                        <h3>Zero Lactose</h3>
+
+                        <p>R$ 21,60</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paginacao">
+                <a href="#" class="ativo">1</a>
+
+                <a href="#">2</a>
+
+                <a href="#">3</a>
+            </div>
+        </section>
     </main>
 
     <%- include("../templates/footer.ejs") %>

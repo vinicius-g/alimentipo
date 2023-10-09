@@ -33,7 +33,7 @@ const validacaoMiddleware = require("../middlewares/regrasValidacaoMiddleware");
 router.get("/",
 HomeControllerRead.acessarPagina);
 
-router.get("/sobre-restricoes",
+router.get("/sobre-restricoes-alimentares",
 SobreRestricoesControllerRead.acessarPagina);
 
 router.get("/produtos-sem-gluten",

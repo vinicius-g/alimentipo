@@ -3,142 +3,65 @@
 
 <head>
     <%- include("../templates/head.ejs") %>
-    <link rel="stylesheet" href="/css/estilo_cadastrese.css">
-    <link rel="stylesheet" href="/css/home.css">
-
-    <script src="js/cadastrese.js"></script>
-    <script src="js/perfil.js"></script>
+    <link rel="stylesheet" href="/css/cadastro-comprador.css">
 
     <title><%- data.page_name %></title>
 </head>
 
 <body>
     <%- include("../templates/header.ejs") %>
+
     <main>
+        <h1>Cadastre-se</h1>
 
-        <form>
-            <div>
-                <input checked onclick="mostra_comprador()" type="radio" name="comprador_ou_vendedor" id="input_comprador" value="comprador">
-                <label for="comprador">Cadastro Comprador</label><br>
-            </div>
+        <div class="alterar-cadastro">
+            <a href="/cadastro-comprador" class="ativo">
+                Cadastro Comprador
+            </a>
 
-            <div class="vendedor-fake">
-                <a href="/cadastro-vendedor">
-                    <input onclick="mostra_vendedor()" type="radio" name="comprador_ou_vendedor" id="input_vendedor" value="vendedor">
-                    <label for="vendedor ">Cadastro Vendedor</label><br></a>
-            </div>
+            <a href="/cadastro-vendedor">
+                Cadastro Vendedor
+            </a>
+        </div>
+
+        <h2>Cadastro de comprador</h2>
+
+        <form action="/cadastro-comprador" method="post" enctype="multipart/form-data" id="cadastro-comprador">
+            <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
+
+            <input type="text" name="nome" placeholder="Nome Completo" <%- data.input_values ? `value="${data.input_values.nome}"` : "" %> <%- data.errors && data.errors.nome_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.nome_error ? `<span class='error-message'>${data.errors.nome_error.msg}</span>` : "" %>
+
+            <input type="text" name="nome_usuario" placeholder="Nome de usúario" <%- data.input_values ? `value="${data.input_values.nome_usuario}"` : "" %> <%- data.errors && data.errors.nome_usuario_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.nome_usuario_error ? `<span class='error-message'>${data.errors.nome_usuario_error.msg}</span>` : "" %>
+
+            <input type="email" name="email" placeholder="E-mail" <%- data.input_values ? `value="${data.input_values.email}"` : "" %> <%- data.errors && data.errors.email_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.email_error ? `<span class='error-message'>${data.errors.email_error.msg}</span>` : "" %>
+
+            <input type="password" name="senha" placeholder="Senha" <%- data.input_values ? `value="${data.input_values.senha}"` : "" %> <%- data.errors && data.errors.senha_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.senha_error ? `<span class='error-message'>${data.errors.senha_error.msg}</span>` : "" %>
+
+            <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*">
+
+            <label for="imagem_perfil" class="foto-perfil <%- data.errors && data.errors.imagem_perfil_error ? "error" : "" %></label>">
+                <div>
+                    <img src="/imagem/add-imagem.png" alt="Adicionar imagem" class="adicionar-imagem">
+                </div>
+
+                <span>Foto de perfil (opcional)</span>
+            </label>
+
+            <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
+
+            <button type="submit">Cadastre-se</button>
         </form>
 
-        <div id="comprador">
-
-            <h2>Cadastro de comprador</h2>
-
-            <form action="/cadastro-comprador" method="post" enctype="multipart/form-data" id="cadastro-comprador">
-                <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
-
-                <div>
-                    <input type="text" name="nome" placeholder="Nome Completo"
-                    <%- data.input_values ? `value="${data.input_values.nome}"` : "" %>
-                    <%- data.errors && data.errors.nome_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.nome_error ? `<span class='error-message'>${data.errors.nome_error.msg}</span>` : "" %>
-
-                <div>
-                    <input type="text" name="nome_usuario" placeholder="Nome de usúario"
-                    <%- data.input_values ? `value="${data.input_values.nome_usuario}"` : "" %>
-                    <%- data.errors && data.errors.nome_usuario_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.nome_usuario_error ? `<span class='error-message'>${data.errors.nome_usuario_error.msg}</span>` : "" %>
-
-                <div>
-                    <input type="email" name="email" placeholder="E-mail"
-                    <%- data.input_values ? `value="${data.input_values.email}"` : "" %>
-                    <%- data.errors && data.errors.email_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.email_error ? `<span class='error-message'>${data.errors.email_error.msg}</span>` : "" %>
-
-                <div>
-                    <input type="password" name="senha" placeholder="Senha"
-                    <%- data.input_values ? `value="${data.input_values.senha}"` : "" %>
-                    <%- data.errors && data.errors.senha_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.senha_error ? `<span class='error-message'>${data.errors.senha_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="foto" class="op">Foto de perfil (opcional)</label>
-                    <input type="file" name="imagem_perfil" accept="image/*"
-                    <%- data.input_values ? `value="${data.input_values.imagem_perfil}"` : "" %>
-                    <%- data.errors && data.errors.imagem_perfil_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
-
-                <input type="submit" value="Cadastre-se">
-
-            </form>
-            <p>Ao se inscrever o usuário aceita os termos e condições</p>
-        </div>
-
-        <div id="vendedor">
-
-            <h2>Cadastro de vendedor</h2>
-
-            <form>
-                <div>
-                    <label for="nome">Nome da Loja</label>
-                    <input type="text" name="nome" required>
-                </div>
-                <div>
-                    <label for="email">E-mail do Adminstrador</label>
-                    <input type="text" name="email" required>
-                </div>
-                <div>
-                    <label for="senha">Senha</label>
-                    <input type="text" name="senha" required>
-                </div>
-                <div>
-                    <label for="cnpj">CNPJ</label>
-                    <input type="text" name="cnpj" required>
-                </div>
-                <div>
-                    <label for="foto">Foto de perfil</label>
-                    <input type="file" name="foto" required>
-                </div>
-                <div>
-                    <label for="loja_online_fisica">Sua loja é...</label>
-                    <div>
-                        <input type="radio" name="fisica_ou_online" id="online" value="online" required>
-                        <label for="online">Online</label><br>
-                        <input type="radio" name="fisica_ou_online" id="fisica" value="fisica">
-                        <label for="fisica ">Física</label><br>
-                        <input type="radio" name="fisica_ou_online" id="online_fisica" value="online_fisica">
-                        <label for="online_fisica">Online e física</label><br>
-                    </div>
-                </div>
-                <div>
-                    <label for="link">Link do site da loja</label>
-                    <input type="url" name="link">
-                </div>
-                <div>
-                    <label for="desc">Descrição da loja</label>
-                    <textarea name="desc" rows="4" cols="50"></textarea>
-                </div>
-                <div>
-                    <label for="end">Endereço da loja física</label>
-                    <textarea name="end" rows="4" cols="50"></textarea>
-                </div>
-                <div>
-                    <label for="tele">Telefone</label>
-                    <input type="tel" name="tele">
-                </div>
-                <input type="reset" value="Limpar">
-                <input type="submit" value="Finalizar cadastro">
-            </form>
-        </div>
+        <p class="termos-condicoes">Ao se inscrever o usuário aceita os <a href="#">termos e condições</a></p>
     </main>
+
     <%- include("../templates/footer.ejs") %>
 </body>

@@ -3,11 +3,7 @@
 
 <head>
     <%- include("../templates/head.ejs") %>
-    <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/cadastro-vendedor.css">
-
-    <script src="/js/cadastrese.js"></script>
-    <script src="/js/perfil.js"></script>
 
     <title><%- data.page_name %></title>
 </head>
@@ -15,121 +11,103 @@
 <body>
     <%- include("../templates/header.ejs") %>
 
-    </header>
     <main>
+        <h1>Cadastre-se</h1>
 
+        <div class="alterar-cadastro">
+            <a href="/cadastro-comprador">
+                Cadastro Comprador
+            </a>
+
+            <a href="/cadastro-vendedor" class="ativo">
+                Cadastro Vendedor
+            </a>
         </div>
 
-        <div id="vendedor">
+        <h2>Cadastro de vendedor</h2>
 
-            <h2>Cadastro de vendedor</h2>
+        <form action="/cadastro-vendedor" method="post" enctype="multipart/form-data">
+            <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
 
-            <form action="/cadastro-vendedor" method="post" enctype="multipart/form-data">
-                <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
+            <input type="text" name="nome_proprietario" placeholder="Nome completo do proprietario" <%- data.input_values ? `value="${data.input_values.nome_proprietario}"` : "" %> <%- data.errors && data.errors.nome_proprietario_error ? `class="error"` : "" %>>
 
+            <%- data.errors && data.errors.nome_proprietario_error ? `<span class='error-message'>${data.errors.nome_proprietario_error.msg}</span>` : "" %>
+
+            <input type="text" name="cpf" placeholder="CPF" <%- data.input_values ? `value="${data.input_values.cpf}"` : "" %> <%- data.errors && data.errors.cpf_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.cpf_error ? `<span class='error-message'>${data.errors.cpf_error.msg}</span>` : "" %>
+
+            <input type="text" name="data_nascimento" placeholder="Data de nacimento" <%- data.input_values ? `value="${data.input_values.data_nascimento}"` : "" %> <%- data.errors && data.errors.data_nascimento_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.data_nascimento_error ? `<span class='error-message'>${data.errors.data_nascimento_error.msg}</span>` : "" %>
+
+            <input type="text" name="nome_loja" placeholder="Nome da Loja" <%- data.input_values ? `value="${data.input_values.nome_loja}"` : "" %> <%- data.errors && data.errors.nome_loja_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.nome_loja_error ? `<span class='error-message'>${data.errors.nome_loja_error.msg}</span>` : "" %>
+
+            <input type="text" name="email" placeholder="E-mail doo Adminstrador" <%- data.input_values ? `value="${data.input_values.email}"` : "" %> <%- data.errors && data.errors.email_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.email_error ? `<span class='error-message'>${data.errors.email_error.msg}</span>` : "" %>
+
+            <input type="password" name="senha" placeholder="Senha" <%- data.input_values ? `value="${data.input_values.senha}"` : "" %> <%- data.errors && data.errors.senha_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.senha_error ? `<span class='error-message'>${data.errors.senha_error.msg}</span>` : "" %>
+
+            <input type="text" name="cnpj" placeholder="CNPJ" <%- data.input_values ? `value="${data.input_values.cnpj}"` : "" %> <%- data.errors && data.errors.cnpj_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.cnpj_error ? `<span class='error-message'>${data.errors.cnpj_error.msg}</span>` : "" %>
+
+            <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*">
+
+            <label for="imagem_perfil" class="foto-perfil <%- data.errors && data.errors.imagem_perfil_error ? "error" : "" %></label>">
                 <div>
-                    <label for="nome"></label>
-                    <input type="text" name="nome_proprietario" placeholder="Nome completo do proprietario" <%- data.input_values ? `value="${data.input_values.nome_proprietario}"` : "" %> <%- data.errors && data.errors.nome_proprietario_error ? `class="error"` : "" %>>
+                    <img src="/imagem/add-imagem.png" alt="Adicionar imagem" class="adicionar-imagem">
                 </div>
 
-                <%- data.errors && data.errors.nome_proprietario_error ? `<span class='error-message'>${data.errors.nome_proprietario_error.msg}</span>` : "" %>
+                <span>Logo loja</span>
+            </label>
+
+            <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
+
+            <div class="sua-loja-e">
+                <label for="online_fisica">Sua loja é...</label>
 
                 <div>
-                    <label for="nome"></label>
-                    <input type="text" name="cpf" placeholder="CPF" <%- data.input_values ? `value="${data.input_values.cpf}"` : "" %> <%- data.errors && data.errors.cpf_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.cpf_error ? `<span class='error-message'>${data.errors.cpf_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="nome"></label>
-                    <input type="text" name="data_nascimento" placeholder="Data de nacimento" <%- data.input_values ? `value="${data.input_values.data_nascimento}"` : "" %> <%- data.errors && data.errors.data_nascimento_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.data_nascimento_error ? `<span class='error-message'>${data.errors.data_nascimento_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="nome"></label>
-                    <input type="text" name="nome_loja" placeholder="Nome da Loja" <%- data.input_values ? `value="${data.input_values.nome_loja}"` : "" %> <%- data.errors && data.errors.nome_loja_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.nome_loja_error ? `<span class='error-message'>${data.errors.nome_loja_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="email"></label>
-                    <input type="text" name="email" placeholder="E-mail doo Adminstrador" <%- data.input_values ? `value="${data.input_values.email}"` : "" %> <%- data.errors && data.errors.email_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.email_error ? `<span class='error-message'>${data.errors.email_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="senha"></label>
-                    <input type="password" name="senha" placeholder="Senha" <%- data.input_values ? `value="${data.input_values.senha}"` : "" %> <%- data.errors && data.errors.senha_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.senha_error ? `<span class='error-message'>${data.errors.senha_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="cnpj"></label>
-                    <input type="text" name="cnpj" placeholder="CNPJ" <%- data.input_values ? `value="${data.input_values.cnpj}"` : "" %> <%- data.errors && data.errors.cnpj_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.cnpj_error ? `<span class='error-message'>${data.errors.cnpj_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="foto">Foto de perfil</label>
-                    <input type="file" name="imagem_perfil" placeholder="Foto de Perfil"
-                    <%- data.errors && data.errors.imagem_perfil_error ? `class="error"` : "" %>>
-                </div>
-
-                <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
-
-                <div>
-                    <label for="online_fisica">Sua loja é...</label>
-                    <div>
+                    <label for="online">
                         <input type="radio" name="online_fisica" id="online" value="online">
-                        <label for="online">Online</label><br>
+                        Online
+                    </label>
+
+                    <label for="online_fisica">
                         <input type="radio" name="online_fisica" id="online_fisica" value="online e fisica">
-                        <label for="online_fisica">Online e física</label><br>
-                    </div>
+                        Online e física
+                    </label>
                 </div>
+            </div>
 
-                <%- data.errors && data.errors.online_fisica_error ? `<span class='error-message'>${data.errors.online_fisica_error.msg}</span>` : "" %>
+            <%- data.errors && data.errors.online_fisica_error ? `<span class='error-message'>${data.errors.online_fisica_error.msg}</span>` : "" %>
 
-                <div>
-                    <label for="link" ></label>
-                    <input type="url" name="link_site" placeholder="Link do site" 
-                    <%- data.input_values ? `value="${data.input_values.link_site}"` : "" %> <%- data.errors && data.errors.link_site_error ? `class="error"` : "" %>>
-                </div>
+            <input type="url" name="link_site" placeholder="Link do site" <%- data.input_values ? `value="${data.input_values.link_site}"` : "" %> <%- data.errors && data.errors.link_site_error ? `class="error"` : "" %>>
 
-                <%- data.errors && data.errors.link_site_error ? `<span class='error-message'>${data.errors.link_site_error.msg}</span>` : "" %>
+            <%- data.errors && data.errors.link_site_error ? `<span class='error-message'>${data.errors.link_site_error.msg}</span>` : "" %>
 
-                <div>
-                    <label for="desc" >Descrição da loja</label>
-                    <textarea name="descricao" rows="4" cols="50" <%- data.errors && data.errors.descricao_error ? `class="error"` : "" %>><%- data.input_values ? data.input_values.descricao : "" %></textarea>
-                </div>
+            <textarea name="descricao" placeholder="Descrição sobre a loja" rows="4" cols="50" <%- data.errors && data.errors.descricao_error ? `class="error"` : "" %>><%- data.input_values ? data.input_values.descricao : "" %></textarea>
 
-                <%- data.errors && data.errors.descricao_error ? `<span class='error-message'>${data.errors.descricao_error.msg}</span>` : "" %>
+            <%- data.errors && data.errors.descricao_error ? `<span class='error-message'>${data.errors.descricao_error.msg}</span>` : "" %>
 
-                <div>
-                    <label for="end" ;">Endereço da loja física</label>
-                    <textarea name="endereco" rows="4" cols="50" <%- data.errors && data.errors.endereco_error ? `class="error"` : "" %>><%- data.input_values ? data.input_values.endereco : "" %></textarea>
-                </div>
+            <input type="tel" name="telefone" placeholder="Telefone" <%- data.input_values ? `value="${data.input_values.telefone}"` : "" %> <%- data.errors && data.errors.telefone_error ? `class="error"` : "" %>>
 
-                <%- data.errors && data.errors.endereco_error ? `<span class='error-message'>${data.errors.endereco_error.msg}</span>` : "" %>
+            <%- data.errors && data.errors.telefone_error ? `<span class='error-message'>${data.errors.telefone_error.msg}</span>` : "" %>
 
-                <div>
-                    <label for="tele" ></label>
-                    <input type="tel" name="telefone" placeholder="Telefone"
-                    <%- data.input_values ? `value="${data.input_values.telefone}"` : "" %> <%- data.errors && data.errors.telefone_error ? `class="error"` : "" %>>
-                </div>
+            <textarea name="endereco" placeholder="Endereço" rows="4" cols="50" <%- data.errors && data.errors.endereco_error ? `class="error"` : "" %>><%- data.input_values ? data.input_values.endereco : "" %></textarea>
 
-                <%- data.errors && data.errors.telefone_error ? `<span class='error-message'>${data.errors.telefone_error.msg}</span>` : "" %>
+            <%- data.errors && data.errors.endereco_error ? `<span class='error-message'>${data.errors.endereco_error.msg}</span>` : "" %>
 
-                <input type="reset" value="Limpar">
-                <input type="submit" value="Finalizar cadastro">
-            </form>
-        </div>
+            <button type="submit">Cadastre-se</button>
+        </form>
+
+        <p class="termos-condicoes">Ao se inscrever o usuário aceita os <a href="#">termos e condições</a></p>
     </main>
+
     <%- include("../templates/footer.ejs") %>
 </body>

@@ -1,0 +1,134 @@
+main {
+    max-width: 480px;
+    margin-inline: auto;
+    padding-inline: 15px;
+}
+
+main h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #72a046;
+    margin-bottom: 30px;
+}
+
+.alterar-cadastro {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+    margin-bottom: 30px;
+}
+
+.alterar-cadastro a {
+    padding: 5px 10px;
+    border: 1px solid #f59a23;
+    border-radius: 10px;
+    position: relative;
+    padding-left: 35px;
+    font-size: .8rem;
+}
+
+.alterar-cadastro a.ativo::before {
+    background-color: #f59a23;
+}
+
+.alterar-cadastro a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    border: 1px solid #f59a23;
+    transform: translateY(-50%);
+}
+
+main h2 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #72a046;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+form input {
+    width: 100%;
+    height: 25px;
+    border: 1px solid #f59a23;
+    border-radius: 5px;
+}
+
+input.error {
+    border-color: red;
+    color: red;
+}
+
+.error-message {
+    color: red;
+}
+
+form input[type=file] {
+    display: none;
+}
+
+label.foto-perfil {
+    display: flex;
+    align-items: center;
+}
+
+label.foto-perfil div {
+    border: 1px solid #797979;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+label.foto-perfil div span {
+    font-size: .9rem;
+}
+
+label.foto-perfil div img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+label.foto-perfil div img.adicionar-imagem {
+    padding: 20px;
+}
+
+label.foto-perfil.error div {
+    border-color: red;
+    color: red;
+}
+
+form button {
+    border: 1px solid #f59a23;
+    border-radius: 10px;
+    padding: 5px 15px;
+    width: fit-content;
+    background: white;
+    color: #72a046;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.termos-condicoes {
+    margin-bottom: 40px;
+}
+
+.termos-condicoes a {
+    color: blue;
+    text-decoration: underline;
+}

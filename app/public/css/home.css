@@ -69,7 +69,7 @@
     padding: 0 15px;
 }
 
-#produtos-destacados a {
+#produtos-destacados > a {
     display: block;
     color: #729f46;
     text-align: end;
@@ -92,7 +92,8 @@
     padding: 40px 15px;
 }
 
-.produto {
+a.produto {
+    display: block;
     position: relative;
     padding: 10px;
     border-radius: 10px;
@@ -101,7 +102,7 @@
     max-width: 175px;
 }
 
-.produto .promocao {
+a.produto .promocao {
     position: absolute;
     top: 0;
     left: 0;
@@ -111,33 +112,34 @@
     padding: 5px 10px;
 }
 
-.produto .favoritar {
+a.produto .favoritar {
     position: absolute;
     top: 10px;
     right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-.produto img {
+a.produto > img {
     margin-bottom: 10px;
 }
 
-.produto h2 {
+a.produto h2 {
     font-weight: 400;
-    color: #797979;
     align-self: flex-start;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.produto h3 {
+a.produto h3 {
     font-size: .9rem;
     font-weight: 300;
-    color: #797979;
     margin-bottom: 5px;
 }
 
-.produto > p {
+a.produto > p {
     font-size: 1.1rem;
     color: #f59a23;
     font-weight: bold;
