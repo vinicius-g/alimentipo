@@ -1,6 +1,6 @@
 class SobreRestricoesController {
     acessarPagina(req, res) {
-        return res.render("pages/sobre_restricoes.ejs", {
+        return res.render("pages/sobre-restricoes.ejs", {
             data: {
                 page_name: "Alimentipo - Sobre restrições"
             }

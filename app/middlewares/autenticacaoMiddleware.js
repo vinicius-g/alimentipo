@@ -78,8 +78,9 @@ class Autenticacao {
         }
     }
 
-    validarToken(req, res, next) {
+    validarTokenComprador(req, res, next) {
         const token = req.session.token;
+
         req.session.loginRedirectUrl = req.url;
 
         if (!token) {
@@ -88,6 +89,37 @@ class Autenticacao {
 
         try {
             jwt.verify(token, process.env.SECRET);
+
+            const {userType} = jwt.decode(token, process.env.SECRET);
+
+            if (userType !== "comprador") {
+                return res.redirect("/login");
+            }
+
+            return next();
+        } catch (erro) {
+            console.log(erro);
+            return res.redirect("/login");
+        }
+    }
+
+    validarTokenVendedor(req, res, next) {
+        const token = req.session.token;
+
+        req.session.loginRedirectUrl = req.url;
+
+        if (!token) {
+            return res.redirect("/login");
+        }
+
+        try {
+            jwt.verify(token, process.env.SECRET);
+
+            const {userType} = jwt.decode(token, process.env.SECRET);
+
+            if (userType !== "comprador") {
+                return res.redirect("/login");
+            }
 
             return next();
         } catch (erro) {

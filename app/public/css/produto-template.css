@@ -1,0 +1,167 @@
+#produto {
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+#produto .produto-imagem {
+    margin: 0 15px;
+    position: relative;
+    padding-top: 40px;
+    height: 290px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#produto .produto-imagem > img {
+    height: 100%;
+}
+
+#produto .produto-imagem .favoritar {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#produto > h1 {
+    font-weight: normal;
+    font-size: 1.3rem;
+}
+
+#produto > h2 {
+    font-size: .9rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+#produto > .produto-preco {
+    font-size: 1.1rem;
+    color: #f59a23;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#produto > .produto-link {
+    border-radius: 5px;
+    border: 1px solid #f59a23;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+#loja {
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+#loja > h2 {
+    font-weight: normal;
+    color: #729f46;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.loja-info .loja-header {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.loja-info .loja-header img {
+    margin-right: 10px;
+}
+
+.loja-info .loja-header h3 {
+    font-weight: normal;
+    font-size: 1.2rem;
+    color: #585858;
+}
+
+.loja-info .loja-header address {
+    font-style: normal;
+    color: #585858;
+}
+
+.loja-info p {
+    margin-bottom: 10px;
+}
+
+.slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slick-next {
+    right: -15px;
+}
+
+.slick-prev {
+    left: -15px;
+}
+
+#sugestao-produtos {
+    padding: 0 15px;
+}
+
+#sugestao-produtos > h2 {
+    margin-left: 15px;
+    font-weight: normal;
+    color: #729f46;
+    font-size: 1.3rem;
+}
+
+.produto-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+a.produto {
+    display: block;
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+    width: 100%;
+    max-width: 175px;
+}
+
+a.produto .favoritar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a.produto > img {
+    margin-bottom: 10px;
+}
+
+a.produto h2 {
+    font-weight: 400;
+    align-self: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.produto h3 {
+    font-size: .9rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+a.produto > p {
+    font-size: 1.1rem;
+    color: #f59a23;
+    font-weight: bold;
+}

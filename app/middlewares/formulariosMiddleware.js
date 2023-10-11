@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const clienteModel = require("../models/Cliente");
+const lojaModel = require("../models/Loja");
 
 class ValidacaoFormulario {
 	constructor() {
@@ -119,8 +120,14 @@ class ValidacaoFormulario {
 
 	async validacaoLogin(req, res, next) {
 		const { email, senha } = req.body;
+        let userType = "comprador";
 
-		const user = await clienteModel.findUserByEmail(email);
+		let user = await clienteModel.findUserByEmail(email);
+
+        if (!user) {
+            user = await lojaModel.findUserByEmail(email);
+            userType = "vendedor";
+        }
 
 		if (!user) {
 			return res.render("pages/login.ejs", {
@@ -139,11 +146,22 @@ class ValidacaoFormulario {
 			});
 		}
 
+        let userSenha;
+        let userId;
+
+        if (userType === "comprador") {
+            userSenha = user.senha_cliente;
+            userId = user.id_cliente;
+        } else if (userType === "vendedor") {
+            userSenha = user.senha_loja;
+            userId = user.id_loja;
+        }
+
 		bcrypt
-			.compare(senha, user.senha_cliente)
+			.compare(senha, userSenha)
 			.then((auth) => {
 				if (auth) {
-					const token = jwt.sign({ userId: user.id_cliente }, process.env.SECRET);
+					const token = jwt.sign({ userId: userId, userType }, process.env.SECRET);
 
 					req.session.token = token;
 

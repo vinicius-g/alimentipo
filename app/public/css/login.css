@@ -1,0 +1,47 @@
+main {
+    max-width: 480px;
+    margin-inline: auto;
+    padding-inline: 15px;
+}
+
+main h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #72a046;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+form > input {
+    width: 100%;
+    height: 25px;
+    border: 1px solid #f59a23;
+    border-radius: 5px;
+    padding-inline-start: 10px;
+}
+
+input.error {
+    border-color: red;
+    color: red;
+}
+
+.error-message {
+    color: red;
+}
+
+form button {
+    border: 1px solid #72a046;
+    border-radius: 10px;
+    padding: 5px 15px;
+    width: fit-content;
+    background: white;
+    color: #72a046;
+    align-self: flex-end;
+    cursor: pointer;
+}

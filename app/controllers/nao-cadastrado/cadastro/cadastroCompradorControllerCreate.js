@@ -1,4 +1,5 @@
 const clienteModel = require("../../../models/Cliente");
+const lojaModel = require("../../../models/Loja");
 
 class CadastroController {
 	async cadastrarCliente(req, res) {
@@ -9,6 +10,27 @@ class CadastroController {
             const imagem_perfil = req.file;
             buffer_imagem_perfil = imagem_perfil.buffer;
             tipo_imagem_perfil = imagem_perfil.mimetype;
+        }
+
+        const loja = await lojaModel.findUserByEmail(email);
+
+        if (loja) {
+            return res.render("pages/cadastro-comprador.ejs", {
+                data: {
+                    page_name: "Cadastro",
+                    input_values: {
+                        nome,
+                        nome_usuario,
+                        email,
+                        senha
+                    },
+                    errors: {
+                        email_error: {
+                            msg: "Email já cadastrado como uma loja!",
+                        },
+                    },
+                },
+            });
         }
 
 		try {

@@ -1,0 +1,111 @@
+.searchbar {
+    display: flex;
+    align-items: center;
+    border: 2px solid #729f46;
+    border-radius: 5px;
+    width: 90%;
+    margin-inline: auto;
+    margin-bottom: 20px;
+}
+
+.searchbar img {
+    margin-inline: 5px;
+}
+
+.searchbar input {
+    border: none;
+    width: 100%;
+    outline: none;
+}
+
+main h1 {
+    font-size: 1.3rem;
+    color: #f59a23;
+    font-weight: normal;
+    margin-left: 15px;
+}
+
+#produtos {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, min(100%, 175px));
+    padding: 0 15px;
+    gap: 50px;
+    margin: 40px 0;
+}
+
+a.produto {
+    display: block;
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+    width: 100%;
+    max-width: 175px;
+}
+
+a.produto .promocao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #729f46;
+    color: white;
+    border-top-left-radius: 10px;
+    padding: 5px 10px;
+}
+
+a.produto .favoritar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a.produto > img {
+    margin-bottom: 10px;
+}
+
+a.produto h2 {
+    font-weight: 400;
+    align-self: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.produto h3 {
+    font-size: .9rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+a.produto > p {
+    font-size: 1.1rem;
+    color: #f59a23;
+    font-weight: bold;
+}
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.paginacao .ativo {
+    position: relative;
+    color: #729f46;
+}
+
+.paginacao .ativo::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 3px;
+    width: 15px;
+    background-color: #729f46;
+    transform: translateX(-50%);
+}

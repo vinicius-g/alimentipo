@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <%- include("../templates/header.ejs") %>
+    <%- data.usuarioLogado ? include("../templates/header-cadastrado.ejs") : include("../templates/header.ejs") %>
 
     <main>
         <section id="slider">
@@ -50,7 +50,7 @@
             <div id="carroussel-produtos-destacados">
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <button class="favoritar">
                                 <img src="/imagem/favoritar.png" alt="Favorito">
                             </button>
@@ -67,7 +67,7 @@
 
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <button class="favoritar">
                                 <img src="/imagem/favoritar.png" alt="Favorito">
                             </button>
@@ -84,7 +84,7 @@
 
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <button class="favoritar">
                                 <img src="/imagem/favoritar.png" alt="Favorito">
                             </button>
@@ -101,7 +101,7 @@
 
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <button class="favoritar">
                                 <img src="/imagem/favoritar.png" alt="Favorito">
                             </button>
@@ -117,7 +117,7 @@
                 </div>
             </div>
 
-            <a href="#">Expandir</a>
+            <a href="/produtos-destacados">Expandir</a>
         </section>
 
         <section id="promocoes">
@@ -126,7 +126,7 @@
             <div id="carroussel-promocoes">
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <div class="promocao">
                                 <p>xx%OFF</p>
                             </div>
@@ -147,7 +147,7 @@
 
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <div class="promocao">
                                 <p>xx%OFF</p>
                             </div>
@@ -168,7 +168,7 @@
 
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <div class="promocao">
                                 <p>xx%OFF</p>
                             </div>
@@ -189,7 +189,7 @@
 
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
+                        <a href="/produto-especifico" class="produto">
                             <div class="promocao">
                                 <p>xx%OFF</p>
                             </div>

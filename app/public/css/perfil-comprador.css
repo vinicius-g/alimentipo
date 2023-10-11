@@ -1,0 +1,121 @@
+#informacoes-perfil {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.imagem-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagem-perfil a {
+    font-size: .9rem;
+}
+
+.texto-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.texto-perfil h1 {
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+.texto-perfil address {
+    font-style: normal;
+}
+
+.texto-perfil a {
+    color: #729f46;
+    margin-top: 5px;
+}
+
+#produtos-favoritos,
+#lojas-favoritas {
+    padding: 0 15px;
+    margin-bottom: 40px;
+}
+
+#produtos-favoritos > h2,
+#lojas-favoritas > h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #729f46;
+}
+
+#produtos-favoritos > a,
+#lojas-favoritas > a {
+    display: block;
+    color: #729f46;
+    text-align: end;
+    margin-bottom: 10px;
+    font-size: .9rem;
+}
+
+#produtos,
+#lojas {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, min(100%, 175px));
+    gap: 50px;
+    margin: 40px 0;
+}
+
+a.produto,
+a.loja {
+    display: block;
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+    width: 100%;
+    max-width: 175px;
+}
+
+a.produto .favoritar,
+a.loja .favoritar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a.produto > img,
+a.loja > img {
+    margin-bottom: 10px;
+}
+
+a.produto h2 {
+    font-weight: 400;
+    align-self: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.loja h2 {
+    font-weight: 400;
+    align-self: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+a.produto h3 {
+    font-size: .9rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+a.produto > p {
+    font-size: 1.1rem;
+    color: #f59a23;
+    font-weight: bold;
+}

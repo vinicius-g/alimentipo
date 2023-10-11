@@ -59,7 +59,7 @@
 
             <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*">
 
-            <label for="imagem_perfil" class="foto-perfil <%- data.errors && data.errors.imagem_perfil_error ? "error" : "" %></label>">
+            <label for="imagem_perfil" class="foto-perfil <%- data.errors && data.errors.imagem_perfil_error ? "error" : "" %>">
                 <div>
                     <img src="/imagem/add-imagem.png" alt="Adicionar imagem" class="adicionar-imagem">
                 </div>
@@ -69,17 +69,19 @@
 
             <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
 
-            <div class="sua-loja-e">
+            <div class="sua-loja-e <%- data.errors && data.errors.online_fisica_error ? "error" : "" %>">
                 <label for="online_fisica">Sua loja é...</label>
 
                 <div>
                     <label for="online">
-                        <input type="radio" name="online_fisica" id="online" value="online">
+                        <input type="radio" name="online_fisica" id="online" value="online"
+                        <%- data.input_values && data.input_values.online_fisica === "online" ? "checked"  : "" %>>
                         Online
                     </label>
 
                     <label for="online_fisica">
-                        <input type="radio" name="online_fisica" id="online_fisica" value="online e fisica">
+                        <input type="radio" name="online_fisica" id="online_fisica" value="online e fisica"
+                        <%- data.input_values && data.input_values.online_fisica === "online e fisica" ? "checked"  : "" %>>
                         Online e física
                     </label>
                 </div>

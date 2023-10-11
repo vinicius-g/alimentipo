@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <%- include("../templates/head.ejs") %>
+    <link rel="stylesheet" href="/css/perfil-comprador.css">
+    <title><%- data.page_name %></title>
+</head>
+
+<body>
+    <%- include("../templates/header.ejs") %>
+
+    <main>
+        <section id="informacoes-perfil">
+            <div class="imagem-perfil">
+                <img src="/imagem/imagem-perfil-padrao.png" alt="Foto perfil">
+
+                <a href="#">Editar</a>
+            </div>
+
+            <div class="texto-perfil">
+                <h1>Nome</h1>
+                <address>E-mail</address>
+
+                <a href="#">Sair</a>
+            </div>
+        </section>
+
+        <section id="produtos-favoritos">
+            <h2>Produtos favoritos</h2>
+
+            <div id="produtos">
+                <a href="/produto-especifico" class="produto">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
+
+                    <h2>Molho de tomate</h2>
+                    <h3>Sem Glúten</h3>
+
+                    <p>R$ 8,99</p>
+                </a>
+
+                <a href="/produto-especifico" class="produto">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
+
+                    <h2>Molho de tomate</h2>
+                    <h3>Sem Glúten</h3>
+
+                    <p>R$ 8,99</p>
+                </a>
+
+                <a href="/produto-especifico" class="produto">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
+
+                    <h2>Molho de tomate</h2>
+                    <h3>Sem Glúten</h3>
+
+                    <p>R$ 8,99</p>
+                </a>
+
+                <a href="/produto-especifico" class="produto">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
+
+                    <h2>Molho de tomate</h2>
+                    <h3>Sem Glúten</h3>
+
+                    <p>R$ 8,99</p>
+                </a>
+            </div>
+
+            <a href="#">Expandir</a>
+        </section>
+
+        <section id="lojas-favoritas">
+            <h2>Lojas favoritas</h2>
+
+            <div id="lojas">
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+            </div>
+
+            <a href="#">Expandir</a>
+        </section>
+    </main>
+
+    <%- include("../templates/footer.ejs") %>
+</body>
+
+</html>
