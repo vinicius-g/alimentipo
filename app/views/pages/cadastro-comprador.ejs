@@ -4,6 +4,7 @@
 <head>
     <%- include("../templates/head.ejs") %>
     <link rel="stylesheet" href="/css/cadastro-comprador.css">
+    <script src="/js/formulario-imagem.js" defer></script>
 
     <title><%- data.page_name %></title>
 </head>
@@ -47,9 +48,9 @@
 
             <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*">
 
-            <label for="imagem_perfil" class="foto-perfil <%- data.errors && data.errors.imagem_perfil_error ? "error" : "" %></label>">
+            <label for="imagem_perfil" class="imagem-perfil <%- data.errors && data.errors.imagem_perfil_error ? "error" : "" %></label>">
                 <div>
-                    <img src="/imagem/add-imagem.png" alt="Adicionar imagem" class="adicionar-imagem">
+                    <img src="/imagem/add-imagem.png" alt="Adicionar imagem" class="adicionar-imagem" id="preview-imagem-perfil">
                 </div>
 
                 <span>Foto de perfil (opcional)</span>

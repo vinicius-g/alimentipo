@@ -11,8 +11,8 @@ class CadastroVendedorController {
             userType = tokenInfo.userType;
             usuarioLogado = true;
         }
-e
-        return res.render("pages/cadastro-v.ejs", {
+
+        return res.render("pages/cadastro-vendedor.ejs", {
             data: {
                 page_name: "Alimentipo",
                 usuarioLogado,
