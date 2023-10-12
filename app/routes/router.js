@@ -13,6 +13,7 @@ const ProdutoZeroAcucarControllerRead = require("../controllers/nao-cadastrado/n
 const ProdutoZeroLactoseControllerRead = require("../controllers/nao-cadastrado/navegacao/zeroLactoseControllerRead");
 const ProdutoControllerRead = require("../controllers/nao-cadastrado/navegacao/produtoControllerRead");
 const ProdutosDestacadosControllerRead = require("../controllers/nao-cadastrado/navegacao/produtosDestacadosControllerRead");
+const LojaControllerRead = require("../controllers/nao-cadastrado/navegacao/lojaControllerRead");
 
 const CadastroCompradorControllerRead = require("../controllers/nao-cadastrado/cadastro/cadastroCompradorControllerRead");
 const CadastroCompradorControllerCreate = require("../controllers/nao-cadastrado/cadastro/cadastroCompradorControllerCreate");
@@ -24,6 +25,10 @@ const LoginControllerRead = require("../controllers/nao-cadastrado/login/loginCo
 const LoginAuthControllerRead = require("../controllers/nao-cadastrado/login/loginAuthControllerRead");
 
 const PerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/perfilCompradorControllerRead");
+
+const ProdutosFavoritosControllerRead = require("../controllers/cadastrado/produtos/produtosFavoritosControllerRead");
+
+const LojasFavoritasControllerRead = require("../controllers/cadastrado/lojas/lojasFavoritasControllerRead");
 
 const ImagemPerfilClienteControllerRead = require("../controllers/nao-cadastrado/imagens/imagemPerfilClienteControllerRead");
 const ImagemPerfilLojaControllerRead = require("../controllers/nao-cadastrado/imagens/imagemPerfilLojaControllerRead");
@@ -58,6 +63,9 @@ ProdutoControllerRead.acessarPagina);
 router.get("/produtos-destacados",
 ProdutosDestacadosControllerRead.acessarPagina);
 
+router.get("/loja-especifica",
+LojaControllerRead.acessarPagina);
+
 router.get("/cadastro-comprador",
 CadastroCompradorControllerRead.acessarPagina);
 
@@ -88,6 +96,14 @@ LoginAuthControllerRead.autenticarCliente);
 router.get("/perfil-comprador",
 AutenticaoMiddleware.validarTokenComprador,
 PerfilCompradorControllerRead.acessarPagina);
+
+router.get("/produtos-favoritos",
+AutenticaoMiddleware.validarTokenComprador,
+ProdutosFavoritosControllerRead.acessarPagina);
+
+router.get("/lojas-favoritas",
+AutenticaoMiddleware.validarTokenComprador,
+LojasFavoritasControllerRead.acessarPagina);
 
 router.get("/imagem/cliente/perfil/:clienteId",
 ImagemPerfilClienteControllerRead.acessarImagem);

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <%- include("../templates/header.ejs") %>
+    <%- data.usuarioLogado ? include("../templates/header-cadastrado.ejs") : include("../templates/header.ejs") %>
 
     <main>
         <h1>Cadastre-se</h1>

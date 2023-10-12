@@ -1,0 +1,94 @@
+#informacoes-perfil {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.imagem-perfil {
+    display: flex;
+    justify-content: center;
+}
+
+.texto-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.texto-perfil h1 {
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+.texto-perfil address {
+    font-style: normal;
+}
+
+#produtos-favoritos > h1 {
+    font-size: 1.3rem;
+    color: #729f46;
+    font-weight: normal;
+    margin-left: 15px;
+}
+
+#produtos {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, min(100%, 175px));
+    padding: 0 15px;
+    gap: 50px;
+    margin: 40px 0;
+}
+
+a.produto {
+    display: block;
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+    width: 100%;
+    max-width: 175px;
+}
+
+a.produto .promocao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #729f46;
+    color: white;
+    border-top-left-radius: 10px;
+    padding: 5px 10px;
+}
+
+a.produto .favoritar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a.produto > img {
+    margin-bottom: 10px;
+}
+
+a.produto h2 {
+    font-weight: 400;
+    align-self: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.produto h3 {
+    font-size: .9rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+a.produto > p {
+    font-size: 1.1rem;
+    color: #f59a23;
+    font-weight: bold;
+}

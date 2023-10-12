@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <%- data.usuarioLogado ? include("../templates/header-cadastrado.ejs") : include("../templates/header.ejs") %>
     <%- include("../templates/header.ejs") %>
 
     <main>

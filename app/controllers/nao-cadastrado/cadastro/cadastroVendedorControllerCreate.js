@@ -15,7 +15,7 @@ class CadastroController {
         if (cliente) {
             return res.render("pages/cadastro-vendedor.ejs", {
                 data: {
-                    page_name: "Cadastro",
+                    page_name: "Alimentipo",
                     input_values: {
                         nome_proprietario,
                         cpf,

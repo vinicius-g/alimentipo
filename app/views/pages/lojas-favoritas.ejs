@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include("../templates/head.ejs") %>
+    <link rel="stylesheet" href="/css/lojas-favoritas.css">
+
+    <title><%- data.page_name %></title>
+</head>
+
+<body>
+    <%- include("../templates/header-cadastrado.ejs") %>
+
+    <main>
+        <section id="informacoes-perfil">
+            <div class="imagem-perfil">
+                <img src="/imagem/imagem-perfil-padrao.png" alt="Foto perfil">
+            </div>
+
+            <div class="texto-perfil">
+                <h1>Nome</h1>
+                <address>E-mail</address>
+            </div>
+        </section>
+
+        <div id="lojas-favoritas">
+            <h2>Lojas favoritas</h2>
+
+            <div id="lojas">
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+
+                <a href="/loja-especifica" class="loja">
+                    <button class="favoritar">
+                        <img src="/imagem/favoritar.png" alt="Favorito">
+                    </button>
+
+                    <img src="/imagem/veganlife.png" alt="Loja">
+
+                    <h2>Veganlife</h2>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <%- include("../templates/footer.ejs") %>
+
+</body>
+
+</html>

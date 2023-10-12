@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-
 class HomeController {
     acessarPagina(req, res) {
         const token = req.session.token;
