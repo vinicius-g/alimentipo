@@ -36,16 +36,16 @@ class Cliente {
         return await prisma.cliente.findUnique({
             where: {
                 id_cliente: userId
-            },
-            select: {
-                id_cliente: true,
-                nome_cliente: true,
-                nome_usuario: true,
-                email_cliente: true,
-                lojas_favoritas: true,
-                produtos_favoritos: true,
-                imagem_cliente: true
             }
+        })
+    }
+
+    async updateUser(data, userId) {
+        return await prisma.cliente.update({
+            where: {
+                id_cliente: userId
+            },
+            data
         })
     }
 }

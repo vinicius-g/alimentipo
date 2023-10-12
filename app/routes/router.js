@@ -26,6 +26,9 @@ const LoginAuthControllerRead = require("../controllers/nao-cadastrado/login/log
 
 const PerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/perfilCompradorControllerRead");
 
+const EditarPerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerRead");
+const EditarPerfilCompradorControllerUpdate = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerUpdate");
+
 const ProdutosFavoritosControllerRead = require("../controllers/cadastrado/produtos/produtosFavoritosControllerRead");
 
 const LojasFavoritasControllerRead = require("../controllers/cadastrado/lojas/lojasFavoritasControllerRead");
@@ -39,7 +42,6 @@ const LogoutControllerRead = require("../controllers/cadastrado/perfil/logoutPer
 const ValidacaoMiddleware = require("../middlewares/regrasValidacaoMiddleware");
 const ValidacaoFormularioMiddleware = require("../middlewares/formulariosMiddleware");
 const AutenticaoMiddleware = require("../middlewares/autenticacaoMiddleware");
-const validacaoMiddleware = require("../middlewares/regrasValidacaoMiddleware");
 
 router.get("/",
 HomeControllerRead.acessarPagina);
@@ -83,7 +85,7 @@ CadastroVendedorControllerRead.acessarPagina);
 
 router.post("/cadastro-vendedor",
 upload.single("imagem_perfil"),
-validacaoMiddleware.RegrasValidacaoCadastroVendedor,
+ValidacaoMiddleware.RegrasValidacaoCadastroVendedor,
 ValidacaoFormularioMiddleware.validacaoCadastroVendedor,
 AutenticaoMiddleware.criptografarSenhaVendedor,
 CadastroVendedorControllerCreate.cadastrarLoja);
@@ -98,6 +100,18 @@ LoginAuthControllerRead.autenticarCliente);
 router.get("/perfil-comprador",
 AutenticaoMiddleware.validarTokenComprador,
 PerfilCompradorControllerRead.acessarPagina);
+
+router.get("/editar-comprador/:clienteId",
+AutenticaoMiddleware.validarTokenComprador,
+EditarPerfilCompradorControllerRead.acessarPagina);
+
+router.post("/editar-comprador/:clienteId",
+AutenticaoMiddleware.validarTokenComprador,
+upload.single("imagem_perfil"),
+ValidacaoMiddleware.RegrasValidacaoCadastroComprador,
+ValidacaoFormularioMiddleware.validacaoCadastroEditarComprador,
+AutenticaoMiddleware.criptografarSenhaEditarComprador,
+EditarPerfilCompradorControllerUpdate.editarCliente);
 
 router.get("/produtos-favoritos",
 AutenticaoMiddleware.validarTokenComprador,

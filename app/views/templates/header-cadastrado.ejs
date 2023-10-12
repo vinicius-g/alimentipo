@@ -21,7 +21,7 @@
     </a>
 
     <div id="usuario-botao">
-        <img src="/imagem/simbolo-perfil.png" alt="Usuario" width="50">
+        <img src="<%- data.usuario.imagem_perfil ? `/imagem/cliente/perfil/${data.usuario.id_usuario}` : "/imagem/simbolo-perfil.png" %>" alt="Usuario">
     </div>
 
     <div id="menu-usuario">

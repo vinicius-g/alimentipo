@@ -1,0 +1,111 @@
+main {
+    max-width: 480px;
+    margin-inline: auto;
+    padding-inline: 15px;
+}
+
+main h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #72a046;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+form input {
+    width: 100%;
+    height: 25px;
+    border: 1px solid #f59a23;
+    border-radius: 5px;
+    padding-inline-start: 10px;
+}
+
+input.error {
+    border-color: red;
+    color: red;
+}
+
+.error-message {
+    color: red;
+}
+
+form input[type=file] {
+    display: none;
+}
+
+label.imagem-perfil {
+    display: flex;
+}
+
+label.imagem-perfil .imagem {
+    border: 1px solid #797979;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+label.imagem-perfil .imagem img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+label.imagem-perfil .imagem img.adicionar-imagem {
+    padding: 20px;
+}
+
+label.imagem-perfil.error div {
+    border-color: red;
+    color: red;
+}
+
+label.imagem-perfil .botoes-imagem-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+label.imagem-perfil .botoes-imagem-perfil > * {
+    border: 1px solid #f59a23;
+    border-radius: 1000px;
+    padding: 0 10px;
+    background: white;
+    color: #f59a23;
+    align-self: flex-end;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+}
+
+label.imagem-perfil .botoes-imagem-perfil > :first-child {
+    margin-bottom: auto;
+}
+
+form > button {
+    border: 1px solid #f59a23;
+    border-radius: 10px;
+    padding: 5px 15px;
+    width: fit-content;
+    background: white;
+    color: #72a046;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.termos-condicoes {
+    margin-bottom: 40px;
+}
+
+.termos-condicoes a {
+    color: blue;
+    text-decoration: underline;
+}

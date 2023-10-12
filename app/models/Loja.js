@@ -36,13 +36,6 @@ class Loja {
         return await prisma.loja.findUnique({
             where: {
                 id_loja: userId
-            },
-            select: {
-                id_loja: true,
-                nome_loja: true,
-                nome_proprietario: true,
-                email_loja: true,
-                imagem_loja: true
             }
         })
     }

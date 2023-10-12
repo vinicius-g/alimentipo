@@ -13,14 +13,14 @@
     <main>
         <section id="informacoes-perfil">
             <div class="imagem-perfil">
-                <img src=<%- data.usuario.imagem_cliente ? `/imagem/cliente/perfil/${data.usuario.id_cliente}` : "/imagem/imagem-perfil-padrao.png" %> alt="Foto perfil">
+                <img src=<%- data.usuario.imagem_perfil ? `/imagem/cliente/perfil/${data.usuario.id_usuario}` : "/imagem/imagem-perfil-padrao.png" %> alt="Foto perfil">
 
-                <a href="/editar-usuario/<%- data.usuario.id_cliente %>">Editar</a>
+                <a href="/editar-comprador/<%- data.usuario.id_usuario %>">Editar</a>
             </div>
 
             <div class="texto-perfil">
-                <h1><%- data.usuario.nome_cliente %></h1>
-                <address><%- data.usuario.email_cliente %></address>
+                <h1><%- data.usuario.nome_usuario %></h1>
+                <address><%- data.usuario.email_usuario %></address>
 
                 <a href="/logout">Sair</a>
             </div>

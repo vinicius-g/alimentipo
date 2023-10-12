@@ -11,10 +11,10 @@ class PerfilCompradorController {
             data: {
                 page_name: "Alimentipo - Perfil comprador",
                 usuario: {
-                    id_cliente: user.id_cliente,
-                    imagem_cliente: user.imagem_cliente,
-                    nome_cliente: user.nome_cliente,
-                    email_cliente: user.email_cliente
+                    id_usuario: user.id_cliente,
+                    imagem_perfil: user.imagem_cliente,
+                    nome_usuario: user.nome_usuario,
+                    email_usuario: user.email_cliente
                 },
                 userType
             }

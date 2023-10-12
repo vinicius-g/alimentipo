@@ -111,6 +111,12 @@ header #usuario-botao {
 	cursor: pointer;
 }
 
+header #usuario-botao img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
 header #menu-usuario {
 	position: absolute;
 	top: 140px;

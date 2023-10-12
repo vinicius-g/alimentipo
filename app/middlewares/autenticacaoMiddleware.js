@@ -19,9 +19,45 @@ class Autenticacao {
             return next();
         } catch (erro) {
             console.log(erro);
-            return res.render("pages/cadastro-comprador", {
+            return res.render("pages/cadastro-comprador.ejs", {
                 data: {
                     page_name: "Cadastro",
+                    input_values: {
+                        nome,
+                        nome_usuario,
+                        email,
+                        senha
+                    },
+                    errors: {
+                        sistema_error: {
+                            msg: "Erro de sistema, tente novamente mais tarde!"
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    async criptografarSenhaEditarComprador(req, res, next) {
+        const {
+            nome,
+            nome_usuario,
+            email,
+            senha
+        } = req.body;
+        const salt = Number(process.env.SALT_ROUNDS);
+
+        try {
+            const hash = await bcrypt.hash(senha, salt);
+
+            req.senhaCriptografada = hash;
+
+            return next();
+        } catch (erro) {
+            console.log(erro);
+            return res.render("pages/editar-comprador.ejs", {
+                data: {
+                    page_name: "Alimentipo",
                     input_values: {
                         nome,
                         nome_usuario,
@@ -51,7 +87,7 @@ class Autenticacao {
         } catch (erro) {
             console.log(erro);
 
-            return res.render("pages/cadastro-vendedor", {
+            return res.render("pages/cadastro-vendedor.ejs", {
                 data: {
                     page_name: "Cadastro",
                     input_values: {
