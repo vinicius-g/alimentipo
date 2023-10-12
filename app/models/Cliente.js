@@ -23,6 +23,28 @@ class Cliente {
         return await prisma.cliente.findUnique({
             where: {
                 email_cliente: email
+            },
+            select: {
+                id_cliente: true,
+                email_cliente: true,
+                senha_cliente: true,
+            }
+        })
+    }
+
+    async findUserById(userId) {
+        return await prisma.cliente.findUnique({
+            where: {
+                id_cliente: userId
+            },
+            select: {
+                id_cliente: true,
+                nome_cliente: true,
+                nome_usuario: true,
+                email_cliente: true,
+                lojas_favoritas: true,
+                produtos_favoritos: true,
+                imagem_cliente: true
             }
         })
     }

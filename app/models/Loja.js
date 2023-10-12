@@ -23,6 +23,26 @@ class Loja {
         return await prisma.loja.findUnique({
             where: {
                 email_loja: email
+            },
+            select: {
+                id_loja: true,
+                email_loja: true,
+                senha_loja: true
+            }
+        })
+    }
+
+    async findUserById(userId) {
+        return await prisma.loja.findUnique({
+            where: {
+                id_loja: userId
+            },
+            select: {
+                id_loja: true,
+                nome_loja: true,
+                nome_proprietario: true,
+                email_loja: true,
+                imagem_loja: true
             }
         })
     }

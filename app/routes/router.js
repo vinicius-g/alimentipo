@@ -33,6 +33,8 @@ const LojasFavoritasControllerRead = require("../controllers/cadastrado/lojas/lo
 const ImagemPerfilClienteControllerRead = require("../controllers/nao-cadastrado/imagens/imagemPerfilClienteControllerRead");
 const ImagemPerfilLojaControllerRead = require("../controllers/nao-cadastrado/imagens/imagemPerfilLojaControllerRead");
 
+const LogoutControllerRead = require("../controllers/cadastrado/perfil/logoutPerfilControllerRead");
+
 
 const ValidacaoMiddleware = require("../middlewares/regrasValidacaoMiddleware");
 const ValidacaoFormularioMiddleware = require("../middlewares/formulariosMiddleware");
@@ -110,5 +112,8 @@ ImagemPerfilClienteControllerRead.acessarImagem);
 
 router.get("/imagem/loja/perfil/:lojaId",
 ImagemPerfilLojaControllerRead.acessarImagem);
+
+router.get("/logout",
+LogoutControllerRead.acessarPagina);
 
 module.exports = router;

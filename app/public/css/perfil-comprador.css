@@ -7,8 +7,15 @@
 
 .imagem-perfil {
     display: flex;
+    padding: 0 15px;
     flex-direction: column;
     align-items: center;
+}
+
+.imagem-perfil img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
 }
 
 .imagem-perfil a {
