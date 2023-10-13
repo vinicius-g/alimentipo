@@ -153,7 +153,7 @@ class Autenticacao {
 
             const {userType} = jwt.decode(token, process.env.SECRET);
 
-            if (userType !== "comprador") {
+            if (userType !== "vendedor") {
                 return res.redirect("/login");
             }
 

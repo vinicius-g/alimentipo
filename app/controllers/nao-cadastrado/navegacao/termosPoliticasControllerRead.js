@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
-const lojaModel = require("../../../models/Loja");
 
-class LojaController {
+class TermosPoliticasController {
     constructor() {
         this.acessarPagina = this.acessarPagina.bind(this);
     }
@@ -13,12 +12,6 @@ class LojaController {
         let userType;
         let userId;
         let imagemPerfil = true;
-        const lojaId = req.params.lojaId;
-        const loja = await lojaModel.findUserById(lojaId);
-
-        if (!loja) {
-            return res.redirect("/");
-        }
 
         if (token) {
             const tokenInfo = jwt.decode(token, process.env.SECRET);
@@ -29,13 +22,9 @@ class LojaController {
             if (userType === "comprador") {
                 imagemPerfil = this.#usuarioTemFoto(userId);
             }
-
-            if (Number(userId) === Number(lojaId)) {
-                return res.redirect("/perfil-vendedor");
-            }
         }
 
-        return res.render("pages/loja-template.ejs", {
+        return res.render("pages/termos-politicas.ejs", {
             data: {
                 page_name: "Alimentipo",
                 usuarioLogado,
@@ -43,18 +32,6 @@ class LojaController {
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
-                },
-                loja: {
-                    id_usuario: loja.id_loja,
-                    imagem_perfil: loja.imagem_loja,
-                    nome_proprietario: loja.nome_proprietario,
-                    nome_loja: loja.nome_loja,
-                    email_loja: loja.email_loja,
-                    online_fisica: loja.online_fisica,
-                    link_loja: loja.link_loja,
-                    telefone_loja: loja.telefone_loja,
-                    endereco_loja: loja.endereco_loja,
-                    descricao_loja: loja.descricao_loja
                 }
             }
         })
@@ -67,6 +44,6 @@ class LojaController {
     }
 }
 
-const LojaControllerRead = new LojaController();
+const TermosPoliticasControllerRead = new TermosPoliticasController();
 
-module.exports = LojaControllerRead;
+module.exports = TermosPoliticasControllerRead;

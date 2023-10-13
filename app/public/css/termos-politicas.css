@@ -1,0 +1,39 @@
+main {
+    padding: 0 15px;
+}
+
+#termos-condicoes h1,
+#politicas-privacidade h2 {
+    font-size: 1.4rem;
+    color: #72a046;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+#termos-condicoes h2,
+#politicas-privacidade h3 {
+    color: #f59a23;
+    margin: 20px 0;
+    font-weight: normal;
+}
+
+#termos-condicoes h3 {
+    color: #f59a23;
+    font-weight: normal;
+}
+
+.glossario-termos-tecnicos {
+    margin-bottom: 20px;
+}
+
+.glossario-termos-tecnicos h2 {
+    text-transform: uppercase;
+    color: #72a046;
+    font-weight: normal;
+    margin: 20px 0;
+}
+
+.laranja {
+    color: #f59a23;
+    font-weight: normal;
+}

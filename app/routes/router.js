@@ -14,6 +14,7 @@ const ProdutoZeroLactoseControllerRead = require("../controllers/nao-cadastrado/
 const ProdutoControllerRead = require("../controllers/nao-cadastrado/navegacao/produtoControllerRead");
 const ProdutosDestacadosControllerRead = require("../controllers/nao-cadastrado/navegacao/produtosDestacadosControllerRead");
 const LojaControllerRead = require("../controllers/nao-cadastrado/navegacao/lojaControllerRead");
+const TermosPoliticasControllerRead = require("../controllers/nao-cadastrado/navegacao/termosPoliticasControllerRead");
 
 const CadastroCompradorControllerRead = require("../controllers/nao-cadastrado/cadastro/cadastroCompradorControllerRead");
 const CadastroCompradorControllerCreate = require("../controllers/nao-cadastrado/cadastro/cadastroCompradorControllerCreate");
@@ -28,6 +29,8 @@ const PerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/
 
 const EditarPerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerRead");
 const EditarPerfilCompradorControllerUpdate = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerUpdate");
+
+const PerfilVendedorControllerRead = require("../controllers/cadastrado/perfil/perfilVendedorControllerRead");
 
 const ProdutosFavoritosControllerRead = require("../controllers/cadastrado/produtos/produtosFavoritosControllerRead");
 
@@ -67,8 +70,11 @@ ProdutoControllerRead.acessarPagina);
 router.get("/produtos-destacados",
 ProdutosDestacadosControllerRead.acessarPagina);
 
-router.get("/loja-especifica",
+router.get("/loja/:lojaId",
 LojaControllerRead.acessarPagina);
+
+router.get("/termos-e-politicas",
+TermosPoliticasControllerRead.acessarPagina);
 
 router.get("/cadastro-comprador",
 CadastroCompradorControllerRead.acessarPagina);
@@ -112,6 +118,10 @@ ValidacaoMiddleware.RegrasValidacaoCadastroComprador,
 ValidacaoFormularioMiddleware.validacaoCadastroEditarComprador,
 AutenticaoMiddleware.criptografarSenhaEditarComprador,
 EditarPerfilCompradorControllerUpdate.editarCliente);
+
+router.get("/perfil-vendedor",
+AutenticaoMiddleware.validarTokenVendedor,
+PerfilVendedorControllerRead.acessarPagina);
 
 router.get("/produtos-favoritos",
 AutenticaoMiddleware.validarTokenComprador,

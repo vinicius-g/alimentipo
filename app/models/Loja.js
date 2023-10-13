@@ -35,7 +35,7 @@ class Loja {
     async findUserById(userId) {
         return await prisma.loja.findUnique({
             where: {
-                id_loja: userId
+                id_loja: Number(userId)
             }
         })
     }

@@ -35,7 +35,7 @@ class Cliente {
     async findUserById(userId) {
         return await prisma.cliente.findUnique({
             where: {
-                id_cliente: userId
+                id_cliente: Number(userId)
             }
         })
     }

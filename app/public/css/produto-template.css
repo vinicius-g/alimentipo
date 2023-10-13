@@ -70,17 +70,18 @@
 
 .loja-info .loja-header img {
     margin-right: 10px;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
 }
 
 .loja-info .loja-header h3 {
     font-weight: normal;
     font-size: 1.2rem;
-    color: #585858;
 }
 
 .loja-info .loja-header address {
     font-style: normal;
-    color: #585858;
 }
 
 .loja-info p {

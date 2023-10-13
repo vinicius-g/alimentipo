@@ -36,11 +36,13 @@ main h1 {
 
 .produto {
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: calc(40% - 10px) calc(60% - 10px);
     gap: 20px;
+    height: 140px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
     border-radius: 15px;
     padding: 10px;
+    width: 100%;
 }
 
 .produto .produto-imagem {
@@ -60,6 +62,10 @@ main h1 {
 .produto .produto-texto {
     display: flex;
     flex-direction: column;
+}
+
+.produto .produto-texto > * {
+    width: 100%;
 }
 
 .produto .produto-texto h2 {

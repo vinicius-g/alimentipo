@@ -135,7 +135,6 @@ label.imagem-perfil div img.adicionar-imagem {
 }
 
 textarea {
-    resize: none;
     border: 1px solid #f59a23;
     border-radius: 5px;
 }
