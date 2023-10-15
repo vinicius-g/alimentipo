@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
+const restricaoModel = require("../../../models/Restricao");
 
 class ProdutosSemGlutenController {
     constructor() {
@@ -24,6 +25,13 @@ class ProdutosSemGlutenController {
             }
         }
 
+        const paginaAtual = req.params.paginaProduto;
+        let produtos = await restricaoModel.findAllProdutosComRestricao("Sem glúten", paginaAtual);
+
+        if (!produtos) {
+            produtos = null
+        }
+
         return res.render("pages/produtos-sem-gluten.ejs", {
             data: {
                 page_name: "Alimentipo",
@@ -32,7 +40,8 @@ class ProdutosSemGlutenController {
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
-                }
+                },
+                produtos
             }
         })
     }

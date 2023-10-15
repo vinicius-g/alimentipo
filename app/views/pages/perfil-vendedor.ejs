@@ -28,14 +28,16 @@
             <p>Nome do vendedor: <%- data.usuario.nome_proprietario %></p>
             <p>Loja: <%- data.usuario.online_fisica %></p>
             <p>Telefone: +55 <%- data.usuario.telefone_loja %></p>
-            <p><%- data.usuario.link_loja %></p>
+            <% if (data.usuario.link_loja) { %>
+            <p>Link do site: <a href="<%- data.usuario.link_loja %>"><%- data.usuario.link_loja %></a></p>
+            <% } %>
             <% if (data.usuario.endereco_loja) { %>
-                <p>Endereço: <%- data.usuario.endereco_loja %></p>
+            <p>Endereço: <%- data.usuario.endereco_loja %></p>
             <% } %>
             <p>Descrição: <%- data.usuario.descricao_loja %></p>
 
             <div class="links-perfil">
-                <a href="#">Publicar produto</a>
+                <a href="/publicar-produto">Publicar produto</a>
 
                 <a href="#">Minha assinatura</a>
             </div>
@@ -44,22 +46,24 @@
         <section id="meus-produtos">
             <h1>Meus produtos</h1>
 
+            <% data.usuario.produtos.forEach(categoria_produto => { %>
             <div class="categoria-produto">
-                <h2>Zero açúcar</h2>
+                <h2><%- categoria_produto.nome_restricao %></h2>
 
                 <div class="lista-produtos">
+                    <% categoria_produto.produtos.forEach(produto => { %>
                     <div class="produto-container">
-                        <div class="produto">
+                        <a href="/produto/<%- produto.produto.id_produto %>" class="produto">
                             <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                                <img src="/imagem/produto/<%- produto.produto.id_produto %>" alt="Molho de tomate">
                             </div>
 
                             <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
+                                <h2><%- produto.produto.nome_produto %></h2>
 
-                                <h3>Zero Açúcar</h3>
+                                <h3><%- categoria_produto.nome_restricao %></h3>
 
-                                <p>R$ 21,60</p>
+                                <p>R$ <%- Number(produto.produto.preco_produto).toFixed(2) %></p>
                             </div>
 
                             <button class="editar" data-editar-produto-botao>
@@ -67,22 +71,28 @@
                                 <div></div>
                                 <div></div>
                             </button>
-                        </div>
+
+                            <% if (produto.produto.desconto_produto) { %>
+                                <div class="promocao">
+                                    <p><%- produto.produto.desconto_produto %>% OFF</p>
+                                </div>
+                            <% } %>
+                        </a>
 
                         <div class="produto-formulario">
                             <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
+                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto" value="<%- produto.produto.link_produto %>">
 
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
+                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"><%- produto.produto.descricao_produto %></textarea>
 
                                 <div class="estoque">
                                     <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
+                                        <input type="radio" name="em_estoque" id="estoque" <%- produto.produto.estoque_produto === 1 ? "checked" : "" %>>
                                         Estoque
                                     </label>
 
                                     <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
+                                        <input type="radio" name="em_estoque" id="fora_estoque" <%- produto.produto.estoque_produto === 0 ? "checked" : "" %>>
                                         Fora de estoque
                                     </label>
                                 </div>
@@ -90,403 +100,21 @@
                                 <div class="desconto">
                                     <label for="desconto_produto">Desconto</label>
 
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
+                                    <input type="number" name="desconto_produto" id="desconto_produto" value="<%- produto.produto.desconto_produto%>">
                                 </div>
 
                                 <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
+                                    <button formaction="/editar-produto/<%- produto.produto.id_produto %>">Editar</button>
 
-                                    <button formaction="/excluir-produto/">Excluir</button>
+                                    <button formaction="/deletar-produto/<%- produto.produto.id_produto %>">Excluir</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <% }) %>
                 </div>
             </div>
-
-            <div class="categoria-produto">
-                <h2>Vegano</h2>
-
-                <div class="lista-produtos">
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="produto-container">
-                        <div class="produto">
-                            <div class="produto-imagem">
-                                <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                            </div>
-
-                            <div class="produto-texto">
-                                <h2>Molho de tomate  a aa a a aa a a aa a a </h2>
-
-                                <h3>Zero Açúcar</h3>
-
-                                <p>R$ 21,60</p>
-                            </div>
-
-                            <button class="editar" data-editar-produto-botao>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>
-                        </div>
-
-                        <div class="produto-formulario">
-                            <form method="post">
-                                <input type="text" placeholder="Link do produto" class="link-input" name="link_produto">
-
-                                <textarea name="descricao_produto" id="descricao_produto" rows="2" placeholder="Descrição produto"></textarea>
-
-                                <div class="estoque">
-                                    <label for="estoque">
-                                        <input type="radio" name="em_estoque" id="estoque">
-                                        Estoque
-                                    </label>
-
-                                    <label for="fora_estoque">
-                                        <input type="radio" name="em_estoque" id="fora_estoque">
-                                        Fora de estoque
-                                    </label>
-                                </div>
-
-                                <div class="desconto">
-                                    <label for="desconto_produto">Desconto</label>
-
-                                    <input type="number" name="desconto_produto" id="desconto_produto">
-                                </div>
-
-                                <div class="botoes-produto">
-                                    <button formaction="/editar-produto/">Editar</button>
-
-                                    <button formaction="/excluir-produto/">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <% }) %>
         </section>
     </main>
 

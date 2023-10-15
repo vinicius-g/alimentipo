@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
+const produtoModel = require("../../../models/Produto");
 
 class ProdutosVeganosController {
     constructor() {
@@ -24,6 +25,16 @@ class ProdutosVeganosController {
             }
         }
 
+        const paginaAtual = req.params.paginaProduto;
+        let produtos = await produtoModel.findProdutosComRestricao("Vegano", paginaAtual);
+        let quantidadeProdutos = await produtoModel.contarProdutos("Vegano");
+
+        if (!produtos) {
+            produtos = null;
+        }
+
+        const quantidadePaginas = Math.ceil(quantidadeProdutos / 10);
+
         return res.render("pages/produtos-veganos.ejs", {
             data: {
                 page_name: "Alimentipo",
@@ -32,7 +43,10 @@ class ProdutosVeganosController {
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
-                }
+                },
+                produtos,
+                quantidadePaginas,
+                paginaAtual
             }
         })
     }

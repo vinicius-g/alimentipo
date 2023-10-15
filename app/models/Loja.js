@@ -39,6 +39,23 @@ class Loja {
             }
         })
     }
+
+    async updateLoja(data, userId) {
+        return await prisma.loja.update({
+            where: {
+                id_loja: userId
+            },
+            data
+        })
+    }
+
+    async deleteLoja(userId) {
+        return await prisma.loja.delete({
+            where: {
+                id_loja: userId
+            }
+        })
+    }
 }
 
 const LojaModel = new Loja();

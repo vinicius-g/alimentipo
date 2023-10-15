@@ -50,7 +50,7 @@ class CadastroController {
 			if (erro.code === "P2002") {
 				return res.render("pages/cadastro-comprador.ejs", {
 					data: {
-						page_name: "Cadastro",
+						page_name: "Alimentipo",
 						input_values: {
 							nome,
                             nome_usuario,
@@ -68,7 +68,7 @@ class CadastroController {
 
 			return res.render("pages/cadastro-comprador.ejs", {
 				data: {
-					page_name: "Cadastro",
+					page_name: "Alimentipo",
 					input_values: {
 						nome,
                         nome_usuario,

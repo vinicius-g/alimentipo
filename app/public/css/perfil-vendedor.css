@@ -38,6 +38,11 @@ main {
     margin-bottom: 10px;
 }
 
+#informacoes-perfil p a {
+    color: blue;
+    text-decoration: underline;
+}
+
 #informacoes-perfil .links-perfil {
     display: flex;
     justify-content: space-between;
@@ -105,16 +110,36 @@ main {
     min-width: 100%;
 }
 
+.produto-container .produto .produto-imagem img {
+    height: 120px;
+    width: 100%;
+}
+
 .produto-container .produto .editar {
     position: absolute;
     top: 15px;
     right: 10px;
+    padding: 10px;
     background: none;
     border: none;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.produto-container .produto .promocao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 10px;
+    background-color: #72a046;
+    color: white;
+    padding: 3px 15px;
+}
+
+.produto-container .produto .promocao p {
+    font-weight: 600;
 }
 
 .produto-container .produto .editar div {
@@ -209,4 +234,5 @@ main {
     border-radius: 500px;
     padding: 0 15px;
     color: #72a046;
+    cursor: pointer;
 }

@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
+const produtoModel = require("../../../models/Produto");
+const lojaModel = require("../../../models/Loja");
 
 class ProdutoController {
     constructor() {
@@ -24,6 +26,18 @@ class ProdutoController {
             }
         }
 
+        const produtoId = req.params.produtoId;
+
+        if (!produtoId) {
+            return res.redirect("/");
+        }
+
+        const produto = await produtoModel.findProdutoById(produtoId);
+
+        console.log(produto.restricoes[0].restricao.nome_restricao);
+
+        const loja = await lojaModel.findUserById(produto.loja_id);
+
         return res.render("pages/produto-template.ejs", {
             data: {
                 page_name: "Alimentipo",
@@ -32,7 +46,9 @@ class ProdutoController {
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
-                }
+                },
+                produto,
+                loja
             }
         })
     }

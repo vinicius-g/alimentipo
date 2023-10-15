@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include("../templates/head.ejs") %>
+    <link rel="stylesheet" href="/css/cadastro-produto.css">
+    <script src="/js/formulario-produto-imagem.js" defer></script>
+
+    <title><%- data.page_name %></title>
+</head>
+
+<body>
+    <%- include("../templates/header-cadastrado.ejs") %>
+
+    <main>
+        <form action="/publicar-produto" method="post" enctype="multipart/form-data">
+            <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
+
+            <input type="text" name="nome_produto" placeholder="Nome do produto"
+            <%- data.input_values ? `value="${data.input_values.nome_produto}"` : "" %> <%- data.errors && data.errors.nome_produto_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.nome_produto_error ? `<span class='error-message'>${data.errors.nome_produto_error.msg}</span>` : "" %>
+
+            <label for="imagem-produto">Foto</label>
+
+            <input type="file" name="imagem_produto" id="imagem-produto">
+
+            <label for="imagem-produto" class="imagem-produto <%- data.errors && data.errors.imagem_produto_error ? "error" : "" %>">
+                <img src="/imagem/add-imagem.png" alt="Adicionar produto" id="preview-imagem-produto" class="adicionar-imagem">
+            </label>
+
+            <%- data.errors && data.errors.imagem_produto_error ? `<span class='error-message'>${data.errors.imagem_produto_error.msg}</span>` : "" %>
+
+            <input type="number" name="preco_produto" placeholder="Preço" min="0" step="0.01"
+            <%- data.input_values ? `value="${data.input_values.preco_produto}"` : "" %> <%- data.errors && data.errors.preco_produto_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.preco_produto_error ? `<span class='error-message'>${data.errors.preco_produto_error.msg}</span>` : "" %>
+
+            <input type="text" name="link_produto" placeholder="link"
+            <%- data.input_values ? `value="${data.input_values.link_produto}"` : "" %> <%- data.errors && data.errors.link_produto_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.link_produto_error ? `<span class='error-message'>${data.errors.link_produto_error.msg}</span>` : "" %>
+
+            <input type="text" name="descricao_produto" placeholder="Descrição"
+            <%- data.input_values ? `value="${data.input_values.descricao_produto}"` : "" %> <%- data.errors && data.errors.descricao_produto_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.descricao_produto_error ? `<span class='error-message'>${data.errors.descricao_produto_error.msg}</span>` : "" %>
+
+            <label>Estoque</label>
+
+            <div class="estoque <%- data.errors && data.errors.estoque_produto_error ? "error" : "" %>">
+                <label for="estoque">
+                    <input type="radio" name="estoque_produto" id="estoque" value="1" <%- data.input_values && data.input_values.estoque_produto === "1" ? "checked" : "" %>>
+                    Estoque
+                </label>
+
+                <label for="fora-estoque">
+                    <input type="radio" name="estoque_produto" id="fora-estoque" value="0" <%- data.input_values && data.input_values.estoque_produto === "0" ? "checked" : "" %>>
+                    Fora de estoque
+                </label>
+            </div>
+
+            <%- data.errors && data.errors.estoque_produto_error ? `<span class='error-message'>${data.errors.estoque_produto_error.msg}</span>` : "" %>
+
+            <label>Restrições</label>
+
+            <div class="restricoes <%- data.errors && data.errors.restricao_produto_error ? "error" : "" %>">
+                <label for="vegano">
+                    <input type="radio" name="restricao_produto" id="vegano" value="Vegano" <%- data.input_values && data.input_values.restricao_produto === "Vegano" ? "checked" : "" %>>
+                    Vegano
+                </label>
+
+                <label for="zero-lactose">
+                    <input type="radio" name="restricao_produto" id="zero-lactose" value="Zero lactose" <%- data.input_values && data.input_values.restricao_produto === "Zero lactose" ? "checked" : "" %>>
+                    Zero lactose
+                </label>
+
+                <label for="zero-acucar">
+                    <input type="radio" name="restricao_produto" id="zero-acucar" value="Zero açúcar" <%- data.input_values && data.input_values.restricao_produto === "Zero açúcar" ? "checked" : "" %>>
+                    Zero açúcar
+                </label>
+
+                <label for="sem-gluten">
+                    <input type="radio" name="restricao_produto" id="sem-gluten" value="Sem glúten" <%- data.input_values && data.input_values.restricao_produto === "Sem glúten" ? "checked" : "" %>>
+                    Sem glúten
+                </label>
+            </div>
+
+            <%- data.errors && data.errors.restricao_produto_error ? `<span class='error-message'>${data.errors.restricao_produto_error.msg}</span>` : "" %>
+
+            <label for="desconto">Desconto(%)</label>
+            <input type="number" name="desconto_produto" id="desconto"
+            <%- data.input_values ? `value="${data.input_values.desconto_produto}"` : "" %> <%- data.errors && data.errors.desconto_produto_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.desconto_produto_error ? `<span class='error-message'>${data.errors.desconto_produto_error.msg}</span>` : "" %>
+
+            <button type="submit">Publicar</button>
+        </form>
+    </main>
+
+    <%- include("../templates/footer.ejs") %>
+</body>

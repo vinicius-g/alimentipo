@@ -50,6 +50,11 @@ main h1 {
     display: flex;
 }
 
+.produto .produto-imagem > img {
+    height: 120px;
+    width: 100%;
+}
+
 .produto .produto-imagem .favoritar {
     position: absolute;
     top: 0;

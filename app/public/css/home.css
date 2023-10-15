@@ -93,13 +93,15 @@
 }
 
 a.produto {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
     width: 100%;
     max-width: 175px;
+    height: 235px;
 }
 
 a.produto .promocao {
@@ -122,6 +124,7 @@ a.produto .favoritar {
 }
 
 a.produto > img {
+    flex: 1;
     margin-bottom: 10px;
 }
 
@@ -143,6 +146,13 @@ a.produto > p {
     font-size: 1.1rem;
     color: #f59a23;
     font-weight: bold;
+}
+
+#promocoes h3 {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.4rem;
+    color: #729f46;
 }
 
 #sobre {

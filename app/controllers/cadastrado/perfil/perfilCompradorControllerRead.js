@@ -9,7 +9,7 @@ class PerfilCompradorController {
 
         return res.render("pages/perfil-comprador.ejs", {
             data: {
-                page_name: "Alimentipo - Perfil comprador",
+                page_name: "Alimentipo",
                 usuario: {
                     id_usuario: user.id_cliente,
                     imagem_perfil: user.imagem_cliente,

@@ -9,7 +9,9 @@ class ValidacaoFormulario {
 		this.validacaoCadastroComprador = this.validacaoCadastroComprador.bind(this);
 		this.validacaoCadastroEditarComprador = this.validacaoCadastroEditarComprador.bind(this);
 		this.validacaoCadastroVendedor = this.validacaoCadastroVendedor.bind(this);
+        this.validacaoCadastroEditarVendedor = this.validacaoCadastroEditarVendedor.bind(this);
 		this.validacaoLogin = this.validacaoLogin.bind(this);
+        this.validacaoCadastroProduto = this.validacaoCadastroProduto.bind(this);
 	}
 
 	validacaoCadastroComprador(req, res, next) {
@@ -49,7 +51,7 @@ class ValidacaoFormulario {
 
 			return res.render("pages/cadastro-comprador.ejs", {
 				data: {
-					page_name: "Cadastro",
+					page_name: "Alimentipo",
 					userType,
 					usuarioLogado,
 					usuario: {
@@ -174,13 +176,148 @@ class ValidacaoFormulario {
 
 			return res.render("pages/cadastro-vendedor.ejs", {
 				data: {
-					page_name: "Cadastro",
+					page_name: "Alimentipo",
 					usuarioLogado,
 					userType,
 					usuario: {
 						imagem_perfil: imagemPerfil,
 						id_usuario: userId,
 					},
+					input_values: {
+						nome_proprietario,
+						cpf,
+						data_nascimento,
+						nome_loja,
+						email,
+						senha,
+						cnpj,
+						online_fisica,
+						link_site,
+						descricao,
+						endereco,
+						telefone,
+					},
+					errors: {
+						nome_proprietario_error,
+						cpf_error,
+						data_nascimento_error,
+						nome_loja_error,
+						email_error,
+						senha_error,
+						cnpj_error,
+						imagem_perfil_error,
+						online_fisica_error,
+						link_site_error,
+						descricao_error,
+						endereco_error,
+						telefone_error,
+					},
+				},
+			});
+		}
+
+		return next();
+	}
+
+    async validacaoCadastroProduto(req, res, next) {
+		const errors = validationResult(req);
+		const imagem_produto = req.file;
+
+		if (imagem_produto) {
+			this.#validarImagemProduto(imagem_produto, errors);
+		} else {
+			this.#validarExistenciaImagemProduto(errors);
+		}
+
+		if (!errors.isEmpty()) {
+			const { nome_produto, preco_produto, link_produto, descricao_produto, estoque_produto, restricao_produto, desconto_produto } = req.body;
+
+			const nome_produto_error = errors.errors.find((error) => error.path === "nome_produto");
+            const preco_produto_error = errors.errors.find((error) => error.path === "preco_produto");
+            const link_produto_error = errors.errors.find((error) => error.path === "link_produto");
+            const descricao_produto_error = errors.errors.find((error) => error.path === "descricao_produto");
+            const estoque_produto_error = errors.errors.find((error) => error.path === "estoque_produto");
+            const restricao_produto_error = errors.errors.find((error) => error.path === "restricao_produto");
+            const desconto_produto_error = errors.errors.find((error) => error.path === "desconto_produto");
+            const imagem_produto_error = errors.errors.find((error) => error.path === "imagem_produto");
+
+            const token = req.session.token;
+            const {userId, userType} = jwt.decode(token, process.env.SECRET);
+            const user = await lojaModel.findUserById(userId);
+
+			return res.render("pages/cadastro-produto.ejs", {
+				data: {
+					page_name: "Alimentipo",
+					userType,
+					usuario: {
+						imagem_perfil: user.imagem_loja,
+						id_usuario: user.id_loja,
+					},
+					input_values: {
+						nome_produto,
+                        preco_produto,
+                        link_produto,
+                        descricao_produto,
+                        estoque_produto,
+                        restricao_produto,
+                        desconto_produto
+					},
+					errors: {
+						nome_produto_error,
+                        preco_produto_error,
+                        link_produto_error,
+                        descricao_produto_error,
+                        estoque_produto_error,
+                        restricao_produto_error,
+                        desconto_produto_error,
+                        imagem_produto_error
+					},
+				},
+			});
+		}
+
+		return next();
+	}
+
+    async validacaoCadastroEditarVendedor(req, res, next) {
+		const errors = validationResult(req);
+        const imagem_perfil = req.file;
+
+        if (imagem_perfil) {
+            this.#validarImagem(imagem_perfil, errors);
+        }
+
+		if (!errors.isEmpty()) {
+			const { nome_proprietario, cpf, data_nascimento, nome_loja, email, senha, cnpj, online_fisica, link_site, descricao, endereco, telefone } = req.body;
+
+			const nome_proprietario_error = errors.errors.find((error) => error.path === "nome_proprietario");
+			const cpf_error = errors.errors.find((error) => error.path === "cpf");
+			const data_nascimento_error = errors.errors.find((error) => error.path === "data_nascimento");
+			const nome_loja_error = errors.errors.find((error) => error.path === "nome_loja");
+			const email_error = errors.errors.find((error) => error.path === "email");
+			const senha_error = errors.errors.find((error) => error.path === "senha");
+			const cnpj_error = errors.errors.find((error) => error.path === "cnpj");
+			const imagem_perfil_error = errors.errors.find((error) => error.path === "imagem_perfil");
+			const online_fisica_error = errors.errors.find((error) => error.path === "online_fisica");
+			const link_site_error = errors.errors.find((error) => error.path === "link_site");
+			const descricao_error = errors.errors.find((error) => error.path === "descricao");
+			const endereco_error = errors.errors.find((error) => error.path === "endereco");
+			const telefone_error = errors.errors.find((error) => error.path === "telefone");
+
+            const token = req.session.token;
+            const {userId, userType} = jwt.decode(token, process.env.SECRET);
+            const user = await lojaModel.findUserById(userId);
+
+			return res.render("pages/editar-vendedor.ejs", {
+				data: {
+					page_name: "Alimentipo",
+                    userType,
+                    usuario: {
+                        id_usuario: user.id_loja,
+                        imagem_perfil: user.imagem_loja,
+                        nome_usuario: user.nome_proprietario,
+                        email_usuario: user.email_loja
+                    },
 					input_values: {
 						nome_proprietario,
 						cpf,
@@ -246,7 +383,7 @@ class ValidacaoFormulario {
 		if (!user) {
 			return res.render("pages/login.ejs", {
 				data: {
-					page_name: "Login",
+					page_name: "Alimentipo",
 					input_values: {
 						email,
 						senha,
@@ -289,7 +426,7 @@ class ValidacaoFormulario {
 
 				return res.render("pages/login.ejs", {
 					data: {
-						page_name: "Login",
+						page_name: "Alimentipo",
 						usuarioLogado,
 						userType,
 						usuario: {
@@ -312,7 +449,7 @@ class ValidacaoFormulario {
 				console.log(erro);
 				return res.render("pages/login.ejs", {
 					data: {
-						page_name: "Login",
+						page_name: "Alimentipo",
 						usuarioLogado,
 						userType,
 						usuario: {
@@ -342,10 +479,26 @@ class ValidacaoFormulario {
 		}
 	}
 
+    #validarImagemProduto(imagem_produto, errors) {
+		if (!imagem_produto.mimetype.match("image/")) {
+			errors.errors.push({
+				msg: "Você deve selecionar uma imagem!",
+				path: "imagem_produto",
+			});
+		}
+	}
+
 	#validarExistenciaImagem(errors) {
 		errors.errors.push({
 			msg: "Você deve selecionar uma imagem!",
 			path: "imagem_perfil",
+		});
+	}
+
+    #validarExistenciaImagemProduto(errors) {
+		errors.errors.push({
+			msg: "Você deve selecionar uma imagem!",
+			path: "imagem_produto",
 		});
 	}
 

@@ -11,6 +11,7 @@ class ImagemPerfilClienteController {
 			return res.send(imagemPerfil.imagem_cliente);
 		} catch (erro) {
 			console.log(erro);
+            return
 		}
 	}
 }

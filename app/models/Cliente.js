@@ -48,6 +48,14 @@ class Cliente {
             data
         })
     }
+
+    async deleteUser(userId) {
+        return await prisma.cliente.delete({
+            where: {
+                id_cliente: userId
+            }
+        })
+    }
 }
 
 const ClienteModel = new Cliente();

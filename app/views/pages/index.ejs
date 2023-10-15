@@ -48,73 +48,33 @@
             <h2>Produtos em destaque</h2>
 
             <div id="carroussel-produtos-destacados">
+                <% data.produtos_destacados.forEach(produto_destacado => { %>
                 <div>
                     <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
+                        <a href="/produto/<%- produto_destacado.id_produto %>" class="produto">
+                            <% if (produto_destacado.desconto_produto) { %>
+                            <div class="promocao">
+                                <p><%- produto_destacado.desconto_produto %>%OFF</p>
+                            </div>
+                            <% } %>
+
                             <button class="favoritar">
                                 <img src="/imagem/favoritar.png" alt="Favorito">
                             </button>
 
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
+                            <img src="/imagem/produto/<%- produto_destacado.id_produto %>" alt="Produto">
 
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
+                            <h2><%- produto_destacado.nome_produto %></h2>
 
-                            <p>R$ 8,99</p>
+                            <h3><% produto_destacado.restricoes.forEach(restricao => { %>
+                                <%- restricao.restricao.nome_restricao %>
+                                <% }) %></h3>
+
+                            <p>R$ <%- Number(produto_destacado.preco_produto).toFixed(2) %></p>
                         </a>
                     </div>
                 </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
+                <% }) %>
             </div>
 
             <a href="/produtos-destacados">Expandir</a>
@@ -123,91 +83,40 @@
         <section id="promocoes">
             <h2>Promoções por tempo limitado</h2>
 
+            <% if (data.produtos_promocao.length > 0) { %>
             <div id="carroussel-promocoes">
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <div class="promocao">
-                                <p>xx%OFF</p>
-                            </div>
+            <% data.produtos_promocao.forEach(produto_promocao => { %>
+            <div>
+                <div class="produto-container">
+                    <a href="/produto/<%- produto_promocao.id_produto %>" class="produto">
+                        <% if (produto_promocao.desconto_produto) { %>
+                        <div class="promocao">
+                            <p><%- produto_promocao.desconto_produto %>%OFF</p>
+                        </div>
+                        <% } %>
 
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
+                        <button class="favoritar">
+                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        </button>
 
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
+                        <img src="/imagem/produto/<%- produto_promocao.id_produto %>" alt="Produto">
 
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
+                        <h2><%- produto_promocao.nome_produto %></h2>
 
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
+                        <h3><% produto_promocao.restricoes.forEach(restricao => { %>
+                            <%- restricao.restricao.nome_restricao %>
+                            <% }) %></h3>
 
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <div class="promocao">
-                                <p>xx%OFF</p>
-                            </div>
-
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <div class="promocao">
-                                <p>xx%OFF</p>
-                            </div>
-
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="/produto-especifico" class="produto">
-                            <div class="promocao">
-                                <p>xx%OFF</p>
-                            </div>
-
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
+                        <p>R$ <%- Number(produto_promocao.preco_produto).toFixed(2) %></p>
+                    </a>
                 </div>
             </div>
+            </div>
+            <% }) %>
+            <% } else { %>
+            <h3>Sem produtos em promoção no momento!</h3>
+            <% } %>
+
         </section>
 
         <section id="sobre">

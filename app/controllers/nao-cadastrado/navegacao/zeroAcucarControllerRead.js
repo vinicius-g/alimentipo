@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
+const restricaoModel = require("../../../models/Restricao");
 
 class ProdutosZeroAcucarController {
     constructor() {
@@ -24,6 +25,13 @@ class ProdutosZeroAcucarController {
             }
         }
 
+        const paginaAtual = req.params.paginaProduto;
+        let produtos = await restricaoModel.findAllProdutosComRestricao("Zero açúcar", paginaAtual);
+
+        if (!produtos) {
+            produtos = null
+        }
+
         return res.render("pages/produtos-zero-acucar.ejs", {
             data: {
                 page_name: "Alimentipo",
@@ -32,7 +40,8 @@ class ProdutosZeroAcucarController {
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
-                }
+                },
+                produtos
             }
         })
     }

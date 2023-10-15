@@ -14,7 +14,7 @@ class EditarPerfilCompradorController {
 
         return res.render("pages/editar-comprador.ejs", {
             data: {
-                page_name: "Alimentipo - Perfil comprador",
+                page_name: "Alimentipo",
                 usuario: {
                     id_usuario: user.id_cliente,
                     imagem_perfil: user.imagem_cliente,

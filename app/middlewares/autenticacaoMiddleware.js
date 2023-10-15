@@ -21,7 +21,7 @@ class Autenticacao {
             console.log(erro);
             return res.render("pages/cadastro-comprador.ejs", {
                 data: {
-                    page_name: "Cadastro",
+                    page_name: "Alimentipo",
                     input_values: {
                         nome,
                         nome_usuario,
@@ -89,7 +89,7 @@ class Autenticacao {
 
             return res.render("pages/cadastro-vendedor.ejs", {
                 data: {
-                    page_name: "Cadastro",
+                    page_name: "Alimentipo",
                     input_values: {
 						nome_proprietario,
                         cpf,

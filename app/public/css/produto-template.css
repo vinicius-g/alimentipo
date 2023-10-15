@@ -51,6 +51,11 @@
     margin-bottom: 20px;
 }
 
+#produto > .produto-link a {
+    color: blue;
+    text-decoration: underline;
+}
+
 #loja {
     padding: 0 15px;
     margin-bottom: 30px;

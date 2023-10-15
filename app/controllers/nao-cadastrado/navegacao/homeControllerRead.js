@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
+const produtoModel = require("../../../models/Produto");
 
 class HomeController {
     constructor() {
@@ -24,6 +25,10 @@ class HomeController {
             }
         }
 
+        const produtosDestacados = await produtoModel.findHighRankProdutos();
+
+        const produtosPromocao = await produtoModel.findProdutosEmPromocao();
+
         return res.render("pages/index.ejs", {
             data: {
                 page_name: "Alimentipo",
@@ -32,7 +37,9 @@ class HomeController {
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
-                }
+                },
+                produtos_destacados: produtosDestacados,
+                produtos_promocao: produtosPromocao
             }
         })
     }

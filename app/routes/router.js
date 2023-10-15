@@ -29,8 +29,17 @@ const PerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/
 
 const EditarPerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerRead");
 const EditarPerfilCompradorControllerUpdate = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerUpdate");
+const DeletarPerfilCompradorControllerDelete = require("../controllers/cadastrado/perfil/deletarPerfilCompradorControllerDelete");
 
 const PerfilVendedorControllerRead = require("../controllers/cadastrado/perfil/perfilVendedorControllerRead");
+
+const EditarPerfilVendedorControllerRead = require("../controllers/cadastrado/perfil/editarPerfilVendedorControllerRead");
+const EditarPerfilVendedorControllerUpdate = require("../controllers/cadastrado/perfil/editarPerfilVendedorControllerUpdate");
+const DeletarPerfilVendedorControllerDelete = require("../controllers/cadastrado/perfil/deletarPerfilVendedorControllerDelete");
+
+const PublicarProdutoControllerRead = require("../controllers/cadastrado/produtos/publicarProdutoControllerRead");
+const PublicarProdutoControllerCreate = require("../controllers/cadastrado/produtos/publicarProdutoControllerCreate");
+const DeletarProdutoControllerDelete = require("../controllers/cadastrado/produtos/deletarProdutoControllerDelete");
 
 const ProdutosFavoritosControllerRead = require("../controllers/cadastrado/produtos/produtosFavoritosControllerRead");
 
@@ -38,6 +47,7 @@ const LojasFavoritasControllerRead = require("../controllers/cadastrado/lojas/lo
 
 const ImagemPerfilClienteControllerRead = require("../controllers/nao-cadastrado/imagens/imagemPerfilClienteControllerRead");
 const ImagemPerfilLojaControllerRead = require("../controllers/nao-cadastrado/imagens/imagemPerfilLojaControllerRead");
+const ImagemProdutoControllerRead = require("../controllers/nao-cadastrado/imagens/imagemProdutoControllerRead");
 
 const LogoutControllerRead = require("../controllers/cadastrado/perfil/logoutPerfilControllerRead");
 
@@ -52,19 +62,19 @@ HomeControllerRead.acessarPagina);
 router.get("/sobre-restricoes-alimentares",
 SobreRestricoesControllerRead.acessarPagina);
 
-router.get("/produtos-sem-gluten",
+router.get("/produtos-sem-gluten/:paginaProduto",
 ProdutoSemGlutenControllerRead.acessarPagina);
 
-router.get("/produtos-veganos",
+router.get("/produtos-veganos/:paginaProduto",
 ProdutoVeganoControllerRead.acessarPagina);
 
-router.get("/produtos-zero-acucar",
+router.get("/produtos-zero-acucar/:paginaProduto",
 ProdutoZeroAcucarControllerRead.acessarPagina);
 
-router.get("/produtos-zero-lactose",
+router.get("/produtos-zero-lactose/:paginaProduto",
 ProdutoZeroLactoseControllerRead.acessarPagina);
 
-router.get("/produto-especifico",
+router.get("/produto/:produtoId",
 ProdutoControllerRead.acessarPagina);
 
 router.get("/produtos-destacados",
@@ -119,9 +129,43 @@ ValidacaoFormularioMiddleware.validacaoCadastroEditarComprador,
 AutenticaoMiddleware.criptografarSenhaEditarComprador,
 EditarPerfilCompradorControllerUpdate.editarCliente);
 
+router.post("/deletar-comprador/:clienteId",
+AutenticaoMiddleware.validarTokenComprador,
+DeletarPerfilCompradorControllerDelete.deleteUser);
+
 router.get("/perfil-vendedor",
 AutenticaoMiddleware.validarTokenVendedor,
 PerfilVendedorControllerRead.acessarPagina);
+
+router.get("/editar-vendedor/:lojaId",
+AutenticaoMiddleware.validarTokenVendedor,
+EditarPerfilVendedorControllerRead.acessarPagina);
+
+router.post("/editar-vendedor/:lojaId",
+AutenticaoMiddleware.validarTokenVendedor,
+upload.single("imagem_perfil"),
+ValidacaoMiddleware.RegrasValidacaoCadastroVendedor,
+ValidacaoFormularioMiddleware.validacaoCadastroEditarVendedor,
+EditarPerfilVendedorControllerUpdate.editarLoja);
+
+router.post("/deletar-vendedor/:lojaId",
+AutenticaoMiddleware.validarTokenVendedor,
+DeletarPerfilVendedorControllerDelete.deleteUser);
+
+router.get("/publicar-produto",
+AutenticaoMiddleware.validarTokenVendedor,
+PublicarProdutoControllerRead.acessarPagina);
+
+router.post("/publicar-produto",
+AutenticaoMiddleware.validarTokenVendedor,
+upload.single("imagem_produto"),
+ValidacaoMiddleware.RegrasValidacaoCadastroProduto,
+ValidacaoFormularioMiddleware.validacaoCadastroProduto,
+PublicarProdutoControllerCreate.cadastrarProduto);
+
+router.post("/deletar-produto/:produtoId",
+AutenticaoMiddleware.validarTokenVendedor,
+DeletarProdutoControllerDelete.deleteProduto);
 
 router.get("/produtos-favoritos",
 AutenticaoMiddleware.validarTokenComprador,
@@ -136,6 +180,9 @@ ImagemPerfilClienteControllerRead.acessarImagem);
 
 router.get("/imagem/loja/perfil/:lojaId",
 ImagemPerfilLojaControllerRead.acessarImagem);
+
+router.get("/imagem/produto/:produtoId",
+ImagemProdutoControllerRead.acessarImagem)
 
 router.get("/logout",
 LogoutControllerRead.acessarPagina);

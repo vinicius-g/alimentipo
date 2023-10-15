@@ -40,6 +40,7 @@ model Loja {
     descricao_loja    String  @db.VarChar(200)
     online_fisica     String  @db.VarChar(15)
     customer_id       String? @unique
+    ranking_loja      Int     @default(1)
 
     produtos             Produto[]
     clientes_favoritaram Lojas_Clientes[]
@@ -53,13 +54,16 @@ model Restricao {
 }
 
 model Produto {
-    id_produto        Int    @id @default(autoincrement())
-    nome_produto      String @db.VarChar(100)
-    descricao_produto String @db.VarChar(200)
-    link_produto      String @db.VarChar(255)
-    preco_produto     Float
-    estoque_produto   Int    @db.TinyInt
-    relevancia        Int
+    id_produto          Int    @id @default(autoincrement())
+    imagem_produto      Bytes
+    tipo_imagem_produto String
+    nome_produto        String @db.VarChar(100)
+    descricao_produto   String @db.VarChar(200)
+    link_produto        String @db.VarChar(255)
+    preco_produto       Float
+    estoque_produto     Int    @db.TinyInt
+    ranking_produto     Int    @default(1)
+    desconto_produto    Int?
 
     loja                 Loja                  @relation(fields: [loja_id], references: [id_loja], onDelete: Cascade, onUpdate: Cascade)
     loja_id              Int
@@ -97,5 +101,5 @@ model Restricoes_Produtos {
     created_at   DateTime  @default(now())
     updated_at   DateTime  @updatedAt
 
-    @@id([id_produto, id_restricao])
+    @@id([id_restricao, id_produto])
 }

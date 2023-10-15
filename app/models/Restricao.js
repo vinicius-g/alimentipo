@@ -1,8 +1,38 @@
 const prisma = require("../../server/database/prismaClient");
 
 class Restricao {
-    async createRestricao(token_email) {
-        
+    async findRestricaoByName(nomeRestricao) {
+        return await prisma.restricao.findUnique({
+            where: {
+                nome_restricao: nomeRestricao
+            }
+        })
+    }
+
+    async findAllProdutosFromLoja(lojaId) {
+        return await prisma.restricao.findMany({
+            where: {
+                produtos: {
+                    some: {
+                        produto: {
+                            loja_id: lojaId
+                        }
+                    }
+                }
+            },
+            include: {
+                produtos: {
+                    include: {
+                        produto: true
+                    },
+                    orderBy: {
+                        produto: {
+                            ranking_produto: "desc"
+                        }
+                    }
+                }
+            }
+        })
     }
 }
 

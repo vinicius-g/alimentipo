@@ -1,16 +1,21 @@
 const lojaModel = require("../../../models/Loja");
 
-class ImagemPerfilClienteController {
-    async acessarImagem(req, res) {
-        const {lojaId} = req.params;
+class ImagemPerfilLojaController {
+	async acessarImagem(req, res) {
+		const { lojaId } = req.params;
 
-        const imagemPerfil = await lojaModel.getLojaImage(lojaId);
+		try {
+			const imagemPerfil = await lojaModel.getLojaImage(lojaId);
 
-        res.setHeader("Content-Type", imagemPerfil.tipo_imagem_loja);
-        return res.send(imagemPerfil.imagem_loja);
-    }
+			res.setHeader("Content-Type", imagemPerfil.tipo_imagem_loja);
+			return res.send(imagemPerfil.imagem_loja);
+		} catch (erro) {
+			console.log(erro);
+			return;
+		}
+	}
 }
 
-const ImagemPerfilClienteControllerRead = new ImagemPerfilClienteController();
+const ImagemPerfilLojaControllerRead = new ImagemPerfilLojaController();
 
-module.exports = ImagemPerfilClienteControllerRead;
+module.exports = ImagemPerfilLojaControllerRead;

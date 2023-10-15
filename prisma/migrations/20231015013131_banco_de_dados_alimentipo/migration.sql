@@ -30,6 +30,7 @@ CREATE TABLE `Loja` (
     `descricao_loja` VARCHAR(200) NOT NULL,
     `online_fisica` VARCHAR(15) NOT NULL,
     `customer_id` VARCHAR(191) NULL,
+    `ranking_loja` INTEGER NOT NULL DEFAULT 1,
 
     UNIQUE INDEX `Loja_cpf_loja_key`(`cpf_loja`),
     UNIQUE INDEX `Loja_cnpj_loja_key`(`cnpj_loja`),
@@ -50,12 +51,15 @@ CREATE TABLE `Restricao` (
 -- CreateTable
 CREATE TABLE `Produto` (
     `id_produto` INTEGER NOT NULL AUTO_INCREMENT,
+    `imagem_produto` LONGBLOB NOT NULL,
+    `tipo_imagem_produto` VARCHAR(191) NOT NULL,
     `nome_produto` VARCHAR(100) NOT NULL,
     `descricao_produto` VARCHAR(200) NOT NULL,
     `link_produto` VARCHAR(255) NOT NULL,
     `preco_produto` DOUBLE NOT NULL,
     `estoque_produto` TINYINT NOT NULL,
-    `relevancia` INTEGER NOT NULL,
+    `ranking_produto` INTEGER NOT NULL DEFAULT 1,
+    `desconto_produto` INTEGER NULL,
     `loja_id` INTEGER NOT NULL,
 
     PRIMARY KEY (`id_produto`)
@@ -88,7 +92,7 @@ CREATE TABLE `Restricoes_Produtos` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
-    PRIMARY KEY (`id_produto`, `id_restricao`)
+    PRIMARY KEY (`id_restricao`, `id_produto`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
