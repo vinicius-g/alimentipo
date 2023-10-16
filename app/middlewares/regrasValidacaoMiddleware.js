@@ -141,6 +141,34 @@ const ValidacaoMiddleware = {
         .withMessage("Você não pode escolher um disconto maior que 100%!")
         .isFloat({min: 1})
         .withMessage("Você não pode escolher um desconto menor que 1%!")
+    ],
+    RegrasValidacaoEditarProduto: [
+        body("link_produto")
+        .isURL()
+        .withMessage("Informe uma URL válida para o seu produto")
+        .isLength({max: 255})
+        .withMessage("O link do seu produto não pode ter mais de 255 caracteres!"),
+        body("descricao_produto")
+        .trim()
+        .isString()
+        .withMessage("Escreva uma descrição para o seu produto!")
+        .isLength({min: 3})
+        .withMessage("A descrição do seu produto deve ter no mínimo 3 caracteres!")
+        .isLength({max: 200})
+        .withMessage("A sua descrição não pode ter mais de 200 caracteres!"),
+        body("estoque_produto")
+        .isInt()
+        .withMessage("Escolha uma opção de estoque para o seu produto!")
+        .isIn(["0", "1"])
+        .withMessage("Escolha uma opção válida para o estoque do seu produto!"),
+        body("desconto_produto")
+        .optional({values: "falsy"})
+        .isFloat()
+        .withMessage("Informe em % qual o desconto do seu produto! (Opcional)")
+        .isFloat({max: 100})
+        .withMessage("Você não pode escolher um disconto maior que 100%!")
+        .isFloat({min: 1})
+        .withMessage("Você não pode escolher um desconto menor que 1%!")
     ]
 }
 

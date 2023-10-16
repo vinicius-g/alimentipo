@@ -7,6 +7,15 @@ class Produto {
         });
     }
 
+    async updateProduto(data, produtoId) {
+        return await prisma.produto.update({
+            data,
+            where: {
+                id_produto: Number(produtoId)
+            }
+        })
+    }
+
     async findProdutoById(produtoId) {
         return await prisma.produto.findUnique({
             where: {

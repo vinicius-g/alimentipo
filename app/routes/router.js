@@ -55,6 +55,7 @@ const DeletarPerfilVendedorControllerDelete = require("../controllers/cadastrado
 
 const PublicarProdutoControllerRead = require("../controllers/cadastrado/produtos/publicarProdutoControllerRead");
 const PublicarProdutoControllerCreate = require("../controllers/cadastrado/produtos/publicarProdutoControllerCreate");
+const EditarProdutoControllerUpdate = require("../controllers/cadastrado/produtos/editarProdutoControllerUpdate");
 const DeletarProdutoControllerDelete = require("../controllers/cadastrado/produtos/deletarProdutoControllerDelete");
 
 const ProdutosFavoritosControllerRead = require("../controllers/cadastrado/produtos/produtosFavoritosControllerRead");
@@ -209,6 +210,12 @@ upload.single("imagem_produto"),
 ValidacaoMiddleware.RegrasValidacaoCadastroProduto,
 ValidacaoFormularioMiddleware.validacaoCadastroProduto,
 PublicarProdutoControllerCreate.cadastrarProduto);
+
+router.post("/editar-produto/:produtoId",
+AutenticaoMiddleware.validarTokenVendedor,
+ValidacaoMiddleware.RegrasValidacaoEditarProduto,
+ValidacaoFormularioMiddleware.validacaoEditarProduto,
+EditarProdutoControllerUpdate.editarProduto)
 
 router.post("/deletar-produto/:produtoId",
 AutenticaoMiddleware.validarTokenVendedor,

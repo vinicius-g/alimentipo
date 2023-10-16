@@ -37,6 +37,8 @@ class HomeController {
             produtosPromocao = null;
         }
 
+        res.location("http://localhost:2405#produto-5");
+
         return res.render("pages/index.ejs", {
             data: {
                 page_name: "Alimentipo",

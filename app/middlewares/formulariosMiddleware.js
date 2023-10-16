@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const clienteModel = require("../models/Cliente");
 const lojaModel = require("../models/Loja");
+const restricaoModel = require("../models/Restricao");
 
 class ValidacaoFormulario {
 	constructor() {
@@ -132,6 +133,88 @@ class ValidacaoFormulario {
 		return next();
 	}
 
+    async validacaoDeletarPerfilComprador(req, res, next) {
+        const token = req.session.token;
+        const {userType, userId} = jwt.decode(token, process.env.SECRET);
+
+        const cliente = await clienteModel.findUserById(userId);
+
+        const {senha, confirmacao_senha} = req.body;
+
+        bcrypt
+			.compare(senha, cliente.senha_cliente)
+			.then((auth) => {
+				if (auth) {
+                    if (senha !== confirmacao_senha) {
+                        return res.render("pages/deletar-comprador.ejs", {
+                            data: {
+                                page_name: "Alimentipo",
+                                userType,
+                                usuario: {
+                                    imagem_perfil: cliente.imagem_cliente,
+                                    id_usuario: cliente.id_cliente,
+                                },
+                                input_values: {
+                                    senha,
+                                    confirmacao_senha
+                                },
+                                errors: {
+                                    confirmacao_senha_error: {
+                                        msg: "Senhas não batem",
+                                    },
+                                },
+                            },
+                        });
+                    }
+
+					return next();
+				}
+
+				return res.render("pages/deletar-comprador.ejs", {
+					data: {
+						page_name: "Alimentipo",
+						userType,
+						usuario: {
+							imagem_perfil: cliente.imagem_cliente,
+							id_usuario: cliente.id_cliente,
+						},
+						input_values: {
+							senha,
+                            confirmacao_senha
+						},
+						errors: {
+							senha_error: {
+								msg: "Senha incorreta",
+							},
+						},
+					},
+				});
+			})
+			.catch((erro) => {
+				console.log(erro);
+
+				return res.render("pages/deletar-comprador.ejs", {
+					data: {
+						page_name: "Alimentipo",
+						userType,
+						usuario: {
+							imagem_perfil: cliente.imagem_cliente,
+							id_usuario: cliente.id_cliente,
+						},
+						input_values: {
+							senha,
+							confirmacao_senha,
+						},
+						errors: {
+							sistema_error: {
+								msg: "Erro de sistema, tente novamente mais tarde!",
+							},
+						},
+					},
+				});
+			});
+    }
+
 	validacaoCadastroVendedor(req, res, next) {
 		const errors = validationResult(req);
 		const imagem_perfil = req.file;
@@ -221,66 +304,6 @@ class ValidacaoFormulario {
 		return next();
 	}
 
-    async validacaoCadastroProduto(req, res, next) {
-		const errors = validationResult(req);
-		const imagem_produto = req.file;
-
-		if (imagem_produto) {
-			this.#validarImagemProduto(imagem_produto, errors);
-		} else {
-			this.#validarExistenciaImagemProduto(errors);
-		}
-
-		if (!errors.isEmpty()) {
-			const { nome_produto, preco_produto, link_produto, descricao_produto, estoque_produto, restricao_produto, desconto_produto } = req.body;
-
-			const nome_produto_error = errors.errors.find((error) => error.path === "nome_produto");
-            const preco_produto_error = errors.errors.find((error) => error.path === "preco_produto");
-            const link_produto_error = errors.errors.find((error) => error.path === "link_produto");
-            const descricao_produto_error = errors.errors.find((error) => error.path === "descricao_produto");
-            const estoque_produto_error = errors.errors.find((error) => error.path === "estoque_produto");
-            const restricao_produto_error = errors.errors.find((error) => error.path === "restricao_produto");
-            const desconto_produto_error = errors.errors.find((error) => error.path === "desconto_produto");
-            const imagem_produto_error = errors.errors.find((error) => error.path === "imagem_produto");
-
-            const token = req.session.token;
-            const {userId, userType} = jwt.decode(token, process.env.SECRET);
-            const user = await lojaModel.findUserById(userId);
-
-			return res.render("pages/cadastro-produto.ejs", {
-				data: {
-					page_name: "Alimentipo",
-					userType,
-					usuario: {
-						imagem_perfil: user.imagem_loja,
-						id_usuario: user.id_loja,
-					},
-					input_values: {
-						nome_produto,
-                        preco_produto,
-                        link_produto,
-                        descricao_produto,
-                        estoque_produto,
-                        restricao_produto,
-                        desconto_produto
-					},
-					errors: {
-						nome_produto_error,
-                        preco_produto_error,
-                        link_produto_error,
-                        descricao_produto_error,
-                        estoque_produto_error,
-                        restricao_produto_error,
-                        desconto_produto_error,
-                        imagem_produto_error
-					},
-				},
-			});
-		}
-
-		return next();
-	}
-
     async validacaoCadastroEditarVendedor(req, res, next) {
 		const errors = validationResult(req);
         const imagem_perfil = req.file;
@@ -349,6 +372,207 @@ class ValidacaoFormulario {
 						endereco_error,
 						telefone_error,
 					},
+				},
+			});
+		}
+
+		return next();
+	}
+
+    async validacaoDeletarPerfilVendedor(req, res, next) {
+        const token = req.session.token;
+        const {userType, userId} = jwt.decode(token, process.env.SECRET);
+
+        const loja = await lojaModel.findUserById(userId);
+
+        const {senha, confirmacao_senha} = req.body;
+
+        bcrypt
+			.compare(senha, loja.senha_loja)
+			.then((auth) => {
+				if (auth) {
+                    if (senha !== confirmacao_senha) {
+                        return res.render("pages/deletar-vendedor.ejs", {
+                            data: {
+                                page_name: "Alimentipo",
+                                userType,
+                                usuario: {
+                                    imagem_perfil: loja.imagem_loja,
+                                    id_usuario: loja.id_loja,
+                                },
+                                input_values: {
+                                    senha,
+                                    confirmacao_senha
+                                },
+                                errors: {
+                                    confirmacao_senha_error: {
+                                        msg: "Senhas não batem",
+                                    },
+                                },
+                            },
+                        });
+                    }
+
+					return next();
+				}
+
+				return res.render("pages/deletar-vendedor.ejs", {
+					data: {
+						page_name: "Alimentipo",
+						userType,
+						usuario: {
+							imagem_perfil: loja.imagem_loja,
+							id_usuario: loja.id_loja,
+						},
+						input_values: {
+							senha,
+                            confirmacao_senha
+						},
+						errors: {
+							senha_error: {
+								msg: "Senha incorreta",
+							},
+						},
+					},
+				});
+			})
+			.catch((erro) => {
+				console.log(erro);
+
+				return res.render("pages/deletar-vendedor.ejs", {
+					data: {
+						page_name: "Alimentipo",
+						userType,
+						usuario: {
+							imagem_perfil: loja.imagem_loja,
+							id_usuario: loja.id_loja,
+						},
+						input_values: {
+							senha,
+							confirmacao_senha,
+						},
+						errors: {
+							sistema_error: {
+								msg: "Erro de sistema, tente novamente mais tarde!",
+							},
+						},
+					},
+				});
+			});
+    }
+
+    async validacaoCadastroProduto(req, res, next) {
+		const errors = validationResult(req);
+		const imagem_produto = req.file;
+
+		if (imagem_produto) {
+			this.#validarImagemProduto(imagem_produto, errors);
+		} else {
+			this.#validarExistenciaImagemProduto(errors);
+		}
+
+		if (!errors.isEmpty()) {
+			const { nome_produto, preco_produto, link_produto, descricao_produto, estoque_produto, restricao_produto, desconto_produto } = req.body;
+
+			const nome_produto_error = errors.errors.find((error) => error.path === "nome_produto");
+            const preco_produto_error = errors.errors.find((error) => error.path === "preco_produto");
+            const link_produto_error = errors.errors.find((error) => error.path === "link_produto");
+            const descricao_produto_error = errors.errors.find((error) => error.path === "descricao_produto");
+            const estoque_produto_error = errors.errors.find((error) => error.path === "estoque_produto");
+            const restricao_produto_error = errors.errors.find((error) => error.path === "restricao_produto");
+            const desconto_produto_error = errors.errors.find((error) => error.path === "desconto_produto");
+            const imagem_produto_error = errors.errors.find((error) => error.path === "imagem_produto");
+
+            const token = req.session.token;
+            const {userId, userType} = jwt.decode(token, process.env.SECRET);
+            const user = await lojaModel.findUserById(userId);
+
+			return res.render("pages/cadastro-produto.ejs", {
+				data: {
+					page_name: "Alimentipo",
+					userType,
+					usuario: {
+						imagem_perfil: user.imagem_loja,
+						id_usuario: user.id_loja,
+					},
+					input_values: {
+						nome_produto,
+                        preco_produto,
+                        link_produto,
+                        descricao_produto,
+                        estoque_produto,
+                        restricao_produto,
+                        desconto_produto
+					},
+					errors: {
+						nome_produto_error,
+                        preco_produto_error,
+                        link_produto_error,
+                        descricao_produto_error,
+                        estoque_produto_error,
+                        restricao_produto_error,
+                        desconto_produto_error,
+                        imagem_produto_error
+					},
+				},
+			});
+		}
+
+		return next();
+	}
+
+    async validacaoEditarProduto(req, res, next) {
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			const { link_produto, descricao_produto, estoque_produto, desconto_produto } = req.body;
+
+            const link_produto_error = errors.errors.find((error) => error.path === "link_produto");
+            const descricao_produto_error = errors.errors.find((error) => error.path === "descricao_produto");
+            const estoque_produto_error = errors.errors.find((error) => error.path === "estoque_produto");
+            const desconto_produto_error = errors.errors.find((error) => error.path === "desconto_produto");
+
+            const token = req.session.token;
+            const {userId, userType} = jwt.decode(token, process.env.SECRET);
+            const loja = await lojaModel.findUserById(userId);
+            const produtoId = req.params.produtoId;
+
+            let produtos = await restricaoModel.findAllProdutosFromLoja(userId);
+
+            if (produtos.length === 0) {
+                produtos = null
+            }
+
+			return res.render("pages/perfil-vendedor.ejs", {
+				data: {
+					page_name: "Alimentipo",
+					userType,
+					usuario: {
+						id_usuario: loja.id_loja,
+						imagem_perfil: loja.imagem_loja,
+						nome_proprietario: loja.nome_proprietario,
+						nome_loja: loja.nome_loja,
+						email_loja: loja.email_loja,
+						online_fisica: loja.online_fisica,
+						link_loja: loja.link_loja,
+						telefone_loja: loja.telefone_loja,
+						endereco_loja: loja.endereco_loja,
+						descricao_loja: loja.descricao_loja,
+                        produtos: produtos
+					},
+					input_values: {
+                        link_produto,
+                        descricao_produto,
+                        estoque_produto,
+                        desconto_produto
+					},
+					errors: {
+                        link_produto_error,
+                        descricao_produto_error,
+                        estoque_produto_error,
+                        desconto_produto_error,
+					},
+                    produto_erro: produtoId
 				},
 			});
 		}
@@ -471,170 +695,6 @@ class ValidacaoFormulario {
 				});
 			});
 	}
-
-    async validacaoDeletarPerfilVendedor(req, res, next) {
-        const token = req.session.token;
-        const {userType, userId} = jwt.decode(token, process.env.SECRET);
-
-        const loja = await lojaModel.findUserById(userId);
-
-        const {senha, confirmacao_senha} = req.body;
-
-        bcrypt
-			.compare(senha, loja.senha_loja)
-			.then((auth) => {
-				if (auth) {
-                    if (senha !== confirmacao_senha) {
-                        return res.render("pages/deletar-vendedor.ejs", {
-                            data: {
-                                page_name: "Alimentipo",
-                                userType,
-                                usuario: {
-                                    imagem_perfil: loja.imagem_loja,
-                                    id_usuario: loja.id_loja,
-                                },
-                                input_values: {
-                                    senha,
-                                    confirmacao_senha
-                                },
-                                errors: {
-                                    confirmacao_senha_error: {
-                                        msg: "Senhas não batem",
-                                    },
-                                },
-                            },
-                        });
-                    }
-
-					return next();
-				}
-
-				return res.render("pages/deletar-vendedor.ejs", {
-					data: {
-						page_name: "Alimentipo",
-						userType,
-						usuario: {
-							imagem_perfil: loja.imagem_loja,
-							id_usuario: loja.id_loja,
-						},
-						input_values: {
-							senha,
-                            confirmacao_senha
-						},
-						errors: {
-							senha_error: {
-								msg: "Senha incorreta",
-							},
-						},
-					},
-				});
-			})
-			.catch((erro) => {
-				console.log(erro);
-
-				return res.render("pages/deletar-vendedor.ejs", {
-					data: {
-						page_name: "Alimentipo",
-						userType,
-						usuario: {
-							imagem_perfil: loja.imagem_loja,
-							id_usuario: loja.id_loja,
-						},
-						input_values: {
-							senha,
-							confirmacao_senha,
-						},
-						errors: {
-							sistema_error: {
-								msg: "Erro de sistema, tente novamente mais tarde!",
-							},
-						},
-					},
-				});
-			});
-    }
-
-    async validacaoDeletarPerfilComprador(req, res, next) {
-        const token = req.session.token;
-        const {userType, userId} = jwt.decode(token, process.env.SECRET);
-
-        const cliente = await clienteModel.findUserById(userId);
-
-        const {senha, confirmacao_senha} = req.body;
-
-        bcrypt
-			.compare(senha, cliente.senha_cliente)
-			.then((auth) => {
-				if (auth) {
-                    if (senha !== confirmacao_senha) {
-                        return res.render("pages/deletar-comprador.ejs", {
-                            data: {
-                                page_name: "Alimentipo",
-                                userType,
-                                usuario: {
-                                    imagem_perfil: cliente.imagem_cliente,
-                                    id_usuario: cliente.id_cliente,
-                                },
-                                input_values: {
-                                    senha,
-                                    confirmacao_senha
-                                },
-                                errors: {
-                                    confirmacao_senha_error: {
-                                        msg: "Senhas não batem",
-                                    },
-                                },
-                            },
-                        });
-                    }
-
-					return next();
-				}
-
-				return res.render("pages/deletar-comprador.ejs", {
-					data: {
-						page_name: "Alimentipo",
-						userType,
-						usuario: {
-							imagem_perfil: cliente.imagem_cliente,
-							id_usuario: cliente.id_cliente,
-						},
-						input_values: {
-							senha,
-                            confirmacao_senha
-						},
-						errors: {
-							senha_error: {
-								msg: "Senha incorreta",
-							},
-						},
-					},
-				});
-			})
-			.catch((erro) => {
-				console.log(erro);
-
-				return res.render("pages/deletar-comprador.ejs", {
-					data: {
-						page_name: "Alimentipo",
-						userType,
-						usuario: {
-							imagem_perfil: cliente.imagem_cliente,
-							id_usuario: cliente.id_cliente,
-						},
-						input_values: {
-							senha,
-							confirmacao_senha,
-						},
-						errors: {
-							sistema_error: {
-								msg: "Erro de sistema, tente novamente mais tarde!",
-							},
-						},
-					},
-				});
-			});
-    }
 
 	#validarImagem(imagem_perfil, errors) {
 		if (!imagem_perfil.mimetype.match("image/")) {

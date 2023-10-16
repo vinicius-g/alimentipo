@@ -206,10 +206,22 @@ main {
     border: none;
 }
 
+.produto-container .produto-formulario form textarea.error {
+    border: 1px solid red;
+}
+
 .produto-container .produto-formulario form .estoque {
     display: flex;
     gap: 40px;
     margin-bottom: 30px;
+}
+
+.error-message {
+    color: red;
+}
+
+.produto-container .produto-formulario form .estoque.error {
+    color: red;
 }
 
 .produto-container .produto-formulario form .desconto {
@@ -221,6 +233,10 @@ main {
     width: 80px;
     border-radius: 5px;
     margin-left: 5px;
+}
+
+.produto-container .produto-formulario form .desconto input.error {
+    border-color: red;
 }
 
 .produto-container .produto-formulario form .botoes-produto {
