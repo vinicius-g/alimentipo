@@ -7,7 +7,19 @@
 
 .imagem-perfil {
     display: flex;
-    justify-content: center;
+    padding: 0 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagem-perfil img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+}
+
+.imagem-perfil a {
+    font-size: .9rem;
 }
 
 .texto-perfil {
@@ -44,16 +56,18 @@
 }
 
 a.loja {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
     width: 100%;
     max-width: 175px;
+    height: 235px;
 }
 
-a.loja .favoritar {
+a.loja .favoritar-loja {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -62,8 +76,22 @@ a.loja .favoritar {
     cursor: pointer;
 }
 
+a.loja .favoritar-loja .imagem-favoritado {
+    display: none;
+}
+
+a.loja .favoritar-loja.favoritado .imagem-favoritar {
+    display: none;
+}
+
+a.loja .favoritar-loja.favoritado .imagem-favoritado {
+    display: block;
+}
+
 a.loja > img {
+    flex: 1;
     margin-bottom: 10px;
+    height: 0;
 }
 
 a.loja h2 {
@@ -73,4 +101,6 @@ a.loja h2 {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
+    width: 100%;
+    padding: 20px 0 10px;
 }

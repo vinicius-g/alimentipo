@@ -7,7 +7,11 @@ class PerfilVendedorController {
         const token = req.session.token;
         const {userType, userId} = jwt.decode(token, process.env.SECRET);
         const loja = await lojaModel.findUserById(userId);
-        const produtos = await restricaoModel.findAllProdutosFromLoja(userId);
+        let produtos = await restricaoModel.findAllProdutosFromLoja(userId);
+
+        if (produtos.length === 0) {
+            produtos = null
+        }
 
         return res.render("pages/perfil-vendedor.ejs", {
             data: {

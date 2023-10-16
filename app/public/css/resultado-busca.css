@@ -34,6 +34,12 @@ main h1 {
     margin: 40px 0;
 }
 
+#produtos > h2 {
+    color: #729f46;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
 .produto {
     display: grid;
     grid-template-columns: calc(40% - 10px) calc(60% - 10px);
@@ -64,7 +70,19 @@ main h1 {
     cursor: pointer;
 }
 
-.produto .produto-texto {
+.produto .produto-imagem .favoritar .imagem-favoritado {
+    display: none;
+}
+
+.produto .produto-imagem .favoritar.favoritado .imagem-favoritar {
+    display: none;
+}
+
+.produto .produto-imagem .favoritar.favoritado .imagem-favoritado {
+    display: block;
+}
+
+.produto .produto-imagem .produto-texto {
     display: flex;
     flex-direction: column;
 }

@@ -4,6 +4,7 @@
 <head>
     <%- include("../templates/head.ejs") %>
     <link rel="stylesheet" href="/css/resultado-busca.css">
+    <script src="/js/favoritar-produto.js" defer></script>
 
     <title><%- data.page_name %></title>
 </head>
@@ -15,128 +16,49 @@
         <section>
             <div class="searchbar">
                 <img src="/imagem/pesquisa.png" alt="Pesquisa">
-                <input type="search" id="searchbar">
+                <form action="/pesquisa-produtos-zero-acucar/1">
+                    <input type="search" id="searchbar" name="pesquisa" <%- data.pesquisa ? `value="${data.pesquisa}"` : "" %>>
+                </form>
             </div>
 
-            <h1>Zero Açúcar</h1>
+            <h1>Zero açúcar</h1>
 
             <div id="produtos">
-                <div class="produto">
+                <% if (data.produtos) { %>
+                <% data.produtos.forEach(produto => { %>
+                <a href="/produto/<%- produto.id_produto %>" class="produto">
                     <div class="produto-imagem">
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
+                        <button class="favoritar <%- produto.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto.id_produto %>">
+                            <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                            <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
                         </button>
 
-                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
+                        <img src="/imagem/produto/<%- produto.id_produto %>" alt="<%- produto.nome_produto %>">
                     </div>
 
                     <div class="produto-texto">
-                        <h2>Molho de tomate</h2>
+                        <h2><%- produto.nome_produto %></h2>
 
-                        <h3>Zero Açúcar</h3>
+                        <h3><% produto.restricoes.forEach(restricao => { %>
+                            <%- restricao.restricao.nome_restricao %>
+                            <% }) %></h3>
 
-                        <p>R$ 21,60</p>
+                        <p>R$ <%- Number(produto.preco_produto).toFixed(2) %></p>
                     </div>
-                </div>
-
-                <div class="produto">
-                    <div class="produto-imagem">
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
-                        </button>
-
-                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                    </div>
-
-                    <div class="produto-texto">
-                        <h2>Molho de tomate</h2>
-
-                        <h3>Zero Açúcar</h3>
-
-                        <p>R$ 21,60</p>
-                    </div>
-                </div>
-
-                <div class="produto">
-                    <div class="produto-imagem">
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
-                        </button>
-
-                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                    </div>
-
-                    <div class="produto-texto">
-                        <h2>Molho de tomate</h2>
-
-                        <h3>Zero Açúcar</h3>
-
-                        <p>R$ 21,60</p>
-                    </div>
-                </div>
-
-                <div class="produto">
-                    <div class="produto-imagem">
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
-                        </button>
-
-                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                    </div>
-
-                    <div class="produto-texto">
-                        <h2>Molho de tomate</h2>
-
-                        <h3>Zero Açúcar</h3>
-
-                        <p>R$ 21,60</p>
-                    </div>
-                </div>
-
-                <div class="produto">
-                    <div class="produto-imagem">
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
-                        </button>
-
-                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                    </div>
-
-                    <div class="produto-texto">
-                        <h2>Molho de tomate</h2>
-
-                        <h3>Zero Açúcar</h3>
-
-                        <p>R$ 21,60</p>
-                    </div>
-                </div>
-
-                <div class="produto">
-                    <div class="produto-imagem">
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
-                        </button>
-
-                        <img src="/imagem/molho-de-tomate.png" alt="Molho de tomate">
-                    </div>
-
-                    <div class="produto-texto">
-                        <h2>Molho de tomate</h2>
-
-                        <h3>Zero Açúcar</h3>
-
-                        <p>R$ 21,60</p>
-                    </div>
-                </div>
+                </a>
+                <% }) %>
+                <% } else { %>
+                    <h2>Sem produtos aqui ainda!</h2>
+                <% } %>
             </div>
 
+            <% if (data.paginacao.primeiraPagina !== data.paginacao.ultimaPagina) { %>
             <div class="paginacao">
-                <a href="#" class="ativo">1</a>
-
-                <a href="#">2</a>
-
-                <a href="#">3</a>
+                <% for( let pagina = data.paginacao.primeiraPagina; pagina <= data.paginacao.ultimaPagina; pagina++ ) { %>
+                <a href="<%- pagina %>" <%- Number(data.paginacao.paginaAtual) === Number(pagina) ? `class="ativo"` : "" %>><%- pagina %></a>
+                <% } %>
             </div>
+            <% } %>
         </section>
     </main>
 

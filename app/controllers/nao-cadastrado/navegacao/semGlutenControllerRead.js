@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
-const restricaoModel = require("../../../models/Restricao");
+const produtoModel = require("../../../models/Produto");
 
 class ProdutosSemGlutenController {
     constructor() {
@@ -26,22 +26,32 @@ class ProdutosSemGlutenController {
         }
 
         const paginaAtual = req.params.paginaProduto;
-        let produtos = await restricaoModel.findAllProdutosComRestricao("Sem glúten", paginaAtual);
+        let produtos = await produtoModel.findProdutosComRestricao("Sem glúten", paginaAtual);
+        let quantidadeProdutos = await produtoModel.contarProdutosComRestricao("Sem glúten");
 
-        if (!produtos) {
-            produtos = null
+        if (produtos.length === 0) {
+            produtos = null;
         }
+
+        let primeiraPagina = paginaAtual - 4 > 1 ? paginaAtual - 4 : 1;
+        let quantidadePagina = Math.ceil(quantidadeProdutos / 10);
+        let ultimaPagina = primeiraPagina + 4 > quantidadePagina ? quantidadePagina : primeiraPagina + 4;
 
         return res.render("pages/produtos-sem-gluten.ejs", {
             data: {
-                page_name: "Alimentipo",
+                page_name: "Produtos Sem Glúten",
                 usuarioLogado,
                 userType,
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
                 },
-                produtos
+                produtos,
+                paginacao: {
+                    primeiraPagina,
+                    ultimaPagina,
+                    paginaAtual
+                }
             }
         })
     }
@@ -53,6 +63,6 @@ class ProdutosSemGlutenController {
     }
 }
 
-const ProdutosDestacadosControllerRead = new ProdutosSemGlutenController();
+const ProdutosSemGlutenControllerRead = new ProdutosSemGlutenController();
 
-module.exports = ProdutosDestacadosControllerRead;
+module.exports = ProdutosSemGlutenControllerRead;

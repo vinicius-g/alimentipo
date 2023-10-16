@@ -55,7 +55,7 @@
 
             <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
 
-            <button type="submit" formaction="/deletar-comprador/<%- data.usuario.id_usuario %>" class="deletar-comprador">Excluir Perfil</button>
+            <a href="/deletar-comprador/<%- data.usuario.id_usuario %>" class="deletar-comprador">Excluir Perfil</a>
 
             <button type="submit" class="editar-comprador">Editar</button>
         </form>

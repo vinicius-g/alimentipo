@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
 const produtoModel = require("../../../models/Produto");
 
-class HomeController {
+class ProdutosZeroAcucarPesquisaController {
     constructor() {
         this.acessarPagina = this.acessarPagina.bind(this);
     }
@@ -25,29 +25,35 @@ class HomeController {
             }
         }
 
-        let produtosDestacados = await produtoModel.findHighRankProdutos();
+        const paginaAtual = req.params.paginaProduto;
+        const pesquisa = req.query.pesquisa;
+        let produtos = await produtoModel.pesquisaProdutosComRestricao("Zero açúcar", paginaAtual, pesquisa);
+        let quantidadeProdutos = await produtoModel.contarProdutosComRestricaoPesquisados("Zero açúcar", pesquisa);
 
-        if (produtosDestacados.length === 0) {
-            produtosDestacados = null;
+        if (produtos.length === 0) {
+            produtos = null;
         }
 
-        let produtosPromocao = await produtoModel.findProdutosEmPromocao();
+        let primeiraPagina = paginaAtual - 4 > 1 ? paginaAtual - 4 : 1;
+        let quantidadePagina = Math.ceil(quantidadeProdutos / 10);
+        let ultimaPagina = primeiraPagina + 4 > quantidadePagina ? quantidadePagina : primeiraPagina + 4;
 
-        if (produtosPromocao.length === 0) {
-            produtosPromocao = null;
-        }
-
-        return res.render("pages/index.ejs", {
+        return res.render("pages/produtos-zero-acucar.ejs", {
             data: {
-                page_name: "Alimentipo",
+                page_name: "Produtos Zero Açúcar",
                 usuarioLogado,
                 userType,
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
                 },
-                produtos_destacados: produtosDestacados,
-                produtos_promocao: produtosPromocao
+                produtos,
+                paginacao: {
+                    primeiraPagina,
+                    ultimaPagina,
+                    paginaAtual
+                },
+                pesquisa
             }
         })
     }
@@ -59,6 +65,6 @@ class HomeController {
     }
 }
 
-const HomeControllerRead = new HomeController();
+const ProdutosZeroAcucarPesquisaControllerRead = new ProdutosZeroAcucarPesquisaController();
 
-module.exports = HomeControllerRead;
+module.exports = ProdutosZeroAcucarPesquisaControllerRead;

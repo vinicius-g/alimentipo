@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
 const lojaModel = require("../../../models/Loja");
+const restricaoModel = require("../../../models/Restricao");
 
 class LojaController {
     constructor() {
@@ -15,6 +16,11 @@ class LojaController {
         let imagemPerfil = true;
         const lojaId = req.params.lojaId;
         const loja = await lojaModel.findUserById(lojaId);
+        let produtos = await restricaoModel.findAllProdutosFromLoja(userId);
+
+        if (produtos.length === 0) {
+            produtos = null
+        }
 
         if (!loja) {
             return res.redirect("/");
@@ -54,7 +60,9 @@ class LojaController {
                     link_loja: loja.link_loja,
                     telefone_loja: loja.telefone_loja,
                     endereco_loja: loja.endereco_loja,
-                    descricao_loja: loja.descricao_loja
+                    descricao_loja: loja.descricao_loja,
+                    clientes_favoritaram: loja.clientes_favoritaram,
+                    produtos: produtos
                 }
             }
         })

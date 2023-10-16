@@ -65,12 +65,3 @@ $(document).ready(function () {
         dots: true
 	});
 });
-
-const testes = document.querySelectorAll(".favoritar")
-
-testes.forEach(teste => {
-    teste.addEventListener("click", (e) => {
-        e.preventDefault()
-        console.log("cliquei botao")
-    })
-})

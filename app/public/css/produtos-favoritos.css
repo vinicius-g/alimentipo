@@ -7,7 +7,19 @@
 
 .imagem-perfil {
     display: flex;
-    justify-content: center;
+    padding: 0 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagem-perfil img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+}
+
+.imagem-perfil a {
+    font-size: .9rem;
 }
 
 .texto-perfil {
@@ -41,13 +53,15 @@
 }
 
 a.produto {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
     width: 100%;
     max-width: 175px;
+    height: 235px;
 }
 
 a.produto .promocao {
@@ -69,8 +83,22 @@ a.produto .favoritar {
     cursor: pointer;
 }
 
+a.produto .favoritar .imagem-favoritado {
+    display: none;
+}
+
+a.produto .favoritar.favoritado .imagem-favoritar {
+    display: none;
+}
+
+a.produto .favoritar.favoritado .imagem-favoritado {
+    display: block;
+}
+
 a.produto > img {
+    flex: 1;
     margin-bottom: 10px;
+    height: 0;
 }
 
 a.produto h2 {

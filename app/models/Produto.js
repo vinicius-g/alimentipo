@@ -21,16 +21,22 @@ class Produto {
                             }
                         }
                     }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: {
+                            select: {
+                                id_cliente: true
+                            }
+                        }
+                    }
                 }
             }
         })
     }
 
-    async findAllProdutosFromLoja(lojaId) {
+    async findProdutos(paginaProduto) {
         return await prisma.produto.findMany({
-            where: {
-                loja_id: lojaId
-            },
             include: {
                 restricoes: {
                     select: {
@@ -40,9 +46,72 @@ class Produto {
                             }
                         }
                     }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: {
+                            select: {
+                                id_cliente: true
+                            }
+                        }
+                    }
+                }
+            },
+            orderBy: {
+                ranking_produto: "desc"
+            },
+            take: 10,
+            skip: (Number(paginaProduto) - 1) * 10,
+        })
+    }
+
+    async pesquisaProdutos(paginaProduto, pesquisa) {
+        return await prisma.produto.findMany({
+            include: {
+                restricoes: {
+                    select: {
+                        restricao: {
+                            select: {
+                                nome_restricao: true
+                            }
+                        }
+                    }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: {
+                            select: {
+                                id_cliente: true
+                            }
+                        }
+                    }
+                }
+            },
+            where: {
+                nome_produto: {
+                    contains: pesquisa
+                }
+            },
+            orderBy: {
+                ranking_produto: "desc"
+            },
+            take: 10,
+            skip: (Number(paginaProduto) - 1) * 10,
+        })
+    }
+
+    async contarProdutosPesquisados(pesquisa) {
+        return await prisma.produto.count({
+            where: {
+                nome_produto: {
+                    contains: pesquisa
                 }
             }
-        })
+        });
+    }
+
+    async contarProdutos() {
+        return await prisma.produto.count();
     }
 
     async findHighRankProdutos() {
@@ -53,6 +122,15 @@ class Produto {
                         restricao: {
                             select: {
                                 nome_restricao: true
+                            }
+                        }
+                    }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: {
+                            select: {
+                                id_cliente: true
                             }
                         }
                     }
@@ -73,6 +151,15 @@ class Produto {
                         restricao: {
                             select: {
                                 nome_restricao: true
+                            }
+                        }
+                    }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: {
+                            select: {
+                                id_cliente: true
                             }
                         }
                     }
@@ -101,6 +188,11 @@ class Produto {
                             }
                         }
                     }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: true
+                    }
                 }
             },
             where: {
@@ -122,7 +214,7 @@ class Produto {
         })
     }
 
-    async contarProdutos(restricao) {
+    async contarProdutosComRestricao(restricao) {
         return await prisma.produto.count({
             where: {
                 restricoes: {
@@ -130,6 +222,73 @@ class Produto {
                         restricao: {
                             nome_restricao: {
                                 equals: restricao
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    async pesquisaProdutosComRestricao(restricao, paginaProduto, pesquisa) {
+        return await prisma.produto.findMany({
+            include: {
+                restricoes: {
+                    select: {
+                        restricao: {
+                            select: {
+                                nome_restricao: true
+                            }
+                        }
+                    }
+                },
+                clientes_favoritaram: {
+                    select: {
+                        cliente: true
+                    }
+                }
+            },
+            where: {
+                restricoes: {
+                    some: {
+                        restricao: {
+                            nome_restricao: {
+                                equals: restricao
+                            }
+                        },
+                        AND: {
+                            produto: {
+                                nome_produto: {
+                                    contains: pesquisa
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            orderBy: {
+                ranking_produto: "desc"
+            },
+            take: 10,
+            skip: (Number(paginaProduto) - 1) * 10,
+        })
+    }
+
+    async contarProdutosComRestricaoPesquisados(restricao, pesquisa) {
+        return await prisma.produto.count({
+            where: {
+                restricoes: {
+                    some: {
+                        restricao: {
+                            nome_restricao: {
+                                equals: restricao
+                            }
+                        },
+                        AND: {
+                            produto: {
+                                nome_produto: {
+                                    contains: pesquisa
+                                }
                             }
                         }
                     }

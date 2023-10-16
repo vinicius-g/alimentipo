@@ -36,6 +36,17 @@ class Loja {
         return await prisma.loja.findUnique({
             where: {
                 id_loja: Number(userId)
+            },
+            include: {
+                clientes_favoritaram: {
+                    select: {
+                        cliente: {
+                            select: {
+                                id_cliente: true
+                            }
+                        }
+                    }
+                }
             }
         })
     }

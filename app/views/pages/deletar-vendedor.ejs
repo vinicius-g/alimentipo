@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include("../templates/head.ejs") %>
+    <link rel="stylesheet" href="/css/deletar-perfil.css">
+
+    <title><%- data.page_name %></title>
+</head>
+
+<body>
+    <%- include("../templates/header-cadastrado.ejs") %>
+
+    <main>
+        <h1>Excluir perfil</h1>
+
+        <form action="/deletar-vendedor/<%- data.usuario.id_usuario %>" method="post">
+            <%- data.errors && data.errors.sistema_error ? `<span class='error-message'>${data.errors.sistema_error.msg}</span>` : "" %>
+
+            <input type="text" name="senha" placeholder="Senha"
+            <%- data.input_values ? `value="${data.input_values.senha}"` : "" %> <%- data.errors && data.errors.senha_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.senha_error ? `<span class='error-message'>${data.errors.senha_error.msg}</span>` : "" %>
+
+            <input type="password" name="confirmacao_senha" placeholder="Confirmação senha"
+            <%- data.input_values ? `value="${data.input_values.confirmacao_senha}"` : "" %> <%- data.errors && data.errors.confirmacao_senha_error ? `class="error"` : "" %>>
+
+            <%- data.errors && data.errors.confirmacao_senha_error ? `<span class='error-message'>${data.errors.confirmacao_senha_error.msg}</span>` : "" %>
+
+            <button type="submit">Excluir</button>
+        </form>
+    </main>
+
+    <%- include("../templates/footer.ejs") %>
+</body>

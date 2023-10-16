@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const clienteModel = require("../../../models/Cliente");
-const restricaoModel = require("../../../models/Restricao");
+const produtoModel = require("../../../models/Produto");
 
 class ProdutosZeroLactoseController {
     constructor() {
@@ -26,22 +26,32 @@ class ProdutosZeroLactoseController {
         }
 
         const paginaAtual = req.params.paginaProduto;
-        let produtos = await restricaoModel.findAllProdutosComRestricao("Zero lactose", paginaAtual);
+        let produtos = await produtoModel.findProdutosComRestricao("Zero lactose", paginaAtual);
+        let quantidadeProdutos = await produtoModel.contarProdutosComRestricao("Zero lactose");
 
-        if (!produtos) {
-            produtos = null
+        if (produtos.length === 0) {
+            produtos = null;
         }
+
+        let primeiraPagina = paginaAtual - 4 > 1 ? paginaAtual - 4 : 1;
+        let quantidadePagina = Math.ceil(quantidadeProdutos / 10);
+        let ultimaPagina = primeiraPagina + 4 > quantidadePagina ? quantidadePagina : primeiraPagina + 4;
 
         return res.render("pages/produtos-zero-lactose.ejs", {
             data: {
-                page_name: "Alimentipo",
+                page_name: "Produtos Zero Lactose",
                 usuarioLogado,
                 userType,
                 usuario: {
                     imagem_perfil: imagemPerfil,
                     id_usuario: userId
                 },
-                produtos
+                produtos,
+                paginacao: {
+                    primeiraPagina,
+                    ultimaPagina,
+                    paginaAtual
+                }
             }
         })
     }

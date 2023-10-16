@@ -46,6 +46,7 @@
         <section id="meus-produtos">
             <h1>Meus produtos</h1>
 
+            <% if (data.usuario.produtos) { %>
             <% data.usuario.produtos.forEach(categoria_produto => { %>
             <div class="categoria-produto">
                 <h2><%- categoria_produto.nome_restricao %></h2>
@@ -61,7 +62,9 @@
                             <div class="produto-texto">
                                 <h2><%- produto.produto.nome_produto %></h2>
 
-                                <h3><%- categoria_produto.nome_restricao %></h3>
+                                <h3><% produto.produto.restricoes.forEach(restricao => { %>
+                                    <%- restricao.restricao.nome_restricao %>
+                                    <% }) %></h3>
 
                                 <p>R$ <%- Number(produto.produto.preco_produto).toFixed(2) %></p>
                             </div>
@@ -73,9 +76,9 @@
                             </button>
 
                             <% if (produto.produto.desconto_produto) { %>
-                                <div class="promocao">
-                                    <p><%- produto.produto.desconto_produto %>% OFF</p>
-                                </div>
+                            <div class="promocao">
+                                <p><%- produto.produto.desconto_produto %>% OFF</p>
+                            </div>
                             <% } %>
                         </a>
 
@@ -115,6 +118,9 @@
                 </div>
             </div>
             <% }) %>
+            <% } else { %>
+                <h3>Sem produtos por aqui ainda!</h3>
+            <% } %>
         </section>
     </main>
 

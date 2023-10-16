@@ -27,17 +27,19 @@ class ProdutosVeganosController {
 
         const paginaAtual = req.params.paginaProduto;
         let produtos = await produtoModel.findProdutosComRestricao("Vegano", paginaAtual);
-        let quantidadeProdutos = await produtoModel.contarProdutos("Vegano");
+        let quantidadeProdutos = await produtoModel.contarProdutosComRestricao("Vegano");
 
-        if (!produtos) {
+        if (produtos.length === 0) {
             produtos = null;
         }
 
-        const quantidadePaginas = Math.ceil(quantidadeProdutos / 10);
+        let primeiraPagina = paginaAtual - 4 > 1 ? paginaAtual - 4 : 1;
+        let quantidadePagina = Math.ceil(quantidadeProdutos / 10);
+        let ultimaPagina = primeiraPagina + 4 > quantidadePagina ? quantidadePagina : primeiraPagina + 4;
 
         return res.render("pages/produtos-veganos.ejs", {
             data: {
-                page_name: "Alimentipo",
+                page_name: "Produtos Veganos",
                 usuarioLogado,
                 userType,
                 usuario: {
@@ -45,8 +47,11 @@ class ProdutosVeganosController {
                     id_usuario: userId
                 },
                 produtos,
-                quantidadePaginas,
-                paginaAtual
+                paginacao: {
+                    primeiraPagina,
+                    ultimaPagina,
+                    paginaAtual
+                }
             }
         })
     }

@@ -23,7 +23,28 @@ class Restricao {
             include: {
                 produtos: {
                     include: {
-                        produto: true
+                        produto: {
+                            include: {
+                                restricoes: {
+                                    select: {
+                                        restricao: {
+                                            select: {
+                                                nome_restricao: true
+                                            }
+                                        }
+                                    }
+                                },
+                                clientes_favoritaram: {
+                                    select: {
+                                        cliente: {
+                                            select: {
+                                                id_cliente: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
                     },
                     orderBy: {
                         produto: {

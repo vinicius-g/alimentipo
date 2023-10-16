@@ -10,6 +10,9 @@
     <%- include("../templates/head.ejs") %>
     <link rel="stylesheet" href="/css/loja-template.css">
     <script src="/js/loja.js" defer></script>
+    <script src="/js/favoritar-produto.js" defer></script>
+    <script src="/js/favoritar-loja.js" defer></script>
+
     <title><%- data.page_name %></title>
 </head>
 
@@ -28,6 +31,11 @@
                         <h3><%- data.loja.nome_loja %></h3>
                         <address><%- data.loja.email_loja %></address>
                     </div>
+
+                    <button class="favoritar-loja <%- data.loja.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-loja="<%- data.loja.id_usuario %>">
+                        <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                        <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
+                    </button>
                 </div>
 
                 <p>Nome do vendedor: <%- data.loja.nome_proprietario %></p>
@@ -44,149 +52,39 @@
         <section id="produtos-loja">
             <h2>Produtos</h2>
 
-            <h3>Zero Açúcar</h3>
+            <% if (data.loja.produtos) { %>
+            <% data.loja.produtos.forEach(categoriaProduto => { %>
+            <h3><%- categoriaProduto.nome_restricao %></h3>
 
             <div class="carroussel-produtos-loja">
+                <% categoriaProduto.produtos.forEach(produto => { %>
                 <div>
                     <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
+                        <a href="/produto/<%- produto.produto.id_produto %>" class="produto">
+                            <% if (data.userType) { %>
+                            <button class="favoritar <%- produto.produto.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto.produto.id_produto %>">
+                                <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                                <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
                             </button>
+                            <% } %>
 
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
+                            <img src="/imagem/produto/<%- produto.produto.id_produto %>" alt="<%- produto.produto.nome_produto %>">
 
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
+                            <h2><%- produto.produto.nome_produto %></h2>
+                            <h3><% produto.produto.restricoes.forEach(restricao => { %>
+                                <%- restricao.restricao.nome_restricao %>
+                                <% }) %></h3>
 
-                            <p>R$ 8,99</p>
+                            <p>R$ <%- Number(produto.produto.preco_produto).toFixed(2) %></p>
                         </a>
                     </div>
                 </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
+                <% }) %>
             </div>
-
-            <h3>Vegano</h3>
-
-            <div class="carroussel-produtos-loja">
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="produto-container">
-                        <a href="#" class="produto">
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
-                            </button>
-
-                            <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                            <h2>Molho de tomate</h2>
-                            <h3>Sem Glúten</h3>
-
-                            <p>R$ 8,99</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <% }) %>
+            <% } else { %>
+                <h3>Sem produtos por aqui ainda!</h3>
+            <% } %>
         </section>
     </main>
 

@@ -7,13 +7,27 @@ const upload = multer({ storage });
 
 const HomeControllerRead = require("../controllers/nao-cadastrado/navegacao/homeControllerRead");
 const SobreRestricoesControllerRead = require("../controllers/nao-cadastrado/navegacao/sobreRestricaoControllerRead");
+
 const ProdutoSemGlutenControllerRead = require("../controllers/nao-cadastrado/navegacao/semGlutenControllerRead");
+const ProdutosSemGlutenPesquisaControllerRead = require("../controllers/nao-cadastrado/navegacao/semGlutenPesquisaControllerRead");
+
 const ProdutoVeganoControllerRead = require("../controllers/nao-cadastrado/navegacao/veganoControllerRead");
+const ProdutosVeganosPesquisaControllerRead = require("../controllers/nao-cadastrado/navegacao/veganoPesquisaControllerRead");
+
 const ProdutoZeroAcucarControllerRead = require("../controllers/nao-cadastrado/navegacao/zeroAcucarControllerRead");
+const ProdutosZeroAcucarPesquisaControllerRead = require("../controllers/nao-cadastrado/navegacao/zeroAcucarPesquisaControllerRead");
+
 const ProdutoZeroLactoseControllerRead = require("../controllers/nao-cadastrado/navegacao/zeroLactoseControllerRead");
+const ProdutosZeroLactosePesquisaControllerRead = require("../controllers/nao-cadastrado/navegacao/zeroLactosePesquisaControllerRead");
+
 const ProdutoControllerRead = require("../controllers/nao-cadastrado/navegacao/produtoControllerRead");
+const FavoritarProdutoControllerUpdate = require("../controllers/nao-cadastrado/navegacao/favoritarProdutoControllerUpdate");
 const ProdutosDestacadosControllerRead = require("../controllers/nao-cadastrado/navegacao/produtosDestacadosControllerRead");
+const ProdutosDestacadosPesquisaControllerRead = require("../controllers/nao-cadastrado/navegacao/produtosDestacadosPesquisaControllerRead");
+
 const LojaControllerRead = require("../controllers/nao-cadastrado/navegacao/lojaControllerRead");
+const FavoritarLojaControllerUpdate = require("../controllers/nao-cadastrado/navegacao/favoritarLojaControllerUpdate");
+
 const TermosPoliticasControllerRead = require("../controllers/nao-cadastrado/navegacao/termosPoliticasControllerRead");
 
 const CadastroCompradorControllerRead = require("../controllers/nao-cadastrado/cadastro/cadastroCompradorControllerRead");
@@ -29,12 +43,14 @@ const PerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/
 
 const EditarPerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerRead");
 const EditarPerfilCompradorControllerUpdate = require("../controllers/cadastrado/perfil/editarPerfilCompradorControllerUpdate");
+const DeletarPerfilCompradorControllerRead = require("../controllers/cadastrado/perfil/deletarPerfilCompradorControllerRead");
 const DeletarPerfilCompradorControllerDelete = require("../controllers/cadastrado/perfil/deletarPerfilCompradorControllerDelete");
 
 const PerfilVendedorControllerRead = require("../controllers/cadastrado/perfil/perfilVendedorControllerRead");
 
 const EditarPerfilVendedorControllerRead = require("../controllers/cadastrado/perfil/editarPerfilVendedorControllerRead");
 const EditarPerfilVendedorControllerUpdate = require("../controllers/cadastrado/perfil/editarPerfilVendedorControllerUpdate");
+const DeletarPerfilVendedorControllerRead = require("../controllers/cadastrado/perfil/deletarPerfilVendedorControllerRead");
 const DeletarPerfilVendedorControllerDelete = require("../controllers/cadastrado/perfil/deletarPerfilVendedorControllerDelete");
 
 const PublicarProdutoControllerRead = require("../controllers/cadastrado/produtos/publicarProdutoControllerRead");
@@ -65,23 +81,44 @@ SobreRestricoesControllerRead.acessarPagina);
 router.get("/produtos-sem-gluten/:paginaProduto",
 ProdutoSemGlutenControllerRead.acessarPagina);
 
+router.get("/pesquisa-produtos-sem-gluten/:paginaProduto",
+ProdutosSemGlutenPesquisaControllerRead.acessarPagina);
+
 router.get("/produtos-veganos/:paginaProduto",
 ProdutoVeganoControllerRead.acessarPagina);
+
+router.get("/pesquisa-produtos-veganos/:paginaProduto",
+ProdutosVeganosPesquisaControllerRead.acessarPagina);
 
 router.get("/produtos-zero-acucar/:paginaProduto",
 ProdutoZeroAcucarControllerRead.acessarPagina);
 
+router.get("/pesquisa-produtos-zero-acucar/:paginaProduto",
+ProdutosZeroAcucarPesquisaControllerRead.acessarPagina);
+
 router.get("/produtos-zero-lactose/:paginaProduto",
 ProdutoZeroLactoseControllerRead.acessarPagina);
+
+router.get("/pesquisa-produtos-zero-lactose/:paginaProduto",
+ProdutosZeroLactosePesquisaControllerRead.acessarPagina);
 
 router.get("/produto/:produtoId",
 ProdutoControllerRead.acessarPagina);
 
-router.get("/produtos-destacados",
+router.post("/favoritar-produto/:produtoId",
+FavoritarProdutoControllerUpdate.favoritarProduto);
+
+router.get("/produtos-destacados/:paginaProduto",
 ProdutosDestacadosControllerRead.acessarPagina);
+
+router.get("/pesquisa-produtos-destacados/:paginaProduto",
+ProdutosDestacadosPesquisaControllerRead.acessarPagina);
 
 router.get("/loja/:lojaId",
 LojaControllerRead.acessarPagina);
+
+router.post("/favoritar-loja/:lojaId",
+FavoritarLojaControllerUpdate.favoritarLoja);
 
 router.get("/termos-e-politicas",
 TermosPoliticasControllerRead.acessarPagina);
@@ -129,8 +166,13 @@ ValidacaoFormularioMiddleware.validacaoCadastroEditarComprador,
 AutenticaoMiddleware.criptografarSenhaEditarComprador,
 EditarPerfilCompradorControllerUpdate.editarCliente);
 
+router.get("/deletar-comprador/:clienteId",
+AutenticaoMiddleware.validarTokenComprador,
+DeletarPerfilCompradorControllerRead.acessarPagina);
+
 router.post("/deletar-comprador/:clienteId",
 AutenticaoMiddleware.validarTokenComprador,
+ValidacaoFormularioMiddleware.validacaoDeletarPerfilComprador,
 DeletarPerfilCompradorControllerDelete.deleteUser);
 
 router.get("/perfil-vendedor",
@@ -148,8 +190,13 @@ ValidacaoMiddleware.RegrasValidacaoCadastroVendedor,
 ValidacaoFormularioMiddleware.validacaoCadastroEditarVendedor,
 EditarPerfilVendedorControllerUpdate.editarLoja);
 
+router.get("/deletar-vendedor/:lojaId",
+AutenticaoMiddleware.validarTokenVendedor,
+DeletarPerfilVendedorControllerRead.acessarPagina);
+
 router.post("/deletar-vendedor/:lojaId",
 AutenticaoMiddleware.validarTokenVendedor,
+ValidacaoFormularioMiddleware.validacaoDeletarPerfilVendedor,
 DeletarPerfilVendedorControllerDelete.deleteUser);
 
 router.get("/publicar-produto",

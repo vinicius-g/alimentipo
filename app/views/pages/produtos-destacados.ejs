@@ -4,6 +4,7 @@
 <head>
     <%- include("../templates/head.ejs") %>
     <link rel="stylesheet" href="/css/produtos-destacados.css">
+    <script src="/js/favoritar-produto.js" defer></script>
 
     <title><%- data.page_name %></title>
 </head>
@@ -15,111 +16,55 @@
         <section>
             <div class="searchbar">
                 <img src="/imagem/pesquisa.png" alt="Pesquisa">
-                <input type="search" id="searchbar">
+                <form action="/pesquisa-produtos-destacados/1">
+                    <input type="search" id="searchbar" name="pesquisa" <%- data.pesquisa ? `value="${data.pesquisa}"` : "" %>>
+                </form>
             </div>
 
             <h1>Produtos em destaque</h1>
 
+            <% if (data.produtos) { %>
             <div id="produtos">
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
+                <% data.produtos.forEach(produto => { %>
+                <div>
+                    <div class="produto-container">
+                        <a href="/produto/<%- produto.id_produto %>" class="produto">
+                            <% if (produto.desconto_produto) { %>
+                            <div class="promocao">
+                                <p><%- produto.desconto_produto %>%OFF</p>
+                            </div>
+                            <% } %>
 
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
+                            <button class="favoritar <%- produto.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto.id_produto %>">
+                                <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                                <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
+                            </button>
 
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
+                            <img src="/imagem/produto/<%- produto.id_produto %>" alt="Produto">
 
-                    <p>R$ 8,99</p>
-                </a>
+                            <h2><%- produto.nome_produto %></h2>
 
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
+                            <h3><% produto.restricoes.forEach(restricao => { %>
+                                <%- restricao.restricao.nome_restricao %>
+                                <% }) %></h3>
 
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
-
-                    <p>R$ 8,99</p>
-                </a>
-
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
-
-                    <p>R$ 8,99</p>
-                </a>
-
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
-
-                    <p>R$ 8,99</p>
-                </a>
-
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
-
-                    <p>R$ 8,99</p>
-                </a>
-
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
-
-                    <p>R$ 8,99</p>
-                </a>
-
-                <a href="/produto-especifico" class="produto">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/molho-de-tomate.png" alt="Produto">
-
-                    <h2>Molho de tomate</h2>
-                    <h3>Sem Glúten</h3>
-
-                    <p>R$ 8,99</p>
-                </a>
+                            <p>R$ <%- Number(produto.preco_produto).toFixed(2) %></p>
+                        </a>
+                    </div>
+                </div>
+                <% }) %>
             </div>
+            <% } else { %>
+                <h3>Sem produtos por aqui ainda!</h3>
+            <% } %>
 
+            <% if (data.paginacao.primeiraPagina !== data.paginacao.ultimaPagina) { %>
             <div class="paginacao">
-                <a href="#" class="ativo">1</a>
-
-                <a href="#">2</a>
-
-                <a href="#">3</a>
+                <% for( let pagina = data.paginacao.primeiraPagina; pagina <= data.paginacao.ultimaPagina; pagina++ ) { %>
+                <a href="<%- pagina %>" <%- Number(data.paginacao.paginaAtual) === Number(pagina) ? `class="ativo"` : "" %>><%- pagina %></a>
+                <% } %>
             </div>
+            <% } %>
         </section>
     </main>
 

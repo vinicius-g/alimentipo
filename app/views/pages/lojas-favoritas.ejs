@@ -4,6 +4,7 @@
 <head>
     <%- include("../templates/head.ejs") %>
     <link rel="stylesheet" href="/css/lojas-favoritas.css">
+    <script src="/js/favoritar-loja.js" defer></script>
 
     <title><%- data.page_name %></title>
 </head>
@@ -14,59 +15,36 @@
     <main>
         <section id="informacoes-perfil">
             <div class="imagem-perfil">
-                <img src="/imagem/imagem-perfil-padrao.png" alt="Foto perfil">
+                <img src=<%- data.usuario.imagem_perfil ? `/imagem/cliente/perfil/${data.usuario.id_usuario}` : "/imagem/imagem-perfil-padrao.png" %> alt="Foto perfil">
             </div>
 
             <div class="texto-perfil">
-                <h1>Nome</h1>
-                <address>E-mail</address>
+                <h1><%- data.usuario.nome_usuario %></h1>
+                <address><%- data.usuario.email_usuario %></address>
             </div>
         </section>
 
         <div id="lojas-favoritas">
             <h2>Lojas favoritas</h2>
 
+            <% if (data.lojasFavoritas) { %>
             <div id="lojas">
-                <a href="/loja-especifica" class="loja">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
+                <% data.lojasFavoritas.forEach(lojaFavorita => { %>
+                <a href="/loja/<%- lojaFavorita.loja.id_loja %>" class="loja">
+                    <button class="favoritar-loja favoritado" data-loja="<%- lojaFavorita.loja.id_loja %>">
+                        <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                        <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
                     </button>
 
-                    <img src="/imagem/veganlife.png" alt="Loja">
+                    <img src="/imagem/loja/perfil/<%- lojaFavorita.loja.id_loja %>" alt="Loja">
 
-                    <h2>Veganlife</h2>
+                    <h2><%- lojaFavorita.loja.nome_loja %></h2>
                 </a>
-
-                <a href="/loja-especifica" class="loja">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/veganlife.png" alt="Loja">
-
-                    <h2>Veganlife</h2>
-                </a>
-
-                <a href="/loja-especifica" class="loja">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/veganlife.png" alt="Loja">
-
-                    <h2>Veganlife</h2>
-                </a>
-
-                <a href="/loja-especifica" class="loja">
-                    <button class="favoritar">
-                        <img src="/imagem/favoritar.png" alt="Favorito">
-                    </button>
-
-                    <img src="/imagem/veganlife.png" alt="Loja">
-
-                    <h2>Veganlife</h2>
-                </a>
+                <% }) %>
             </div>
+            <% } else { %>
+            <h3>Sem lojas favoritas ainda!</h3>
+            <% } %>
         </div>
     </main>
 

@@ -10,6 +10,8 @@
     <%- include("../templates/head.ejs") %>
     <link rel="stylesheet" href="/css/home.css">
     <script src="/js/home.js" defer></script>
+    <script src="/js/favoritar-produto.js" defer></script>
+
     <title><%- data.page_name %></title>
 </head>
 
@@ -20,7 +22,9 @@
         <section id="slider">
             <div class="searchbar">
                 <img src="/imagem/pesquisa.png" alt="Pesquisa">
-                <input type="search" id="searchbar">
+                <form action="/pesquisa-produtos-destacados/1">
+                    <input type="search" id="searchbar" name="pesquisa" <%- data.pesquisa ? `value="${data.pesquisa}"` : "" %>>
+                </form>
             </div>
 
             <div id="carroussel-novidades">
@@ -47,6 +51,7 @@
         <section id="produtos-destacados">
             <h2>Produtos em destaque</h2>
 
+            <% if (data.produtos_destacados) { %>
             <div id="carroussel-produtos-destacados">
                 <% data.produtos_destacados.forEach(produto_destacado => { %>
                 <div>
@@ -58,9 +63,12 @@
                             </div>
                             <% } %>
 
-                            <button class="favoritar">
-                                <img src="/imagem/favoritar.png" alt="Favorito">
+                            <% if (data.userType !== "vendedor") { %>
+                            <button class="favoritar <%- produto_destacado.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto_destacado.id_produto %>">
+                                <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                                <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
                             </button>
+                            <% } %>
 
                             <img src="/imagem/produto/<%- produto_destacado.id_produto %>" alt="Produto">
 
@@ -77,42 +85,48 @@
                 <% }) %>
             </div>
 
-            <a href="/produtos-destacados">Expandir</a>
+            <a href="/produtos-destacados/1">Expandir</a>
+            <% } else { %>
+            <h3>Sem produtos por aqui ainda!</h3>
+            <% } %>
         </section>
 
         <section id="promocoes">
             <h2>Promoções por tempo limitado</h2>
 
-            <% if (data.produtos_promocao.length > 0) { %>
+            <% if (data.produtos_promocao) { %>
             <div id="carroussel-promocoes">
-            <% data.produtos_promocao.forEach(produto_promocao => { %>
-            <div>
-                <div class="produto-container">
-                    <a href="/produto/<%- produto_promocao.id_produto %>" class="produto">
-                        <% if (produto_promocao.desconto_produto) { %>
-                        <div class="promocao">
-                            <p><%- produto_promocao.desconto_produto %>%OFF</p>
-                        </div>
-                        <% } %>
+                <% data.produtos_promocao.forEach(produto_promocao => { %>
+                <div>
+                    <div class="produto-container">
+                        <a href="/produto/<%- produto_promocao.id_produto %>" class="produto">
+                            <% if (produto_promocao.desconto_produto) { %>
+                            <div class="promocao">
+                                <p><%- produto_promocao.desconto_produto %>%OFF</p>
+                            </div>
+                            <% } %>
 
-                        <button class="favoritar">
-                            <img src="/imagem/favoritar.png" alt="Favorito">
-                        </button>
+                            <% if (data.userType !== "vendedor") { %>
+                            <button class="favoritar <%- produto_promocao.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto_promocao.id_produto %>">
+                                <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                                <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
+                            </button>
+                            <% } %>
 
-                        <img src="/imagem/produto/<%- produto_promocao.id_produto %>" alt="Produto">
+                            <img src="/imagem/produto/<%- produto_promocao.id_produto %>" alt="Produto">
 
-                        <h2><%- produto_promocao.nome_produto %></h2>
+                            <h2><%- produto_promocao.nome_produto %></h2>
 
-                        <h3><% produto_promocao.restricoes.forEach(restricao => { %>
-                            <%- restricao.restricao.nome_restricao %>
-                            <% }) %></h3>
+                            <h3><% produto_promocao.restricoes.forEach(restricao => { %>
+                                <%- restricao.restricao.nome_restricao %>
+                                <% }) %></h3>
 
-                        <p>R$ <%- Number(produto_promocao.preco_produto).toFixed(2) %></p>
-                    </a>
+                            <p>R$ <%- Number(produto_promocao.preco_produto).toFixed(2) %></p>
+                        </a>
+                    </div>
                 </div>
+                <% }) %>
             </div>
-            </div>
-            <% }) %>
             <% } else { %>
             <h3>Sem produtos em promoção no momento!</h3>
             <% } %>

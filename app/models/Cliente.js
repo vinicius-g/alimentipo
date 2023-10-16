@@ -56,6 +56,48 @@ class Cliente {
             }
         })
     }
+
+    async favoritarProduto(userId, produtoId) {
+        return await prisma.cliente.update({
+            where: {
+                id_cliente: userId
+            },
+            data: {
+                produtos_favoritos: {
+                    create: [
+                        {
+                            produto: {
+                                connect: {
+                                    id_produto: Number(produtoId)
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+    }
+
+    async favoritarLoja(userId, lojaId) {
+        return await prisma.cliente.update({
+            where: {
+                id_cliente: userId
+            },
+            data: {
+                lojas_favoritas: {
+                    create: [
+                        {
+                            loja: {
+                                connect: {
+                                    id_loja: Number(lojaId)
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+    }
 }
 
 const ClienteModel = new Cliente();

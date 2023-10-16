@@ -34,7 +34,7 @@ class ProdutoController {
 
         const produto = await produtoModel.findProdutoById(produtoId);
 
-        console.log(produto.restricoes[0].restricao.nome_restricao);
+        const sugestaoProdutos = await produtoModel.findHighRankProdutos();
 
         const loja = await lojaModel.findUserById(produto.loja_id);
 
@@ -48,7 +48,8 @@ class ProdutoController {
                     id_usuario: userId
                 },
                 produto,
-                loja
+                loja,
+                sugestaoProdutos
             }
         })
     }
