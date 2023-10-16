@@ -29,10 +29,10 @@
                 <a href="/produto/<%- produto.id_produto %>" class="produto">
                     <div class="produto-imagem">
                         <% if (data.userType !== "vendedor") { %>
-                            <button class="favoritar <%- produto.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto.id_produto %>">
-                                <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
-                                <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
-                            </button>
+                        <button class="favoritar <%- produto.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-produto="<%- produto.id_produto %>">
+                            <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                            <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
+                        </button>
                         <% } %>
 
                         <img src="/imagem/produto/<%- produto.id_produto %>" alt="<%- produto.nome_produto %>">
@@ -47,10 +47,16 @@
 
                         <p>R$ <%- Number(produto.preco_produto).toFixed(2) %></p>
                     </div>
+
+                    <% if (produto.desconto_produto) { %>
+                    <div class="promocao">
+                        <p><%- produto.desconto_produto %>% OFF</p>
+                    </div>
+                    <% } %>
                 </a>
                 <% }) %>
                 <% } else { %>
-                    <h2>Sem produtos aqui ainda!</h2>
+                <h2 class="mensagem-padrao">Sem produtos aqui ainda!</h2>
                 <% } %>
             </div>
 

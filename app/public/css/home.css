@@ -161,13 +161,6 @@ a.produto > p {
     font-weight: bold;
 }
 
-#promocoes > h3 {
-    text-align: center;
-    padding: 30px;
-    font-size: 1.4rem;
-    color: #729f46;
-}
-
 #sobre {
     padding: 0 15px;
 }

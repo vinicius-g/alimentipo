@@ -29,6 +29,12 @@
                 </button>
                 <% } %>
 
+                <% if (data.produto.desconto_produto) { %>
+                <div class="promocao">
+                    <p><%- data.produto.desconto_produto %>% OFF</p>
+                </div>
+                <% } %>
+
                 <img src="/imagem/produto/<%- data.produto.id_produto %>" alt="Produto">
             </div>
 
@@ -60,10 +66,12 @@
                         <address><%- data.loja.email_loja %></address>
                     </div>
 
-                    <button class="favoritar-loja <%- data.loja.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-loja="<%- data.loja.id_loja %>">
-                        <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
-                        <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
-                    </button>
+                    <% if (data.userType !== "vendedor") { %>
+                        <button class="favoritar-loja <%- data.loja.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-loja="<%- data.loja.id_loja %>">
+                            <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
+                            <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
+                        </button>
+                    <% } %>
                 </div>
 
                 <p>Nome vendedor: <%- data.loja.nome_proprietario %></p>
@@ -116,7 +124,7 @@
                 <% }) %>
             </div>
             <% } else { %>
-                <h3>Sem produtos por aqui ainda!</h3>
+            <h3 class="mensagem-padrao">Sem produtos por aqui ainda!</h3>
             <% } %>
         </section>
     </main>

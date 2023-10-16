@@ -41,6 +41,12 @@
                     </button>
                     <% } %>
 
+                    <% if (produto.produto.desconto_produto) { %>
+                    <div class="promocao">
+                        <p><%- produto.produto.desconto_produto %>% OFF</p>
+                    </div>
+                    <% } %>
+
                     <img src="/imagem/produto/<%- produto.produto.id_produto %>" alt="Produto">
 
                     <h2><%- produto.produto.nome_produto %></h2>
@@ -55,7 +61,7 @@
 
             <a href="/produtos-favoritos">Expandir</a>
             <% } else { %>
-            <h3>Sem produtos favoritos ainda!</h3>
+            <h3 class="mensagem-padrao">Sem produtos favoritos ainda!</h3>
             <% } %>
         </section>
 
@@ -80,7 +86,7 @@
 
             <a href="/lojas-favoritas">Expandir</a>
             <% } else { %>
-                <h3>Sem lojas favoritas ainda!</h3>
+            <h3 class="mensagem-padrao">Sem lojas favoritas ainda!</h3>
             <% } %>
         </section>
     </main>

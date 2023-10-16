@@ -164,3 +164,11 @@ header #menu-usuario a {
 	background-color: white !important;
     color: #72a046;
 }
+
+.mensagem-padrao {
+    font-size: 1.4rem;
+    width: 100%;
+    text-align: center;
+    color: #72a046;
+    padding: 20px 0;
+}

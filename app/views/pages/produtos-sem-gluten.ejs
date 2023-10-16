@@ -45,10 +45,16 @@
 
                         <p>R$ <%- Number(produto.preco_produto).toFixed(2) %></p>
                     </div>
+
+                    <% if (produto.desconto_produto) { %>
+                    <div class="promocao">
+                        <p><%- produto.desconto_produto %>% OFF</p>
+                    </div>
+                    <% } %>
                 </a>
                 <% }) %>
                 <% } else { %>
-                    <h2>Sem produtos aqui ainda!</h2>
+                <h2 class="mensagem-padrao">Sem produtos aqui ainda!</h2>
                 <% } %>
             </div>
 

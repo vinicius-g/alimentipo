@@ -32,10 +32,12 @@
                         <address><%- data.loja.email_loja %></address>
                     </div>
 
+                    <% if (data.userType !== "vendedor") { %>
                     <button class="favoritar-loja <%- data.loja.clientes_favoritaram.find(cliente => Number(cliente.cliente.id_cliente) === Number(data.usuario.id_usuario)) ? "favoritado" : "" %>" data-loja="<%- data.loja.id_usuario %>">
                         <img src="/imagem/favoritar.png" alt="Favorito" class="imagem-favoritar">
                         <img src="/imagem/favoritado.png" alt="Favoritado" class="imagem-favoritado">
                     </button>
+                    <% } %>
                 </div>
 
                 <p>Nome do vendedor: <%- data.loja.nome_proprietario %></p>
@@ -68,6 +70,12 @@
                             </button>
                             <% } %>
 
+                            <% if (produto.produto.desconto_produto) { %>
+                            <div class="promocao">
+                                <p><%- produto.produto.desconto_produto %>% OFF</p>
+                            </div>
+                            <% } %>
+
                             <img src="/imagem/produto/<%- produto.produto.id_produto %>" alt="<%- produto.produto.nome_produto %>">
 
                             <h2><%- produto.produto.nome_produto %></h2>
@@ -83,7 +91,7 @@
             </div>
             <% }) %>
             <% } else { %>
-                <h3>Sem produtos por aqui ainda!</h3>
+            <h3 class="mensagem-padrao">Sem produtos por aqui ainda!</h3>
             <% } %>
         </section>
     </main>
