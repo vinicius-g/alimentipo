@@ -20,7 +20,7 @@ class CadastroVendedorController {
             usuarioLogado = true;
 
             if (userType === "comprador") {
-                imagemPerfil = this.#usuarioTemFoto(userId);
+                imagemPerfil = await this.#usuarioTemFoto(userId);
             }
         }
 

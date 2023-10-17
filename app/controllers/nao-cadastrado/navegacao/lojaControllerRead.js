@@ -33,7 +33,7 @@ class LojaController {
             usuarioLogado = true;
 
             if (userType === "comprador") {
-                imagemPerfil = this.#usuarioTemFoto(userId);
+                imagemPerfil = await this.#usuarioTemFoto(userId);
             }
 
             if (Number(userId) === Number(lojaId)) {

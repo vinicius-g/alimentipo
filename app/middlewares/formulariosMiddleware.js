@@ -17,7 +17,7 @@ class ValidacaoFormulario {
         this.validacaoCadastroProduto = this.validacaoCadastroProduto.bind(this);
 	}
 
-	validacaoCadastroComprador(req, res, next) {
+	async validacaoCadastroComprador(req, res, next) {
 		const errors = validationResult(req);
 
 		if (req.file) {
@@ -48,7 +48,7 @@ class ValidacaoFormulario {
 				usuarioLogado = true;
 
 				if (userType === "comprador") {
-					imagemPerfil = this.#usuarioTemFoto(userId);
+					imagemPerfil = await this.#usuarioTemFoto(userId);
 				}
 			}
 
@@ -215,7 +215,7 @@ class ValidacaoFormulario {
 			});
     }
 
-	validacaoCadastroVendedor(req, res, next) {
+	async validacaoCadastroVendedor(req, res, next) {
 		const errors = validationResult(req);
 		const imagem_perfil = req.file;
 
@@ -255,7 +255,7 @@ class ValidacaoFormulario {
 				usuarioLogado = true;
 
 				if (userType === "comprador") {
-					imagemPerfil = this.#usuarioTemFoto(userId);
+					imagemPerfil = await this.#usuarioTemFoto(userId);
 				}
 			}
 
@@ -595,7 +595,7 @@ class ValidacaoFormulario {
 			usuarioLogado = true;
 
 			if (userType === "comprador") {
-				imagemPerfil = this.#usuarioTemFoto(userId);
+				imagemPerfil = await this.#usuarioTemFoto(userId);
 			}
 		}
 

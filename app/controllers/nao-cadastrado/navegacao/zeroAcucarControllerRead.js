@@ -21,7 +21,7 @@ class ProdutosZeroAcucarController {
             usuarioLogado = true;
 
             if (userType === "comprador") {
-                imagemPerfil = this.#usuarioTemFoto(userId);
+                imagemPerfil = await arioTemFoto(userId);
             }
         }
 

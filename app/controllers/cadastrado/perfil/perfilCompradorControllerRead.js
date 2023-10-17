@@ -13,6 +13,8 @@ class PerfilCompradorController {
 
         let lojasFavoritas = await lojasClientesModel.getSomeLojasFavoritasFromUsuario(userId);
 
+        console.log(user.imagem_cliente)
+
         if (produtosFavoritos.length === 0) {
             produtosFavoritos = null;
         }
