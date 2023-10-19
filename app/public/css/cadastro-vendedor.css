@@ -151,10 +151,18 @@ form button {
 }
 
 .termos-condicoes {
+    display: block;
     margin-bottom: 40px;
 }
 
+.termos-condicoes.error {
+    color: red;
+}
+
 .termos-condicoes a {
-    color: blue;
-    text-decoration: underline;
+    color: #f59a23;
+}
+
+.termos-condicoes.error a {
+    color: red;
 }

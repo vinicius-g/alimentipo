@@ -67,6 +67,28 @@ class Loja {
             }
         })
     }
+
+    async addUserPremium(userId) {
+        return await prisma.loja.update({
+            where: {
+                id_loja: userId
+            },
+            data: {
+                premium: 1
+            }
+        })
+    }
+
+    async removeUserPremium(userId) {
+        return await prisma.loja.update({
+            where: {
+                id_loja: userId
+            },
+            data: {
+                premium: 0
+            }
+        })
+    }
 }
 
 const LojaModel = new Loja();

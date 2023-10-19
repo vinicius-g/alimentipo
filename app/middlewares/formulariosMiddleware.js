@@ -27,13 +27,14 @@ class ValidacaoFormulario {
 		}
 
 		if (!errors.isEmpty()) {
-			const { nome, nome_usuario, email, senha } = req.body;
+			const { nome, nome_usuario, email, senha, termos_condicoes } = req.body;
 
 			const nome_error = errors.errors.find((error) => error.path === "nome");
 			const nome_usuario_error = errors.errors.find((error) => error.path === "nome_usuario");
 			const email_error = errors.errors.find((error) => error.path === "email");
 			const senha_error = errors.errors.find((error) => error.path === "senha");
 			const imagem_perfil_error = errors.errors.find((error) => error.path === "imagem_perfil");
+            const termos_condicoes_error = errors.errors.find((error) => error.path === "termos_condicoes");
 
 			const token = req.session.token;
 			let usuarioLogado = false;
@@ -66,6 +67,7 @@ class ValidacaoFormulario {
 						nome_usuario,
 						email,
 						senha,
+                        termos_condicoes
 					},
 					errors: {
 						nome_error,
@@ -73,6 +75,7 @@ class ValidacaoFormulario {
 						email_error,
 						senha_error,
 						imagem_perfil_error,
+                        termos_condicoes_error
 					},
 				},
 			});
@@ -226,7 +229,7 @@ class ValidacaoFormulario {
 		}
 
 		if (!errors.isEmpty()) {
-			const { nome_proprietario, cpf, data_nascimento, nome_loja, email, senha, cnpj, online_fisica, link_site, descricao, endereco, telefone } = req.body;
+			const { nome_proprietario, cpf, data_nascimento, nome_loja, email, senha, cnpj, online_fisica, link_site, descricao, endereco, telefone, termos_condicoes } = req.body;
 
 			const nome_proprietario_error = errors.errors.find((error) => error.path === "nome_proprietario");
 			const cpf_error = errors.errors.find((error) => error.path === "cpf");
@@ -241,6 +244,7 @@ class ValidacaoFormulario {
 			const descricao_error = errors.errors.find((error) => error.path === "descricao");
 			const endereco_error = errors.errors.find((error) => error.path === "endereco");
 			const telefone_error = errors.errors.find((error) => error.path === "telefone");
+            const termos_condicoes_error = errors.errors.find((error) => error.path === "termos_condicoes");
 
 			const token = req.session.token;
 			let usuarioLogado = false;
@@ -281,6 +285,7 @@ class ValidacaoFormulario {
 						descricao,
 						endereco,
 						telefone,
+                        termos_condicoes
 					},
 					errors: {
 						nome_proprietario_error,
@@ -296,6 +301,7 @@ class ValidacaoFormulario {
 						descricao_error,
 						endereco_error,
 						telefone_error,
+                        termos_condicoes_error
 					},
 				},
 			});

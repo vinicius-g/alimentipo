@@ -3,7 +3,7 @@ const lojaModel = require("../../../models/Loja");
 
 class CadastroController {
 	async cadastrarCliente(req, res) {
-		const { nome, nome_usuario, email, senha } = req.body;
+		const { nome, nome_usuario, email, senha, termos_condicoes } = req.body;
         let buffer_imagem_perfil;
         let tipo_imagem_perfil;
         if (req.file) {
@@ -22,7 +22,8 @@ class CadastroController {
                         nome,
                         nome_usuario,
                         email,
-                        senha
+                        senha,
+                        termos_condicoes
                     },
                     errors: {
                         email_error: {
@@ -40,7 +41,8 @@ class CadastroController {
                 email_cliente: email,
                 senha_cliente: req.senhaCriptografada,
                 imagem_cliente: buffer_imagem_perfil,
-                tipo_imagem_cliente: tipo_imagem_perfil
+                tipo_imagem_cliente: tipo_imagem_perfil,
+                termos_condicoes: Number(termos_condicoes),
             })
 
 			return res.redirect("/login");
@@ -55,7 +57,8 @@ class CadastroController {
 							nome,
                             nome_usuario,
                             email,
-                            senha
+                            senha,
+                            termos_condicoes
 						},
 						errors: {
 							email_error: {

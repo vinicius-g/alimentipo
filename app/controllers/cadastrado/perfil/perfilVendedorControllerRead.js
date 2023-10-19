@@ -27,6 +27,7 @@ class PerfilVendedorController {
                     telefone_loja: loja.telefone_loja,
                     endereco_loja: loja.endereco_loja,
                     descricao_loja: loja.descricao_loja,
+                    premium: loja.premium,
                     produtos: produtos
                 },
                 userType

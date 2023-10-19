@@ -25,7 +25,7 @@ class CadastroController {
 			}
 		}
 
-		const { nome_proprietario, cpf, data_nascimento, nome_loja, email, senha, cnpj, online_fisica, link_site, descricao, endereco, telefone } = req.body;
+		const { nome_proprietario, cpf, data_nascimento, nome_loja, email, senha, cnpj, online_fisica, link_site, descricao, endereco, telefone, termos_condicoes } = req.body;
 		const imagem_perfil = req.file;
 		const data_nascimento_array = data_nascimento.split("/");
 		const data_nascimento_formato_valido = `${data_nascimento_array[2]}/${data_nascimento_array[1]}/${data_nascimento_array[0]}`;
@@ -57,6 +57,7 @@ class CadastroController {
 						descricao,
 						endereco,
 						telefone,
+                        termos_condicoes
 					},
 					errors: {
 						email_error: {
@@ -83,6 +84,7 @@ class CadastroController {
 				telefone_loja: telefone,
 				imagem_loja: imagem_perfil.buffer,
 				tipo_imagem_loja: imagem_perfil.mimetype,
+                termos_condicoes: Number(termos_condicoes)
 			});
 
 			return res.redirect("/login");
@@ -113,6 +115,7 @@ class CadastroController {
 								descricao,
 								endereco,
 								telefone,
+                                termos_condicoes
 							},
 							errors: {
 								cpf_error: {
@@ -146,6 +149,7 @@ class CadastroController {
 								descricao,
 								endereco,
 								telefone,
+                                termos_condicoes
 							},
 							errors: {
 								email_error: {
@@ -179,6 +183,7 @@ class CadastroController {
 								descricao,
 								endereco,
 								telefone,
+                                termos_condicoes
 							},
 							errors: {
 								cnpj_error: {
@@ -212,6 +217,7 @@ class CadastroController {
 						descricao,
 						endereco,
 						telefone,
+                        termos_condicoes
 					},
 					errors: {
 						sistema_error: {

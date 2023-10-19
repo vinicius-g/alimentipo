@@ -22,7 +22,6 @@
 
     <div id="usuario-botao">
         <% if (data.userType === "comprador") { %>
-            <% console.log(data.usuario.imagem_perfil) %>
             <img src="<%- data.usuario.imagem_perfil ? `/imagem/cliente/perfil/${data.usuario.id_usuario}` : "/imagem/simbolo-perfil.png" %>" alt="Usuario">
         <% } %>
 

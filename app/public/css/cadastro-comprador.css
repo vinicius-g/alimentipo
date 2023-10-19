@@ -58,7 +58,7 @@ form {
     margin-bottom: 15px;
 }
 
-form input {
+form > input {
     width: 100%;
     height: 25px;
     border: 1px solid #f59a23;
@@ -126,10 +126,18 @@ form button {
 }
 
 .termos-condicoes {
+    display: block;
     margin-bottom: 40px;
 }
 
+.termos-condicoes.error {
+    color: red;
+}
+
 .termos-condicoes a {
-    color: blue;
-    text-decoration: underline;
+    color: #f59a23;
+}
+
+.termos-condicoes.error a {
+    color: red;
 }

@@ -16,6 +16,28 @@ class Produto {
         })
     }
 
+    async updateProdutoHighRank(lojaId) {
+        return await prisma.produto.updateMany({
+            where: {
+                loja_id: lojaId
+            },
+            data: {
+                ranking_produto: 100
+            }
+        })
+    }
+
+    async updateProdutoLowRank(lojaId) {
+        return await prisma.produto.updateMany({
+            where: {
+                loja_id: lojaId
+            },
+            data: {
+                ranking_produto: 1
+            }
+        })
+    }
+
     async findProdutoById(produtoId) {
         return await prisma.produto.findUnique({
             where: {

@@ -58,10 +58,12 @@
 
             <%- data.errors && data.errors.imagem_perfil_error ? `<span class='error-message'>${data.errors.imagem_perfil_error.msg}</span>` : "" %>
 
+            <label for="termos-condicoes" class="termos-condicoes <%- data.errors && data.errors.termos_condicoes_error ? "error" : "" %>"><input type="checkbox" name="termos_condicoes" id="termos-condicoes" value="1" <%- data.input_values && data.input_values.termos_condicoes === "1" ? "checked" : "" %>> Li e aceito os <a href="/termos-e-politicas">termos e condições</a></label>
+
+            <%- data.errors && data.errors.termos_condicoes_error ? `<span class='error-message'>${data.errors.termos_condicoes_error.msg}</span>` : "" %>
+
             <button type="submit">Cadastre-se</button>
         </form>
-
-        <p class="termos-condicoes">Ao se inscrever o usuário aceita os <a href="#">termos e condições</a></p>
     </main>
 
     <%- include("../templates/footer.ejs") %>

@@ -68,6 +68,9 @@ const ImagemProdutoControllerRead = require("../controllers/nao-cadastrado/image
 
 const LogoutControllerRead = require("../controllers/cadastrado/perfil/logoutPerfilControllerRead");
 
+const minhaAssinaturaControllerRead = require("../controllers/cadastrado/lojas/minhaAssinaturaControllerRead");
+const adicionarAssinaturaLojaControllerUpdate = require("../controllers/cadastrado/lojas/adicionarAssinaturaLojaControllerUpdate");
+const removerAssinaturaLojaControllerUpdate = require("../controllers/cadastrado/lojas/removerAssinaturaLojaControllerUpdate");
 
 const ValidacaoMiddleware = require("../middlewares/regrasValidacaoMiddleware");
 const ValidacaoFormularioMiddleware = require("../middlewares/formulariosMiddleware");
@@ -220,6 +223,18 @@ EditarProdutoControllerUpdate.editarProduto)
 router.post("/deletar-produto/:produtoId",
 AutenticaoMiddleware.validarTokenVendedor,
 DeletarProdutoControllerDelete.deleteProduto);
+
+router.get("/minha-assinatura",
+AutenticaoMiddleware.validarTokenVendedor,
+minhaAssinaturaControllerRead.acessarPagina);
+
+router.get("/adicionar-assinatura/:lojaId",
+AutenticaoMiddleware.validarTokenVendedor,
+adicionarAssinaturaLojaControllerUpdate.updateUserPremium);
+
+router.get("/remover-assinatura/:lojaId",
+AutenticaoMiddleware.validarTokenVendedor,
+removerAssinaturaLojaControllerUpdate.updateUserPremium);
 
 router.get("/produtos-favoritos",
 AutenticaoMiddleware.validarTokenComprador,

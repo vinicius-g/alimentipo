@@ -7,6 +7,7 @@ CREATE TABLE `Cliente` (
     `nome_usuario` VARCHAR(100) NOT NULL,
     `email_cliente` VARCHAR(100) NOT NULL,
     `senha_cliente` CHAR(60) NOT NULL,
+    `termos_condicoes` TINYINT NOT NULL,
 
     UNIQUE INDEX `Cliente_email_cliente_key`(`email_cliente`),
     PRIMARY KEY (`id_cliente`)
@@ -29,13 +30,13 @@ CREATE TABLE `Loja` (
     `telefone_loja` CHAR(11) NOT NULL,
     `descricao_loja` VARCHAR(200) NOT NULL,
     `online_fisica` VARCHAR(15) NOT NULL,
-    `customer_id` VARCHAR(191) NULL,
+    `premium` TINYINT NOT NULL DEFAULT 0,
     `ranking_loja` INTEGER NOT NULL DEFAULT 1,
+    `termos_condicoes` TINYINT NOT NULL,
 
     UNIQUE INDEX `Loja_cpf_loja_key`(`cpf_loja`),
     UNIQUE INDEX `Loja_cnpj_loja_key`(`cnpj_loja`),
     UNIQUE INDEX `Loja_email_loja_key`(`email_loja`),
-    UNIQUE INDEX `Loja_customer_id_key`(`customer_id`),
     PRIMARY KEY (`id_loja`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

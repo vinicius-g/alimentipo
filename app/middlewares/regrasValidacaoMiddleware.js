@@ -25,7 +25,10 @@ const ValidacaoMiddleware = {
             minNumbers: 1,
             minSymbols: 1
         })
-        .withMessage("A senha deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial!")
+        .withMessage("A senha deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial!"),
+        body("termos_condicoes")
+        .isIn(["1"])
+        .withMessage("Por favor aceite os termos e condições")
     ],
     RegrasValidacaoCadastroVendedor: [
         body("nome_proprietario")
@@ -94,7 +97,10 @@ const ValidacaoMiddleware = {
         .isLength({min: 11, max: 11})
         .withMessage("Informe os seu telefone!")
         .isInt()
-        .withMessage("Informe apenas os números do seu telefone!")
+        .withMessage("Informe apenas os números do seu telefone!"),
+        body("termos_condicoes")
+        .isIn(["1"])
+        .withMessage("Por favor aceite os termos e condições")
     ],
     RegrasValidacaoCadastroProduto: [
         body("nome_produto")
