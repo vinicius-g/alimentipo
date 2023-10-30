@@ -19,3 +19,22 @@ botaoPagamentoPix.addEventListener("click", () => {
     pagamentoPixContainer.classList.add("ativo");
     pagamentoCartaoContainer.classList.remove("ativo");
 });
+
+const botaoCopiarPix = document.getElementById("copiar-pix");
+const pixCopiaCola = document.getElementById("copia-cola-pix");
+
+botaoCopiarPix.addEventListener("click", () => {
+    navigator.clipboard.writeText(pixCopiaCola.innerText);
+})
+
+const assinarBotoes = document.querySelectorAll("[data-escolher-plano-assinatura]");
+
+assinarBotoes.forEach(assinarBotao => {
+    assinarBotao.addEventListener("click", (e) => {
+        assinarBotoes.forEach(assinarBotao => {
+            assinarBotao.classList.remove("ativo");
+        });
+
+        e.target.classList.add("ativo");
+    })
+})

@@ -99,7 +99,7 @@
                 <img src="/imagem/qr-code.png" alt="QR Code">
 
                 <div>
-                    <p class="copia-cola">00020126360014BR.GOV.BCB.PIX0114+55119920630545204000053039865802BR5908VInicius6007barueri62070503***630482B8</p>
+                    <p class="copia-cola" id="copia-cola-pix">00020126360014BR.GOV.BCB.PIX0114+55119920630545204000053039865802BR5908VInicius6007barueri62070503***630482B8</p>
 
                     <button id="copiar-pix">Copiar</button>
                 </div>
@@ -112,9 +112,9 @@
 
                 <input type="text" name="nome_cartao" id="nome-cartao" required placeholder="Nome do cartão">
 
-                <input type="text" name="validade_cartao" id="validadade-cartao" required>
+                <input type="text" name="validade_cartao" id="validadade-cartao" placeholder="Data de validade" required>
 
-                <input type="number" name="cvv_cartao" id="cvv-cartao" required>
+                <input type="number" name="cvv_cartao" id="cvv-cartao" placeholder="CVV" required>
             </div>
 
                 <a href="/adicionar-assinatura/<%- data.usuario.id_usuario %>" class="btn-assinar">Assinar</a>

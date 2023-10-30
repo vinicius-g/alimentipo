@@ -38,9 +38,9 @@
             <p>Descrição: <%- data.usuario.descricao_loja %></p>
 
             <div class="links-perfil">
-                <a href="/publicar-produto">Publicar produto</a>
-
                 <% if (data.usuario.premium) { %>
+                    <a href="/publicar-produto">Publicar produto</a>
+
                     <a href="/minha-assinatura">Minha assinatura</a>
                 <% } %>
             </div>
@@ -76,7 +76,7 @@
                 <div class="plano-assinatura">
                     <h3>Plano Mensal</h3>
 
-                    <p class="valor">R$ <b class="laranja">24,99</b></p>
+                    <p class="valor">R$ <b class="laranja">29,90</b></p>
 
                     <p class="texto-assinatura">
                         <img src="/imagem/check.png">Tenha seus produtos  divulgados durante <b class="verde">1</b> mês</p>
@@ -87,7 +87,7 @@
                 <div class="plano-assinatura">
                     <h3>Plano Anual</h3>
 
-                    <p class="valor">R$ <b class="laranja">24,99</b></p>
+                    <p class="valor">R$ <b class="laranja">322,90</b></p>
 
                     <p class="texto-assinatura">
                         <img src="/imagem/check.png">Tenha seus produtos  divulgados durante <b class="verde">1</b> ano</p>
@@ -117,7 +117,7 @@
                 <img src="/imagem/qr-code.png" alt="QR Code">
 
                 <div>
-                    <p class="copia-cola">00020126360014BR.GOV.BCB.PIX0114+55119920630545204000053039865802BR5908VInicius6007barueri62070503***630482B8</p>
+                    <p class="copia-cola" id="copia-cola-pix">00020126360014BR.GOV.BCB.PIX0114+55119920630545204000053039865802BR5908VInicius6007barueri62070503***630482B8</p>
 
                     <button id="copiar-pix">Copiar</button>
                 </div>
@@ -130,9 +130,9 @@
 
                 <input type="text" name="nome_cartao" id="nome-cartao" required placeholder="Nome do cartão">
 
-                <input type="text" name="validade_cartao" id="validadade-cartao" required>
+                <input type="text" name="validade_cartao" id="validadade-cartao" placeholder="Data de validade" required>
 
-                <input type="number" name="cvv_cartao" id="cvv-cartao" required>
+                <input type="number" name="cvv_cartao" id="cvv-cartao" placeholder="CVV" required>
             </div>
 
                 <a href="/adicionar-assinatura/<%- data.usuario.id_usuario %>" class="btn-assinar">Assinar</a>
